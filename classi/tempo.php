@@ -1,13 +1,13 @@
 <?php
 class Tempo {
-    public $id;
+    public $tempoid;
     public $progettofk;
     public $descrizione;
     public $utentefk;
     public $data;
     public $durata;
 
-    public function AddDB() {
+    public function DB_Add() {
         if(!empty($this->data)) {
             $database = new db();
             $database->query('INSERT INTO tempo (progettofk, descrizione, utentefk, data, durata) VALUES(:progettofk, :descrizione, :utentefk, :data, :durata)');
@@ -28,4 +28,39 @@ class Tempo {
         }
     }
 
+    public function DB_Find_by_ID() {
+        throw new Exception('Non implementato');
+    }
+}
+
+
+/* --------------------------------------
+ *           CLASS TEMPI
+ * --------------------------------------
+ */
+
+class Tempi
+{
+    public $tempi;
+
+    public function __construct()
+    {
+        $this->tempi = [];
+    }
+
+    public function Add($obj)
+    {
+        $this->tempi[] = $obj;
+    }
+
+    public function getTempi()
+    {
+        return $this->tempi;
+    }
+
+    public function getDB_All()
+    {
+        // DATI FAKE
+
+    }
 }

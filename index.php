@@ -6,7 +6,9 @@ Utilita::PARAMETRI_INIZIALI();
 
 require_once('classi/file.php');
 require_once('classi/database.php');
+require_once('classi/tipologia.php.php');
 require_once('classi/tempo.php');
+require_once('classi/progetto.php');
 
 // Caricamento template HTML
 $filename_corrente = File::FILENAME(__FILE__);
@@ -26,8 +28,9 @@ Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
  * -----------------------------
  */
 
-//Html_default::HEADER("");
-$HTML->Saluta();
+$progetti = new Progetti();
+$progetti->getDB_All();
+$HTML->Form_nuovo_tempo($progetti, $basename_corrente);
 
 /* -----------------------------
  *      FINE CORPO FILE
