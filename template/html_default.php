@@ -48,7 +48,10 @@ class Html_default {
         // MENU
         $menu = [
             'Home' => 'index.php',
-            'Lista' => 'lista_tempo.php',
+            'Tempo' => 'tempo.php',
+            'Progetti' => 'progetti.php',
+            'Utenti' => 'utenti.php',
+            'Export' => 'export.php',
         ];
 
         $linkHome = current($menu);

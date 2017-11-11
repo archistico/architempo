@@ -3,6 +3,7 @@
 require_once('config.php');
 require_once('classi/utilita.php');
 Utilita::PARAMETRI_INIZIALI();
+$notices = [];
 
 require_once('classi/file.php');
 require_once('classi/utente.php');
@@ -34,10 +35,14 @@ $progetti->getDB_All();
 
 $HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente);
 
+
+
 /* -----------------------------
  *      FINE CORPO FILE
  * -----------------------------
  */
+
+Html_default::SHOW_NOTICES($notices);
 
 // Elementi di chiusura
 Html_default::CLOSECONTAINER();
