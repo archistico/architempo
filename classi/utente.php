@@ -31,6 +31,14 @@ class Utente {
     public function DB_Update_by_ID() {
         throw new Exception('Non implementato');
     }
+
+    public static function Nuovo($id, $denominazione, $ruolofk) {
+        $instance = new self();
+        $instance->utenteid = $id;
+        $instance->denominazione = $denominazione;
+        $instance->ruolofk = $ruolofk;
+        return $instance;
+    }
 }
 
 /* --------------------------------------
@@ -60,6 +68,20 @@ class Utenti
     public function getDB_All()
     {
         // DATI FAKE
+        Add(Utente::Nuovo(1, 'Emilie Rollandin', 1));
+        Add(Utente::Nuovo(2, 'Elettra Groppo', 1));
+        Add(Utente::Nuovo(3, 'Lavoratore 1', 2));
+        Add(Utente::Nuovo(4, 'Cliente 1', 3));
+    }
 
+    public function find_by_id($id) {
+        $item = null;
+        foreach($this->utenti as $el) {
+            if ($id == $el->utenteid) {
+                $item = $el;
+                break;
+            }
+        }
+        return $item;
     }
 }

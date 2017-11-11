@@ -36,6 +36,16 @@ $progetti->getDB_All();
 
 $HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente);
 
+$tempo = new Tempo();
+
+/*
+    public $tempoid;
+    public $progettofk;
+    public $descrizione;
+    public $utentefk;
+    private $datainizio;
+    private $datafine;
+ */
 
 
 /* -----------------------------

@@ -69,4 +69,15 @@ class Progetti
         $this->Add(Progetto::Nuovo(2, 'Test 2'));
         $this->Add(Progetto::Nuovo(3, 'Test 3'));
     }
+
+    public function find_by_id($id) {
+        $item = null;
+        foreach($this->progetti as $el) {
+            if ($id == $el->progettoid) {
+                $item = $el;
+                break;
+            }
+        }
+        return $item;
+    }
 }
