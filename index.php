@@ -6,11 +6,12 @@ Utilita::PARAMETRI_INIZIALI();
 $notices = [];
 
 require_once('classi/file.php');
+require_once('classi/ruolo.php');
 require_once('classi/utente.php');
 require_once('classi/database.php');
 require_once('classi/tipologia.php');
-require_once('classi/tempo.php');
 require_once('classi/progetto.php');
+require_once('classi/tempo.php');
 
 // Caricamento template HTML
 $filename_corrente = File::FILENAME(__FILE__);
