@@ -5,16 +5,34 @@ require_once('classi/utilita.php');
 Utilita::PARAMETRI_INIZIALI();
 
 require_once('classi/file.php');
+require_once('classi/database.php');
+require_once('classi/tempo.php');
 
 // Caricamento template HTML
-$file_corrente = File::FILENAME(__FILE__);
+$filename_corrente = File::FILENAME(__FILE__);
+$basename_corrente = File::BASENAME(__FILE__);
 require_once('template/html_default.php');
-require_once('template/html_'.$file_corrente.'.php');
+require_once('template/html_'.$filename_corrente.'.php');
+$nameclassHTML = "Html_".$filename_corrente;
+$HTML = new $nameclassHTML();
 
-Html_default::HEAD("Architempo - ".strtoupper($file_corrente));
+Html_default::HEAD("Architempo - ".strtoupper($filename_corrente));
 Html_default::OPENCONTAINER();
-Html_default::MENU($file_corrente);
+Html_default::MENU($basename_corrente);
 Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
+
+/* -----------------------------
+ *       CORPO FILE
+ * -----------------------------
+ */
+
+//Html_default::HEADER("");
+$HTML->Saluta();
+
+/* -----------------------------
+ *      FINE CORPO FILE
+ * -----------------------------
+ */
 
 // Elementi di chiusura
 Html_default::CLOSECONTAINER();

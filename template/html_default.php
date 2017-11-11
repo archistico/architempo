@@ -45,9 +45,19 @@ class Html_default {
     }
 
     public static function MENU($file) {
+        // MENU
+        $menu = [
+            'Home' => 'index.php',
+            'Lista' => 'lista_tempo.php',
+        ];
+
+        $linkHome = current($menu);
+        $nomeHome = key($menu);
+        next($menu);
+
         $html = "
         <nav class='navbar navbar-expand-lg navbar-light'>
-            <a class='navbar-brand' href='index.php'>Home</a>
+            <a class='navbar-brand' href='$linkHome'>$nomeHome</a>
             <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarNav' aria-controls='navbarNav' aria-expanded='false' aria-label='Toggle navigation'>
                 <span class='navbar-toggler-icon'></span>
             </button>
@@ -56,11 +66,17 @@ class Html_default {
         ";
         echo $html;
 
-        $html = "
-        <li class='nav-item'><a class='nav-link' href='admin_codici.php'>Codici</a></li>
-        <li class='nav-item'><a class='nav-link' href='admin_libri.php'>Libri</a></li>
-        ";
-        echo $html;
+        while ($link = current($menu)) {
+            $nome = key($menu);
+            if($link == $file) {
+                $active = true;
+            } else {
+                $active = false;
+            }
+
+            echo "<li class='nav-item $active'><a class='nav-link' href='$link'>$nome</a></li>";
+            next($menu);
+        }
 
         $html = "
                 </ul>
