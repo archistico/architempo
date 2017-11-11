@@ -1,18 +1,20 @@
 <?php
 /* --------------------------------------
- *           CLASS PROGETTO
+ *           CLASS UTENTE
  * --------------------------------------
  */
 
-class Progetto {
-    public $progettoid;
-    public $descrizione;
-    public $clientefk;
-    public $tipologiafk;
-    public $compenso;
-    public $acconto;
-    public $pagato;
-    public $completato;
+class Utente {
+    public $utenteid;
+    public $denominazione;
+    public $indirizzo;
+    public $cf;
+    public $piva;
+    public $telefono;
+    public $mail;
+    public $password;
+    public $ruolofk;
+    public $note;
 
     public function DB_Add() {
         throw new Exception('Non implementato');
@@ -29,43 +31,35 @@ class Progetto {
     public function DB_Update_by_ID() {
         throw new Exception('Non implementato');
     }
-
-    public static function Nuovo($id, $descrizione) {
-        $instance = new self();
-        $instance->progettoid = $id;
-        $instance->descrizione = $descrizione;
-        return $instance;
-    }
 }
 
 /* --------------------------------------
- *           CLASS PROGETTI
+ *           CLASS UTENTI
  * --------------------------------------
  */
 
-class Progetti
+class Utenti
 {
-    public $progetti;
+    public $utenti;
 
     public function __construct()
     {
-        $this->progetti = [];
+        $this->utenti = [];
     }
 
     public function Add($obj)
     {
-        $this->progetti[] = $obj;
+        $this->utenti[] = $obj;
     }
 
-    public function getProgetti()
+    public function getUtenti()
     {
-        return $this->progetti;
+        return $this->utenti;
     }
 
     public function getDB_All()
     {
         // DATI FAKE
-        $this->Add(Progetto::Nuovo(1, 'Test 1'));
-        $this->Add(Progetto::Nuovo(2, 'Test 2'));
+
     }
 }

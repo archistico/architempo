@@ -5,8 +5,9 @@ require_once('classi/utilita.php');
 Utilita::PARAMETRI_INIZIALI();
 
 require_once('classi/file.php');
+require_once('classi/utente.php');
 require_once('classi/database.php');
-require_once('classi/tipologia.php.php');
+require_once('classi/tipologia.php');
 require_once('classi/tempo.php');
 require_once('classi/progetto.php');
 
@@ -30,7 +31,8 @@ Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
 
 $progetti = new Progetti();
 $progetti->getDB_All();
-$HTML->Form_nuovo_tempo($progetti, $basename_corrente);
+
+$HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente);
 
 /* -----------------------------
  *      FINE CORPO FILE

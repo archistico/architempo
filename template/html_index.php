@@ -13,8 +13,9 @@ class Html_index {
                 <select class='form-control' style='width: 100%;' name='progettofk' required>
         ";
         echo $html;
+
         foreach ($progetti as $opz) {
-            echo "<option value='$opz->id'>$opz->descrizione</option>";
+            echo "<option value='$opz->progettoid'>$opz->descrizione</option>";
         }
         $html = "
                 </select>
