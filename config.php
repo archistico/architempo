@@ -8,4 +8,3 @@ define(GLOBAL_DB_SALT, "qwerty");
 
 define(GLOBAL_FILE_UPLOAD, "uploads");
 define(GLOBAL_FILE_MAXDIM, 10*1000*1000);
-
