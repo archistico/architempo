@@ -1,55 +1,52 @@
 <?php
 
 /* --------------------------------------
- *           CLASS TIPOLOGIA
+ *           CLASS RUOLO
  * --------------------------------------
  */
 
-class Tipologia {
-    public $tipologiaid;
+class Ruolo {
+    public $ruoloid;
     public $descrizione;
 
     public function __construct($id, $des)
     {
-        $this->tipologiaid = $id;
+        $this->ruoloid = $id;
         $this->descrizione = $des;
     }
 }
 
 /* --------------------------------------
- *           CLASS TIPOLOGIE
+ *           CLASS RUOLI
  * --------------------------------------
  */
 
-class Tipologie
+class Ruoli
 {
-    public $tipologie;
+    public $ruoli;
 
     public function __construct()
     {
-        $this->tipologie = [];
-        Add(new Tipologia(1, 'Grafica'));
-        Add(new Tipologia(2, 'Programmazione'));
-        Add(new Tipologia(3, 'Architettura'));
-        Add(new Tipologia(4, 'Lavoro dipendente'));
-        Add(new Tipologia(5, 'Editoria'));
-
+        $this->ruoli = [];
+        Add(new Ruolo(1, 'Amministratore'));
+        Add(new Ruolo(2, 'Lavoratore'));
+        Add(new Ruolo(3, 'Cliente'));
     }
 
     public function Add($obj)
     {
-        $this->tipologie[] = $obj;
+        $this->ruoli[] = $obj;
     }
 
     public function getTipologie()
     {
-        return $this->tipologie;
+        return $this->ruoli;
     }
 
     public function find_by_id($id) {
         $item = null;
-        foreach($this->tipologie as $el) {
-            if ($id == $el->tipologiaid) {
+        foreach($this->ruoli as $el) {
+            if ($id == $el->ruoloid) {
                 $item = $el;
                 break;
             }
