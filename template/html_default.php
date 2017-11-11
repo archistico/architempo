@@ -11,7 +11,8 @@ class Html_default {
             <meta name='viewport' content='width=device-width, initial-scale=1'>
 
             <title>$titolo</title>
-
+            
+            <link rel='icon' href='favicon.ico'>
             <link rel='stylesheet' href='vendor/bootstrap/bootstrap.min.css'>
             <link rel='stylesheet' href='vendor/awesome/css/font-awesome.min.css'>
             <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet'>
