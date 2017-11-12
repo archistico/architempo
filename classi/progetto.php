@@ -55,7 +55,40 @@ class Progetto {
     }
 
     public function getTempo() {
-        return "00:00:00";
+        // CERCARE TUTTI I TEMPI CON UN PROGETTO ID E SOMMARE LE DURATE
+        $totale = 0;
+        try {
+            $database = new db();
+            $database->query('SELECT datainizio, datafine FROM tempo WHERE progettofk = :id');
+            $database->bind(':id', $this->progettoid);
+            $rows = $database->resultset();
+
+            foreach ($rows as $row) {
+                $t = new Tempo();
+                $t->setDatainizioDB($row['datainizio']);
+                $t->setDatafineDB($row['datafine']);
+
+                $totale += $t->getDurata_Secondi();
+            }
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        $hours = floor($totale / 3600);
+        $totale -= $hours * 3600;
+        $minutes = floor($totale / 60);
+        $totale -= $minutes * 60;
+        $seconds = $totale;
+
+        $durata = str_pad($hours, 2, "0",STR_PAD_LEFT). ":".str_pad($minutes, 2, "0",STR_PAD_LEFT).":".str_pad($seconds, 2, "0",STR_PAD_LEFT);
+
+        if($totale == 0) {
+            return "00:00:00";
+        } else {
+            return $durata;
+        }
+
     }
 }
 

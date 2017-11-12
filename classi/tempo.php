@@ -49,6 +49,10 @@ class Tempo {
         $this->datafine = DateTime::createFromFormat('Y-m-d H:i:s', $data);
     }
 
+    public function getDurata_Secondi() {
+        return $this->datafine->getTimestamp() - $this->datainizio->getTimestamp();
+    }
+
     public function DB_Add() {
         $result = false;
 
@@ -92,7 +96,7 @@ class Tempo {
         $ore = $this->datainizio->diff($this->datafine)->format("%H");
         $giorni = $this->datainizio->diff($this->datafine)->format("%D");
         $ore = $ore + $giorni * 24;
-        return $ore.":".$minuti.":".$secondi;
+        return str_pad($ore, 2, "0", STR_PAD_LEFT).":".$minuti.":".$secondi;
     }
 
     public function getDataByID($id) {
