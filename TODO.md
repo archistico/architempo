@@ -1,3 +1,2 @@
 # TODO
-+ funzione tempo->getDurata() tiene in conto solo differenze di giorni e non mesi e anni
-+ 
++ dividere schermata tabella tempo da index con l'inserimento

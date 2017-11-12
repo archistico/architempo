@@ -41,7 +41,7 @@ if (empty($notices) && !Tempo::EXIST($id)) {
 if(empty($notices) && $ok != 1) {
     $tempo = new Tempo();
     $tempo->getDataByID($id);
-    $HTML->scelta("ATTENZIONE! CANCELLARE IL TEMPO?", $tempo->getInfo(), "CANCELLA", "$basename_corrente?id=$id&ok=1", "index.php");
+    $HTML->scelta("ATTENZIONE! CANCELLARE IL TEMPO?", $tempo->getInfo(), "CANCELLA", "$basename_corrente?id=$id&ok=1", "tempo.php");
 }
 
 // SE INVECE HO ACCETTATO
@@ -56,7 +56,7 @@ if(empty($notices) && $ok == 1) {
     $notices['ok'] = "Tempo cancellato";
 }
 
-Html_default::SHOW_NOTICES($notices, "index.php");
+Html_default::SHOW_NOTICES($notices, "tempo.php");
 
 /* -----------------------------
 *      FINE CORPO FILE

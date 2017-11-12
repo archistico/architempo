@@ -94,11 +94,6 @@ $progetti->getDB_All();
 
 $HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente, htmlspecialchars($_SESSION["csrf"]));
 
-Html_default::HEADER("Lista Registrazioni");
-$tempi = new Tempi();
-$tempi->getDB_All();
-$HTML->Table_tempo($tempi->getTempi());
-
 /* -----------------------------
  *      FINE CORPO FILE
  * -----------------------------
