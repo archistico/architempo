@@ -68,10 +68,10 @@ class Utenti
     public function getDB_All()
     {
         // DATI FAKE
-        Add(Utente::Nuovo(1, 'Emilie Rollandin', 1));
-        Add(Utente::Nuovo(2, 'Elettra Groppo', 1));
-        Add(Utente::Nuovo(3, 'Lavoratore 1', 2));
-        Add(Utente::Nuovo(4, 'Cliente 1', 3));
+        $this->Add(Utente::Nuovo(1, 'Emilie Rollandin', 1));
+        $this->Add(Utente::Nuovo(2, 'Elettra Groppo', 1));
+        $this->Add(Utente::Nuovo(3, 'Lavoratore 1', 2));
+        $this->Add(Utente::Nuovo(4, 'Cliente 1', 3));
     }
 
     public function find_by_id($id) {

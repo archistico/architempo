@@ -1,0 +1,1 @@
+$("#durata").fitText(0.4);

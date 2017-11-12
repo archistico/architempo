@@ -28,11 +28,11 @@ class Tipologie
     public function __construct()
     {
         $this->tipologie = [];
-        Add(new Tipologia(1, 'Grafica'));
-        Add(new Tipologia(2, 'Programmazione'));
-        Add(new Tipologia(3, 'Architettura'));
-        Add(new Tipologia(4, 'Lavoro dipendente'));
-        Add(new Tipologia(5, 'Editoria'));
+        $this->Add(new Tipologia(1, 'Grafica'));
+        $this->Add(new Tipologia(2, 'Programmazione'));
+        $this->Add(new Tipologia(3, 'Architettura'));
+        $this->Add(new Tipologia(4, 'Lavoro dipendente'));
+        $this->Add(new Tipologia(5, 'Editoria'));
 
     }
 

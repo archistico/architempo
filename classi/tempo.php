@@ -1,11 +1,21 @@
 <?php
 class Tempo {
     public $tempoid;
+
     public $progettofk;
+    public $progetto;
+
     public $descrizione;
+
     public $utentefk;
+    public $utente;
+
     private $datainizio;
     private $datafine;
+
+    public function getProgetto() {
+        return $this->progetto;
+    }
 
     public function setDatainizio($data) {
         $this->datainizio = DateTime::createFromFormat('d/m/Y H:i:s', $data);
@@ -17,6 +27,7 @@ class Tempo {
 
     public function getDatainizio() {
         return $this->datainizio->format('d/m/Y H:i:s');
+
     }
 
     public function getDatafine() {
@@ -41,11 +52,30 @@ class Tempo {
         $database->bind(':datainizio', $this->getDatainizio2DB());
         $database->bind(':datafine', $this->getDatafine2DB());
         $database->execute();
-
     }
 
     public function DB_Find_by_ID() {
         throw new Exception('Non implementato');
+    }
+
+    public static function NUOVO($tempoid, $progetto, $descrizione, $utente, $datainizio, $datafine) {
+        $instance = new self();
+        $instance->tempoid = $tempoid;
+        $instance->progetto = $progetto;
+        $instance->descrizione = $descrizione;
+        $instance->utente = $utente;
+        $instance->datainizio = DateTime::createFromFormat('d/m/Y H:i:s', $datainizio);
+        $instance->datafine = DateTime::createFromFormat('d/m/Y H:i:s', $datafine);
+        return $instance;
+    }
+
+    public function getDurata() {
+        $secondi = $this->datainizio->diff($this->datafine)->format("%S");
+        $minuti = $this->datainizio->diff($this->datafine)->format("%I");
+        $ore = $this->datainizio->diff($this->datafine)->format("%H");
+        $giorni = $this->datainizio->diff($this->datafine)->format("%D");
+        $ore = $ore + $giorni * 24;
+        return $ore.":".$minuti.":".$secondi;
     }
 }
 

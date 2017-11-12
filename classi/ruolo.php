@@ -28,9 +28,9 @@ class Ruoli
     public function __construct()
     {
         $this->ruoli = [];
-        Add(new Ruolo(1, 'Amministratore'));
-        Add(new Ruolo(2, 'Lavoratore'));
-        Add(new Ruolo(3, 'Cliente'));
+        $this->Add(new Ruolo(1, 'Amministratore'));
+        $this->Add(new Ruolo(2, 'Lavoratore'));
+        $this->Add(new Ruolo(3, 'Cliente'));
     }
 
     public function Add($obj)

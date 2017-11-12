@@ -36,17 +36,15 @@ $progetti->getDB_All();
 
 $HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente);
 
-$tempo = new Tempo();
+$utenti = new Utenti();
+$utenti->getDB_All();
 
-/*
-    public $tempoid;
-    public $progettofk;
-    public $descrizione;
-    public $utentefk;
-    private $datainizio;
-    private $datafine;
- */
+$tempo = Tempo::NUOVO(1, $progetti->getProgetti()[0], 'Descrizione tempo', $utenti->getUtenti()[0], '01/01/2017 00:00:00', '02/01/2017 01:05:10' );
+$tempi = new Tempi();
+$tempi->Add($tempo);
 
+Html_default::HEADER("Lista Registrazioni");
+$HTML->Table_tempo($tempi->getTempi());
 
 /* -----------------------------
  *      FINE CORPO FILE
@@ -58,4 +56,5 @@ Html_default::SHOW_NOTICES($notices);
 // Elementi di chiusura
 Html_default::CLOSECONTAINER();
 Html_default::SCRIPT(True);
+$HTML->CaricaJS($filename_corrente);
 Html_default::END();
