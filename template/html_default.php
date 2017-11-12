@@ -50,8 +50,9 @@ class Html_default {
         $menu = [
             'Home' => 'index.php',
             'Tempo' => 'tempo.php',
-            'Progetti' => 'progetti.php',
-            'Utenti' => 'utenti.php',
+            'Progetti' => 'progetto.php',
+            'Statistiche' => 'statistiche.php',
+            'Utenti' => 'utente.php',
             'Export' => 'export.php',
         ];
 

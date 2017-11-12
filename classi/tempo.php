@@ -105,7 +105,7 @@ class Tempo {
             $this->tempoid = $row['tempoid'];
             $this->progettofk = $row['progettofk'];
             $this->progetto = Progetto::FIND_BY_ID($row['progettofk']);
-            $this->descrizione = $row['descrizione'];
+            $this->descrizione = Utilita::DB2HTML($row['descrizione']);
             $this->utentefk = $row['utentefk'];
             $this->utente = Utente::FIND_BY_ID($row['utentefk']);
             $this->setDatainizioDB($row['datainizio']);
@@ -197,7 +197,7 @@ class Tempi
                 $t->tempoid = $row['tempoid'];
                 $t->progettofk = $row['progettofk'];
                 $t->progetto = Progetto::FIND_BY_ID($row['progettofk']);
-                $t->descrizione = $row['descrizione'];
+                $t->descrizione = Utilita::DB2HTML($row['descrizione']);
                 $t->utentefk = $row['utentefk'];
                 $t->utente = Utente::FIND_BY_ID($row['utentefk']);
                 $t->setDatainizioDB($row['datainizio']);

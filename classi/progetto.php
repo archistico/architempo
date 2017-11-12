@@ -8,7 +8,9 @@ class Progetto {
     public $progettoid;
     public $descrizione;
     public $clientefk;
+    public $cliente;
     public $tipologiafk;
+    public $tipologia;
     public $compenso;
     public $acconto;
     public $pagato;
@@ -43,6 +45,18 @@ class Progetto {
         $p->descrizione = 'Progetto di test';
         return $p;
     }
+
+    public function getCliente() {
+        return $this->cliente;
+    }
+
+    public function getTipologia() {
+        return $this->tipologia;
+    }
+
+    public function getTempo() {
+        return "00:00:00";
+    }
 }
 
 /* --------------------------------------
@@ -71,10 +85,33 @@ class Progetti
 
     public function getDB_All()
     {
-        // DATI FAKE
-        $this->Add(Progetto::NUOVO(1, 'Test 1'));
-        $this->Add(Progetto::NUOVO(2, 'Test 2'));
-        $this->Add(Progetto::NUOVO(3, 'Test 3'));
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM progetto');
+            $rows = $database->resultset();
+
+            foreach ($rows as $row) {
+                $t = new Progetto();
+                $t->progettoid = $row['progettoid'];
+                $t->clientefk = $row['clientefk'];
+                $t->cliente = Utente::FIND_BY_ID($row['clientefk']);
+                $t->descrizione = Utilita::DB2HTML($row['descrizione']);
+                $t->tipologiafk = $row['tipologiafk'];
+
+                $tipologie = new Tipologie();
+                $t->tipologia = $tipologie->find_by_id($row['tipologiafk']);
+
+                $t->compenso = $row['compenso'];
+                $t->acconto = $row['acconto'];
+                $t->pagato = $row['pagato'];
+                $t->completato = $row['completato'];
+
+                $this->Add($t);
+            }
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
     }
 
     public function find_by_id($id) {
