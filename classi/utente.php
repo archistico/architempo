@@ -32,7 +32,7 @@ class Utente {
         throw new Exception('Non implementato');
     }
 
-    public static function Nuovo($id, $denominazione, $ruolofk) {
+    public static function NUOVO($id, $denominazione, $ruolofk) {
         $instance = new self();
         $instance->utenteid = $id;
         $instance->denominazione = $denominazione;
@@ -43,6 +43,14 @@ class Utente {
     public static function UTENTE_LOGGATO_ID() {
         // DATI FAKE
         return 1;
+    }
+
+    public static function FIND_BY_ID($id) {
+        // FAKE
+        $u = new Utente();
+        $u->denominazione = 'Utente di test';
+        $u->utenteid = 1;
+        return $u;
     }
 }
 
@@ -73,10 +81,10 @@ class Utenti
     public function getDB_All()
     {
         // DATI FAKE
-        $this->Add(Utente::Nuovo(1, 'Emilie Rollandin', 1));
-        $this->Add(Utente::Nuovo(2, 'Elettra Groppo', 1));
-        $this->Add(Utente::Nuovo(3, 'Lavoratore 1', 2));
-        $this->Add(Utente::Nuovo(4, 'Cliente 1', 3));
+        $this->Add(Utente::NUOVO(1, 'Emilie Rollandin', 1));
+        $this->Add(Utente::NUOVO(2, 'Elettra Groppo', 1));
+        $this->Add(Utente::NUOVO(3, 'Lavoratore 1', 2));
+        $this->Add(Utente::NUOVO(4, 'Cliente 1', 3));
     }
 
     public function find_by_id($id) {

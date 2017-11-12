@@ -30,11 +30,18 @@ class Progetto {
         throw new Exception('Non implementato');
     }
 
-    public static function Nuovo($id, $descrizione) {
+    public static function NUOVO($id, $descrizione) {
         $instance = new self();
         $instance->progettoid = $id;
         $instance->descrizione = $descrizione;
         return $instance;
+    }
+
+    public static function FIND_BY_ID($id) {
+        // FAKE
+        $p = new Progetto();
+        $p->descrizione = 'Progetto di test';
+        return $p;
     }
 }
 
@@ -65,9 +72,9 @@ class Progetti
     public function getDB_All()
     {
         // DATI FAKE
-        $this->Add(Progetto::Nuovo(1, 'Test 1'));
-        $this->Add(Progetto::Nuovo(2, 'Test 2'));
-        $this->Add(Progetto::Nuovo(3, 'Test 3'));
+        $this->Add(Progetto::NUOVO(1, 'Test 1'));
+        $this->Add(Progetto::NUOVO(2, 'Test 2'));
+        $this->Add(Progetto::NUOVO(3, 'Test 3'));
     }
 
     public function find_by_id($id) {

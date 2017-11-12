@@ -10,12 +10,24 @@ Html_default::MENU($basename_corrente);
 Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
 
 /* -----------------------------
+ *           LOGGIN
+ * -----------------------------
+ */
+$utentefk = Utente::UTENTE_LOGGATO_ID();
+
+/* -----------------------------
  *       CORPO FILE
  * -----------------------------
  */
 
 // SE SONO VUOTI TUTTI NON VALIDARE -> FORM NON SUBMIT
-if (!empty($_POST['descrizione']) && !empty($_POST['progettofk']) && !empty($_POST['datainizio']) && !empty($_POST['datafine'])) {
+if (!empty($_POST['descrizione']) && !empty($_POST['progettofk']) && !empty($_POST['datainizio']) && !empty($_POST['datafine'])
+    && (isset($_POST['csrf']) && isset($_SESSION['csrf']) && $_POST["csrf"] == $_SESSION["csrf"])
+    ) {
+
+    // cancello il CSRF
+    $_SESSION["csrf"] = '';
+
     // VALIDAZIONE
     if (empty($_POST['descrizione'])) {
         $notices[] = 'Descrizione non passato';
@@ -51,9 +63,6 @@ if (!empty($_POST['descrizione']) && !empty($_POST['progettofk']) && !empty($_PO
 
     if(empty($notices)) {
 
-        // CERCO UTENTE LOGGATO
-        $utentefk = Utente::UTENTE_LOGGATO_ID();
-
         // AGGIUNGO IL TEMPO NEL DB
 
         $t = new Tempo();
@@ -66,33 +75,34 @@ if (!empty($_POST['descrizione']) && !empty($_POST['progettofk']) && !empty($_PO
         if(!$t->DB_Add()) {
             $notices[] = 'Errore nella query sulla base dati';
         } else {
-            $notices['ok'] = "Codice cancellato";
+            $notices['ok'] = "Inserito";
         }
     }
+
+    unset($_POST);
+    $_POST = array();
 }
+
+// Creo il formid per questa sessione
+$_SESSION["csrf"] = $utentefk . "-" . md5(rand(0,10000000));
+
+Html_default::SHOW_NOTICES($notices);
 
 // HOME CARICA DATI PER FORM - NUOVO TEMPO
 $progetti = new Progetti();
 $progetti->getDB_All();
 
-$HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente);
-
-$utenti = new Utenti();
-$utenti->getDB_All();
-
-$tempo = Tempo::NUOVO(1, $progetti->getProgetti()[0], 'Descrizione tempo', $utenti->getUtenti()[0], '01/01/2017 00:00:00', '02/01/2017 01:05:10' );
-$tempi = new Tempi();
-$tempi->Add($tempo);
+$HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente, htmlspecialchars($_SESSION["csrf"]));
 
 Html_default::HEADER("Lista Registrazioni");
+$tempi = new Tempi();
+$tempi->getDB_All();
 $HTML->Table_tempo($tempi->getTempi());
 
 /* -----------------------------
  *      FINE CORPO FILE
  * -----------------------------
  */
-
-Html_default::SHOW_NOTICES($notices);
 
 // Elementi di chiusura
 Html_default::CLOSECONTAINER();

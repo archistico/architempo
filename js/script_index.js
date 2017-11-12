@@ -19,7 +19,7 @@ $(document).ready(function () {
 
     $("#durata").fitText(0.4);
 
-    console.log('Eccoci');
+    //console.log('Eccoci');
 
     $("#btnPlay").on("click", function () {
         console.log('Play');
@@ -29,7 +29,7 @@ $(document).ready(function () {
 
         intervallo = setInterval(calcola, 1000);
 
-        console.log('Data inizio: ' + datainizio_str);
+        //console.log('Data inizio: ' + datainizio_str);
     });
 
     $("#form").on("submit", function () {
@@ -37,12 +37,12 @@ $(document).ready(function () {
             alert('Premere play prima');
             return false;
         }
-        console.log('Registra');
+        //console.log('Registra');
 
         datafine = moment();
         datafine_str = datafine.format("DD/MM/YYYY HH:mm:ss");
 
-        console.log('Data fine: ' + datafine_str);
+        //console.log('Data fine: ' + datafine_str);
 
         // calcola durata
         var differenza = moment.duration(datafine.diff(datainizio));

@@ -2,7 +2,7 @@
 
 class Html_index {
 
-    public function Form_nuovo_tempo($progetti, $formLink) {
+    public function Form_nuovo_tempo($progetti, $formLink, $csrf) {
         $html = "
         <div class='row'>
         <div class='col-md-12'>
@@ -36,14 +36,15 @@ class Html_index {
             </div>
             <input id='datainizio' name='datainizio' type='hidden' value=''>
             <input id='datafine' name='datafine' type='hidden' value=''>
+            <input type='hidden' name='csrf' value='$csrf'>
         </div>
         </div>
         <div class='row'>
             <div class='col-md-6 paddingBottom20'>
-	            <a class='btn btn-danger btn-block btn-lg' id='btnPlay'>PLAY</a>
+	            <a class='btn btn-success btn-block btn-lg text-white' id='btnPlay'><i class='fa fa-play' aria-hidden='true'></i> PLAY</a>
             </div>
             <div class='col-md-6 paddingBottom20'>
-	            <button type='submit' class='btn btn-success btn-block btn-lg' id='btnRegistra'>REGISTRA</button>
+	            <button type='submit' class='btn btn-danger btn-block btn-lg' id='btnRegistra'><i class='fa fa-stop' aria-hidden='true'></i> REGISTRA</button>
             </div>
         </div>  
         </form>

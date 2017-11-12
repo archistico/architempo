@@ -41,7 +41,16 @@ class Tempo {
         return $this->datafine->format('Y-m-d H:i:s');
     }
 
+    public function setDatainizioDB($data) {
+        $this->datainizio = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+    }
+
+    public function setDatafineDB($data) {
+        $this->datafine = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+    }
+
     public function DB_Add() {
+        $result = false;
 
         try {
             $database = new db();
@@ -51,18 +60,15 @@ class Tempo {
             $database->bind(':utentefk', $this->utentefk);
             $database->bind(':datainizio', $this->getDatainizio2DB());
             $database->bind(':datafine', $this->getDatafine2DB());
-            $database->execute();
+            $result = $database->execute();
         } catch (PDOException $e) {
             throw new PDOException("Error  : " . $e->getMessage());
         }
 
         // chiude il database
         $database = NULL;
-        if(!true) {
-            return true;
-        } else {
-            return false;
-        }
+
+        return $result;
     }
 
     public function DB_Find_by_ID() {
@@ -117,8 +123,28 @@ class Tempi
 
     public function getDB_All()
     {
-        // DATI FAKE
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM tempo');
+            $rows = $database->resultset();
 
+            foreach ($rows as $row) {
+                $t = new Tempo();
+                $t->tempoid = $row['tempoid'];
+                $t->progettofk = $row['progettofk'];
+                $t->progetto = Progetto::FIND_BY_ID($row['progettofk']);
+                $t->descrizione = $row['descrizione'];
+                $t->utentefk = $row['utentefk'];
+                $t->utente = Utente::FIND_BY_ID($row['utentefk']);
+                $t->setDatainizioDB($row['datainizio']);
+                $t->setDatafineDB($row['datafine']);
+
+                $this->Add($t);
+            }
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
     }
 
     public function find_by_id($id) {
