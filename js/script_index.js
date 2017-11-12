@@ -33,6 +33,10 @@ $(document).ready(function () {
     });
 
     $("#form").on("submit", function () {
+        if(datainizio==null) {
+            alert('Premere play prima');
+            return false;
+        }
         console.log('Registra');
 
         datafine = moment();
@@ -41,26 +45,31 @@ $(document).ready(function () {
         console.log('Data fine: ' + datafine_str);
 
         // calcola durata
-        durata_secondi = datafine.diff(datainizio, 'seconds');
-        durata_minuti = datafine.diff(datainizio, 'minutes');
-        durata_ore = datafine.diff(datainizio, 'hours');
+        var differenza = moment.duration(datafine.diff(datainizio));
 
+        durata_ore = parseInt(differenza.asHours());
+        durata_minuti = parseInt(differenza.asMinutes())-durata_ore*60;
+        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*60-durata_minuti*60;
         durata_str = durata_ore.pad()+":" +durata_minuti.pad()+ ":"+durata_secondi.pad();
 
-        console.log('Durata: ' + durata_str);
+        $("#datainizio").val(datainizio_str);
+        $("#datafine").val(datafine_str);
+
         clearInterval(intervallo);
 
         // impedisce l'invio
-        return false;
+        // return false;
     });
 
     // Funzione che eseguo ogni secondo
     // Calcola la differenza in ore minuti secondi tra inizio e now
     function calcola() {
         var now = moment();
-        durata_secondi = now.diff(datainizio, 'seconds');
-        durata_minuti = now.diff(datainizio, 'minutes');
-        durata_ore = now.diff(datainizio, 'hours');
+        var differenza = moment.duration(now.diff(datainizio));
+
+        durata_ore = parseInt(differenza.asHours());
+        durata_minuti = parseInt(differenza.asMinutes())-durata_ore*60;
+        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*60-durata_minuti*60;
 
         durata_str = durata_ore.pad()+":" +durata_minuti.pad()+ ":"+durata_secondi.pad();
 
