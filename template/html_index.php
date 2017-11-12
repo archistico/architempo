@@ -9,22 +9,13 @@ class Html_index {
             <h1 id='durata' class='text-center'>00:00:00</h1>
         </div>
         </div>
-        <div class='row paddingBottom20'>
-        <div class='col-md-6'>
-            <button type='submit' class='btn btn-secondary btn-block'>PLAY</button>
-        </div>
-        <div class='col-md-6'>
-            <button type='submit' class='btn btn-secondary btn-block'>PAUSE</button>
-        </div>
-        </div>
         ";
         echo $html;
 
         $html = "
+        <form action='$formLink' method='post'>
         <div class='row'>
-        <div class='col-md-12'>
-            <form action='$formLink' method='post'>
-                        
+        <div class='col-md-6'>
             <div class='form-group'>
                 <label for='librofk'>Seleziona il progetto</label>
                 <select class='form-control' style='width: 100%;' name='progettofk' required>
@@ -36,17 +27,26 @@ class Html_index {
         }
         $html = "
                 </select>
-            </div>    
+            </div>
+        </div>
+        <div class='col-md-6'>    
             <div class='form-group'>
                 <label for='Denominazione'>Denominazione</label>
                 <input type='text' class='form-control' id='Denominazione' placeholder='Denominazione' name='denominazione' required>
             </div>
-            <div class='form-group'>
-                <button type='submit' class='btn btn-info btn-block btn-lg'>NUOVO</button>
+            <input id='datainizio' name='datainizio' type='hidden' value=''>
+            <input id='datafine' name='datafine' type='hidden' value=''>
+        </div>
+        </div>
+        <div class='row'>
+            <div class='col-md-6 paddingBottom20'>
+	            <button type='submit' class='btn btn-danger btn-block btn-lg' id='btnPlay'>PLAY</button>
             </div>
-            </form>
-        </div>
-        </div>
+            <div class='col-md-6 paddingBottom20'>
+	            <button type='submit' class='btn btn-success btn-block btn-lg' id='btnRegistra'>REGISTRA</button>
+            </div>
+        </div>  
+        </form>
         ";
         echo $html;
     }
