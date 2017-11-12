@@ -94,6 +94,70 @@ class Tempo {
         $ore = $ore + $giorni * 24;
         return $ore.":".$minuti.":".$secondi;
     }
+
+    public function getDataByID($id) {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM tempo WHERE tempoid = :id');
+            $database->bind(':id', $id);
+            $row = $database->single();
+
+            $this->tempoid = $row['tempoid'];
+            $this->progettofk = $row['progettofk'];
+            $this->progetto = Progetto::FIND_BY_ID($row['progettofk']);
+            $this->descrizione = $row['descrizione'];
+            $this->utentefk = $row['utentefk'];
+            $this->utente = Utente::FIND_BY_ID($row['utentefk']);
+            $this->setDatainizioDB($row['datainizio']);
+            $this->setDatafineDB($row['datafine']);
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+    }
+
+    public function getInfo() {
+        return $this->descrizione . " : ".$this->getDurata();
+    }
+
+    public static function EXIST($id) {
+        $exist = false;
+
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM tempo WHERE tempoid = :id');
+            $database->bind(':id', $id);
+            $database->execute();
+            if($database->rowCount()>0) {
+                $exist = true;
+            }
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $exist;
+    }
+
+    public static function DELETE_BY_ID($id) {
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('DELETE FROM tempo WHERE tempoid = :id');
+            $database->bind(':id', $id);
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
+    }
 }
 
 

@@ -77,7 +77,7 @@ class Html_index {
             echo " <td class='hidden-xs'>".$tem->getDatainizio()."</td>";
             echo " <td class='hidden-xs'>".$tem->getDatafine()."</td>";
             echo " <td>".$tem->getDurata()."</td>";
-            echo " <td><a href=''><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
+            echo " <td><a href='tempo_elimina.php?id=$tem->tempoid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
         }
         $html = "
