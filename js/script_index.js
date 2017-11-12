@@ -4,13 +4,16 @@ $(document).ready(function () {
 
     console.log('Eccoci');
 
-    function clickBtnRegistra() {
-        console.log('Registra');
-        // impedisce l'invio del form
-        return false;
-    }
-
-    function clickBtnPlay() {
+    $("#btnPlay").on("click", function () {
         console.log('Play');
-    }
-}
+    });
+
+    $("#form").on("submit", function () {
+        console.log('Registra');
+
+        // impedisce l'invio
+        return false;
+    });
+
+});
+
