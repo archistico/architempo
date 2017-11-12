@@ -11,7 +11,7 @@ class Utente {
     public $cf;
     public $piva;
     public $telefono;
-    public $mail;
+    public $email;
     public $password;
     public $ruolofk;
     public $note;

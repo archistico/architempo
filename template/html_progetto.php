@@ -25,7 +25,7 @@ class Html_progetto {
             echo " <td>".$elemento->descrizione." - ".$elemento->getCliente()->denominazione."</td>";
             echo " <td>".$elemento->getTipologia()->descrizione."</td>";
             echo " <td>&euro; ".$elemento->acconto." / &euro; ".$elemento->compenso."</td>";
-            echo " <td>".$elemento->pagato." - ".$elemento->completato."</td>";
+            echo " <td>".($elemento->pagato==0?'NO':'SÍ')." - ".($elemento->completato==0?'NO':'SÍ')."</td>";
             echo " <td>".$elemento->getTempo()."</td>";
             echo " <td><a href='progetto_elimina.php?id=$elemento->progettoid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";

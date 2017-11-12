@@ -51,9 +51,8 @@ class Html_default {
             'Home' => 'index.php',
             'Tempo' => 'tempo.php',
             'Progetti' => 'progetto.php',
-            'Statistiche' => 'statistiche.php',
             'Utenti' => 'utente.php',
-            'Export' => 'export.php',
+            'Statistiche' => 'statistiche.php',
         ];
 
         $linkHome = current($menu);
