@@ -88,4 +88,10 @@ class Utilita {
     public static function SANITIZE_NUMERILETTERE($str) {
         return preg_replace("/[^a-zA-Z0-9]+/", "", $str);
     }
+
+    public static function VALIDATE_DATE($date, $format = 'd/m/Y H:i:s')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
 }

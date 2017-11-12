@@ -39,6 +39,11 @@ class Utente {
         $instance->ruolofk = $ruolofk;
         return $instance;
     }
+
+    public static function UTENTE_LOGGATO_ID() {
+        // DATI FAKE
+        return 1;
+    }
 }
 
 /* --------------------------------------

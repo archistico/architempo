@@ -58,7 +58,7 @@ class db{
         if(!is_null($this->qError[2])){
             echo $this->qError[2];
         }
-        echo 'done with query';
+        //echo 'done with query';
     }
 
     public function resultset(){

@@ -17,7 +17,7 @@ class Html_index {
         <div class='row'>
         <div class='col-md-6'>
             <div class='form-group'>
-                <label for='librofk'>Seleziona il progetto</label>
+                <label for='progettofk'>Seleziona il progetto</label>
                 <select class='form-control' style='width: 100%;' name='progettofk' required>
         ";
         echo $html;
@@ -31,7 +31,7 @@ class Html_index {
         </div>
         <div class='col-md-6'>    
             <div class='form-group'>
-                <label for='Denominazione'>Descrizione attività</label>
+                <label for='Descrizione'>Descrizione attività</label>
                 <input type='text' class='form-control' id='Descrizione' placeholder='Scrivi cosa ti metterai a fare' name='descrizione' required>
             </div>
             <input id='datainizio' name='datainizio' type='hidden' value=''>

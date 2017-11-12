@@ -49,7 +49,7 @@ $(document).ready(function () {
 
         durata_ore = parseInt(differenza.asHours());
         durata_minuti = parseInt(differenza.asMinutes())-durata_ore*60;
-        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*60-durata_minuti*60;
+        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*3600-durata_minuti*60;
         durata_str = durata_ore.pad()+":" +durata_minuti.pad()+ ":"+durata_secondi.pad();
 
         $("#datainizio").val(datainizio_str);
@@ -69,7 +69,7 @@ $(document).ready(function () {
 
         durata_ore = parseInt(differenza.asHours());
         durata_minuti = parseInt(differenza.asMinutes())-durata_ore*60;
-        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*60-durata_minuti*60;
+        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*3600-durata_minuti*60;
 
         durata_str = durata_ore.pad()+":" +durata_minuti.pad()+ ":"+durata_secondi.pad();
 

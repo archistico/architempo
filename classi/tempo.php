@@ -27,7 +27,6 @@ class Tempo {
 
     public function getDatainizio() {
         return $this->datainizio->format('d/m/Y H:i:s');
-
     }
 
     public function getDatafine() {
@@ -43,15 +42,27 @@ class Tempo {
     }
 
     public function DB_Add() {
-        // 2017-11-11 22:12:42
-        $database = new db();
-        $database->query('INSERT INTO tempo (progettofk, descrizione, utentefk, datainizio, datafine) VALUES(:progettofk, :descrizione, :utentefk, :datainizio, :datafine)');
-        $database->bind(':progettofk', $this->progettofk);
-        $database->bind(':descrizione', Utilita::HTML2DB($this->descrizione));
-        $database->bind(':utentefk', $this->utentefk);
-        $database->bind(':datainizio', $this->getDatainizio2DB());
-        $database->bind(':datafine', $this->getDatafine2DB());
-        $database->execute();
+
+        try {
+            $database = new db();
+            $database->query('INSERT INTO tempo (progettofk, descrizione, utentefk, datainizio, datafine) VALUES(:progettofk, :descrizione, :utentefk, :datainizio, :datafine)');
+            $database->bind(':progettofk', $this->progettofk);
+            $database->bind(':descrizione', Utilita::HTML2DB($this->descrizione));
+            $database->bind(':utentefk', $this->utentefk);
+            $database->bind(':datainizio', $this->getDatainizio2DB());
+            $database->bind(':datafine', $this->getDatafine2DB());
+            $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+        if(!true) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public function DB_Find_by_ID() {
