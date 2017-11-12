@@ -13,7 +13,7 @@ class Html_index {
         echo $html;
 
         $html = "
-        <form action='$formLink' method='post'>
+        <form action='$formLink' method='post' onsubmit='return clickBtnRegistra();'>
         <div class='row'>
         <div class='col-md-6'>
             <div class='form-group'>
@@ -31,8 +31,8 @@ class Html_index {
         </div>
         <div class='col-md-6'>    
             <div class='form-group'>
-                <label for='Denominazione'>Denominazione</label>
-                <input type='text' class='form-control' id='Denominazione' placeholder='Denominazione' name='denominazione' required>
+                <label for='Denominazione'>Descrizione attività</label>
+                <input type='text' class='form-control' id='Descrizione' placeholder='Scrivi cosa ti metterai a fare' name='descrizione' required>
             </div>
             <input id='datainizio' name='datainizio' type='hidden' value=''>
             <input id='datafine' name='datafine' type='hidden' value=''>
@@ -40,7 +40,7 @@ class Html_index {
         </div>
         <div class='row'>
             <div class='col-md-6 paddingBottom20'>
-	            <button type='submit' class='btn btn-danger btn-block btn-lg' id='btnPlay'>PLAY</button>
+	            <a class='btn btn-danger btn-block btn-lg' id='btnPlay' onclick='clickBtnPlay();return false;'>PLAY</a>
             </div>
             <div class='col-md-6 paddingBottom20'>
 	            <button type='submit' class='btn btn-success btn-block btn-lg' id='btnRegistra'>REGISTRA</button>
