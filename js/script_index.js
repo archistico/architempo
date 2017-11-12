@@ -6,6 +6,9 @@ $(document).ready(function () {
 
     $("#btnPlay").on("click", function () {
         console.log('Play');
+        var inizio = moment().format("DD/MM/YYYY");
+
+        console.log('Data inizio: ' + inizio);
     });
 
     $("#form").on("submit", function () {
