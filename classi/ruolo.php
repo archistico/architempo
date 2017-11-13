@@ -19,6 +19,21 @@ class Ruolo {
         return $this->descrizione;
     }
 
+    public static function FIND_BY_ID($id) {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM ruolo WHERE ruoloid = :id');
+            $database->bind(':id', $id);
+            $row = $database->single();
+
+            $r = new Ruolo($row['ruoloid'], Utilita::DB2HTML($row['descrizione']));
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+        return $r;
+    }
+
 }
 
 /* --------------------------------------
@@ -32,10 +47,7 @@ class Ruoli
 
     public function __construct()
     {
-        $this->ruoli = [];
-        $this->Add(new Ruolo(1, 'Amministratore'));
-        $this->Add(new Ruolo(2, 'Lavoratore'));
-        $this->Add(new Ruolo(3, 'Cliente'));
+
     }
 
     public function Add($obj)
@@ -46,6 +58,23 @@ class Ruoli
     public function getTipologie()
     {
         return $this->ruoli;
+    }
+
+    public function getDB_All()
+    {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM utente');
+            $rows = $database->resultset();
+
+            foreach ($rows as $row) {
+                $r = new Ruolo($row['ruoloid'], Utilita::DB2HTML($row['descrizione']));
+                $this->Add($r);
+            }
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
     }
 
     public function find_by_id($id) {

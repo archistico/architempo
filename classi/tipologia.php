@@ -27,12 +27,6 @@ class Tipologie
 
     public function __construct()
     {
-        $this->tipologie = [];
-        $this->Add(new Tipologia(1, 'Grafica'));
-        $this->Add(new Tipologia(2, 'Programmazione'));
-        $this->Add(new Tipologia(3, 'Architettura'));
-        $this->Add(new Tipologia(4, 'Lavoro dipendente'));
-        $this->Add(new Tipologia(5, 'Editoria'));
 
     }
 
@@ -44,6 +38,23 @@ class Tipologie
     public function getTipologie()
     {
         return $this->tipologie;
+    }
+
+    public function getDB_All()
+    {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM tipologia');
+            $rows = $database->resultset();
+
+            foreach ($rows as $row) {
+                $t = new Tipologia($row['tipologiaid'], Utilita::DB2HTML($row['descrizione']));
+                $this->Add($t);
+            }
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
     }
 
     public function find_by_id($id) {

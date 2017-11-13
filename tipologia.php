@@ -22,6 +22,7 @@ $utentefk = Utente::UTENTE_LOGGATO_ID();
 
 Html_default::HEADER("Lista tipologie");
 $tipologie = new Tipologie();
+$tipologie->getDB_All();
 $HTML->Table_tipologie($tipologie->getTipologie());
 
 /* -----------------------------
