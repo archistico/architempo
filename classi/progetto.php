@@ -19,9 +19,35 @@ class Progetto {
     public function DB_Add() {
         throw new Exception('Non implementato');
     }
+    
+    public static function DB_Find_by_ID($id) {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM progetto WHERE progettoid = :id');
+            $database->bind(':id', $id);
+            $row = $database->single();
 
-    public function DB_Find_by_ID() {
-        throw new Exception('Non implementato');
+            $instance = new Progetto();
+
+            $instance->progettoid = $row['progettoid'];
+            $instance->clientefk = $row['clientefk'];
+            $instance->cliente = Utente::FIND_BY_ID($row['clientefk']);
+            $instance->descrizione = Utilita::DB2HTML($row['descrizione']);
+            $instance->tipologiafk = $row['tipologiafk'];
+            $tipologie = new Tipologie();
+            $instance->tipologia = $tipologie->find_by_id($row['tipologiafk']);
+            $instance->compenso = $row['compenso'];
+            $instance->acconto = $row['acconto'];
+            $instance->pagato = $row['pagato'];
+            $instance->completato = $row['completato'];
+          
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        if($instance!=null) {
+            return $instance;
+        }
     }
 
     public function DB_Delete_by_ID() {
@@ -37,13 +63,6 @@ class Progetto {
         $instance->progettoid = $id;
         $instance->descrizione = $descrizione;
         return $instance;
-    }
-
-    public static function FIND_BY_ID($id) {
-        // FAKE
-        $p = new Progetto();
-        $p->descrizione = 'Progetto di test';
-        return $p;
     }
 
     public function getCliente() {

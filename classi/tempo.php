@@ -108,7 +108,7 @@ class Tempo {
 
             $this->tempoid = $row['tempoid'];
             $this->progettofk = $row['progettofk'];
-            $this->progetto = Progetto::FIND_BY_ID($row['progettofk']);
+            $this->progetto = Progetto::DB_FIND_BY_ID($row['progettofk']);
             $this->descrizione = Utilita::DB2HTML($row['descrizione']);
             $this->utentefk = $row['utentefk'];
             $this->utente = Utente::FIND_BY_ID($row['utentefk']);
@@ -121,7 +121,7 @@ class Tempo {
     }
 
     public function getInfo() {
-        return $this->descrizione . " : ".$this->getDurata();
+        return $this->getProgetto()->descrizione." - ".$this->descrizione . ": ".$this->getDurata();
     }
 
     public static function EXIST($id) {
@@ -200,7 +200,7 @@ class Tempi
                 $t = new Tempo();
                 $t->tempoid = $row['tempoid'];
                 $t->progettofk = $row['progettofk'];
-                $t->progetto = Progetto::FIND_BY_ID($row['progettofk']);
+                $t->progetto = Progetto::DB_FIND_BY_ID($row['progettofk']);
                 $t->descrizione = Utilita::DB2HTML($row['descrizione']);
                 $t->utentefk = $row['utentefk'];
                 $t->utente = Utente::FIND_BY_ID($row['utentefk']);
