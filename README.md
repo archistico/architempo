@@ -12,4 +12,6 @@ mysql -u root -p'toor' architempo < sql/tabella_tempo.sql
 
  https://gist.github.com/danferth/9512172#file-zdb-php-L9  
  
+ # TODO
  
+ Guarda il file todo.md
