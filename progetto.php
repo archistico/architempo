@@ -20,6 +20,9 @@ $utentefk = Utente::UTENTE_LOGGATO_ID();
  * -----------------------------
  */
 
+Html_default::HEADER("Crea nuovo progetto");
+Html_default::BUTTON("NUOVO", "progetto_nuovo.php", "info");
+
 Html_default::HEADER("Lista Registrazioni");
 $progetti = new Progetti();
 $progetti->getDB_All();

@@ -147,14 +147,25 @@ class Html_default {
         echo $html;
     }
 
-    public static function BUTTON($text, $link) {
-        $html = "
-        <div class='row'>
-        <div class='col-md-12'>
-            <a href='$link'>$text<a>
-        </div>
-        </div>        
-        ";
+    public static function BUTTON($text, $link, $class = "") {
+        if(empty($class)) {
+            $html = "
+            <div class='row paddingBottom20'>
+            <div class='col-md-12'>
+                <a href='$link'>$text<a>
+            </div>
+            </div>        
+            ";
+        } else {
+            $html = "
+            <div class='row paddingBottom20'>
+            <div class='col-md-12'>
+                <a class='btn btn-$class btn-block btn-lg' href='$link'>$text<a>
+            </div>
+            </div>        
+            ";
+        }
+        
         echo $html;
     }
 
