@@ -93,6 +93,36 @@ class Progetto {
         return $this->tipologia;
     }
 
+    public function getDataByID($id) {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM progetto WHERE progettoid = :id');
+            $database->bind(':id', $id);
+            $row = $database->single();
+
+            $this->progettoid = $row['progettoid'];
+            $this->clientefk = $row['clientefk'];
+            $this->cliente = Utente::FIND_BY_ID($row['clientefk']);
+            $this->descrizione = Utilita::DB2HTML($row['descrizione']);
+            $this->tipologiafk = $row['tipologiafk'];
+            $tipologie = new Tipologie();
+            $this->tipologia = $tipologie->find_by_id($row['tipologiafk']);
+            $this->compenso = $row['compenso'];
+            $this->acconto = $row['acconto'];
+            $this->pagato = $row['pagato'];
+            $this->completato = $row['completato'];
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        return empty($this->descrizione)?false:true;
+    }
+
+    public function getInfo() {
+        return $this->descrizione ." - ". $this->getCliente()->denominazione;
+    }
+
     public function getTempo() {
         // CERCARE TUTTI I TEMPI CON UN PROGETTO ID E SOMMARE LE DURATE
         $totale = 0;
@@ -127,7 +157,58 @@ class Progetto {
         } else {
             return $durata;
         }
+    }
 
+    public static function EXIST($id) {
+        $exist = false;
+
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM progetto WHERE progettoid = :id');
+            $database->bind(':id', $id);
+            $database->execute();
+            if($database->rowCount()>0) {
+                $exist = true;
+            }
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $exist;
+    }
+
+    public static function DELETE_BY_ID_AND_TEMPO($id) {
+        $resultTempo = false;
+        $resultProgetto = false;
+
+        try {
+            $database = new db();
+            $database->beginTransaction();
+
+            $database->query('DELETE FROM tempo WHERE progettofk = :id');
+            $database->bind(':id', $id);
+            $resultTempo = $database->execute();
+
+            $database->query('DELETE FROM progetto WHERE progettoid = :id');
+            $database->bind(':id', $id);
+            $resultProgetto = $database->execute();
+
+            $database->endTransaction();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        if($resultTempo && $resultProgetto) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
 
