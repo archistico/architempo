@@ -19,6 +19,8 @@ $utentefk = Utente::UTENTE_LOGGATO_ID();
  *       CORPO FILE
  * -----------------------------
  */
+Html_default::HEADER("Crea nuovo utente");
+Html_default::BUTTON("NUOVO", "utente_nuovo.php", "info");
 
 Html_default::HEADER("Lista Registrazioni");
 $utenti = new Utenti();

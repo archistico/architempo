@@ -14,7 +14,7 @@ Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
  * -----------------------------
  */
 $utentefk = Utente::UTENTE_LOGGATO_ID();
-$csrfname = $filename_corrente.":".$utentefk."-csrf";
+$csrfname = $filename_corrente.":".$utentefk.":csrf";
 /* -----------------------------
  *       CORPO FILE
  * -----------------------------
@@ -25,7 +25,6 @@ $csrfname = $filename_corrente.":".$utentefk."-csrf";
 if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POST['tipologiafk']) && isset($_POST['compenso']) && isset($_POST['acconto'])
     && (isset($_POST[$csrfname]) && isset($_SESSION[$csrfname]) && $_POST[$csrfname] == $_SESSION[$csrfname])
 ) {
-
     // cancello il CSRF
     $_SESSION[$csrfname] = '';
 
@@ -107,16 +106,14 @@ $_SESSION[$csrfname] = $utentefk . "-" . md5(rand(0,10000000));
 
 Html_default::SHOW_NOTICES($notices);
 
-// Per nuovo progetto
-Html_default::HEADER("Crea nuovo progetto");
+// Per nuovo utente
+Html_default::HEADER("Crea nuovo utente");
 
 // Carica dati da iniettare
-$utenti = new Utenti();
-$utenti->getDB_All();
+$ruoli = new Ruoli();
+$ruoli->getDB_All();
 
-$tipologie = new Tipologie();
-$tipologie->getDB_All();
-$HTML->FORM_NUOVO_PROGETTO($utenti->getUtenti(), $tipologie->getTipologie(), $basename_corrente, "progetto.php",  htmlspecialchars($_SESSION[$csrfname]), $csrfname);
+$HTML->FORM_NUOVO_UTENTE($ruoli->getRuoli(), $basename_corrente, "utente.php",  htmlspecialchars($_SESSION[$csrfname]), $csrfname);
 
 /* -----------------------------
  *      FINE CORPO FILE

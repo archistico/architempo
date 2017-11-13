@@ -55,7 +55,7 @@ class Ruoli
         $this->ruoli[] = $obj;
     }
 
-    public function getTipologie()
+    public function getRuoli()
     {
         return $this->ruoli;
     }
@@ -64,7 +64,7 @@ class Ruoli
     {
         try {
             $database = new db();
-            $database->query('SELECT * FROM utente');
+            $database->query('SELECT * FROM ruolo');
             $rows = $database->resultset();
 
             foreach ($rows as $row) {
