@@ -18,14 +18,18 @@ $(document).ready(function () {
     }
 
     $("#durata").fitText(0.4);
-
-    //console.log('Eccoci');
-
+    
     $("#btnPlay").on("click", function () {
-        console.log('Play');
-
+        
         datainizio = moment();
         datainizio_str = datainizio.format("DD/MM/YYYY HH:mm:ss");
+
+        // Avverti il cambio pagina
+        window.onbeforeunload = function(e) {
+            var dialogText = 'In registrazione';
+            e.returnValue = dialogText;
+            return dialogText;
+        };
 
         intervallo = setInterval(calcola, 1000);
 
@@ -37,13 +41,10 @@ $(document).ready(function () {
             alert('Premere play prima');
             return false;
         }
-        //console.log('Registra');
-
+        
         datafine = moment();
         datafine_str = datafine.format("DD/MM/YYYY HH:mm:ss");
-
-        //console.log('Data fine: ' + datafine_str);
-
+        
         // calcola durata
         var differenza = moment.duration(datafine.diff(datainizio));
 
@@ -56,6 +57,9 @@ $(document).ready(function () {
         $("#datafine").val(datafine_str);
 
         clearInterval(intervallo);
+        
+        // Avverti il cambio pagina
+        window.onbeforeunload = null;
 
         // impedisce l'invio
         // return false;
@@ -75,5 +79,7 @@ $(document).ready(function () {
 
         $("#durata").text(durata_str);
     }
+
+    
 });
 
