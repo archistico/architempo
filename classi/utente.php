@@ -18,7 +18,31 @@ class Utente {
     public $note;
 
     public function DB_Add() {
-        throw new Exception('Non implementato');
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('INSERT INTO utente (denominazione, indirizzo, cf, piva, telefono, email, password, ruolofk, note) VALUES(:denominazione, :indirizzo, :cf, :piva, :telefono, :email, :password, :ruolofk, :note)');
+            $database->bind(':denominazione', Utilita::HTML2DB($this->denominazione));
+            $database->bind(':indirizzo', Utilita::HTML2DB($this->indirizzo));
+            $database->bind(':cf', Utilita::HTML2DB($this->cf));
+            $database->bind(':piva', Utilita::HTML2DB($this->piva));
+            $database->bind(':telefono', Utilita::HTML2DB($this->telefono));
+            $database->bind(':email', Utilita::HTML2DB($this->email));
+            $database->bind(':password', Utilita::HTML2DB($this->password));
+            $database->bind(':note', Utilita::HTML2DB($this->note));
+
+            $database->bind(':ruolofk', $this->ruolofk);
+
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
     }
 
     public function DB_Find_by_ID() {

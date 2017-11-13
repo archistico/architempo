@@ -4,7 +4,6 @@ class Html_utente_nuovo {
 
     public function FORM_NUOVO_UTENTE($ruoli, $formLink, $annullaLink, $csrf, $csrfname) {
 
-        // CLIENTE E DESCRIZIONE
         $html = "
         <form action='$formLink' method='post' id='form'>
         <div class='row'>

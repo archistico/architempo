@@ -22,73 +22,83 @@ $csrfname = $filename_corrente.":".$utentefk.":csrf";
 
 // SE FORM INVIATO
 // SE SONO VUOTI TUTTI NON VALIDARE -> FORM NON SUBMIT
-if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POST['tipologiafk']) && isset($_POST['compenso']) && isset($_POST['acconto'])
+if (!empty($_POST['denominazione']) && !empty($_POST['ruolofk'])
     && (isset($_POST[$csrfname]) && isset($_SESSION[$csrfname]) && $_POST[$csrfname] == $_SESSION[$csrfname])
 ) {
     // cancello il CSRF
     $_SESSION[$csrfname] = '';
 
     // VALIDAZIONE
-    if (empty($_POST['descrizione'])) {
-        $notices[] = 'Descrizione non passato';
+    if (empty($_POST['denominazione'])) {
+        $notices[] = 'Denominazione non passata';
     } else {
-        $descrizione = Utilita::PULISCISTRINGA($_POST['descrizione']);
+        $denominazione = Utilita::PULISCISTRINGA($_POST['denominazione']);
     }
 
-    if (empty($_POST['clientefk'])) {
-        $notices[] = 'Cliente non passato';
+    if (empty($_POST['ruolofk'])) {
+        $notices[] = 'Ruolo non passato';
     } else {
-        $clientefk = Utilita::PULISCISTRINGA($_POST['clientefk']);
+        $ruolofk = Utilita::PULISCISTRINGA($_POST['ruolofk']);
     }
 
-    if (empty($_POST['tipologiafk'])) {
-        $notices[] = 'Tipologia non passata';
+    if (empty($_POST['indirizzo'])) {
+        $notices[] = 'Indirizzo non passato';
     } else {
-        $tipologiafk = Utilita::PULISCISTRINGA($_POST['tipologiafk']);
+        $indirizzo = Utilita::PULISCISTRINGA($_POST['indirizzo']);
     }
 
-    // valore che potrebbero essere zero
-    if (!isset($_POST['compenso'])) {
-        $notices[] = 'Compenso non passato';
+    if (empty($_POST['cf'])) {
+        $notices[] = 'Codice fiscale non passato';
     } else {
-        $compenso = Utilita::PULISCISTRINGA($_POST['compenso']);
+        $cf = Utilita::PULISCISTRINGA($_POST['cf']);
     }
 
-    // valore che potrebbero essere zero
-    if (!isset($_POST['acconto'])) {
-        $notices[] = 'Acconto non passato';
+    if (empty($_POST['piva'])) {
+        $notices[] = 'Partiva iva non passata';
     } else {
-        $acconto = Utilita::PULISCISTRINGA($_POST['acconto']);
+        $piva = Utilita::PULISCISTRINGA($_POST['piva']);
     }
 
-    // Checkbox
-    if (!isset($_POST['pagato'])) {
-        $pagato = 0;
+    if (empty($_POST['telefono'])) {
+        $notices[] = 'Telefono non passato';
     } else {
-        $pagato = 1;
+        $telefono = Utilita::PULISCISTRINGA($_POST['telefono']);
     }
 
-    // Checkbox
-    if (!isset($_POST['completato'])) {
-        $completato = 0;
+    if (empty($_POST['email'])) {
+        $notices[] = 'Email non passato';
     } else {
-        $completato = 1;
+        $email = Utilita::PULISCISTRINGA($_POST['email']);
+    }
+
+    if (empty($_POST['password'])) {
+        $notices[] = 'Password non passata';
+    } else {
+        $password = Utilita::PULISCISTRINGA($_POST['password']);
+    }
+
+    if (empty($_POST['note'])) {
+        $notices[] = 'Note non passato';
+    } else {
+        $note = Utilita::PULISCISTRINGA($_POST['note']);
     }
 
     if(empty($notices)) {
 
-        // AGGIUNGO IL TEMPO NEL DB
+        // AGGIUNGO NEL DB
 
-        $p = new Progetto();
-        $p->descrizione = $descrizione;
-        $p->clientefk = $clientefk;
-        $p->tipologiafk = $tipologiafk;
-        $p->compenso = $compenso;
-        $p->acconto = $acconto;
-        $p->pagato = $pagato;
-        $p->completato = $completato;
+        $u= new Utente();
+        $u->denominazione = $denominazione;
+        $u->indirizzo = $indirizzo;
+        $u->cf = $cf;
+        $u->piva = $piva;
+        $u->telefono = $telefono;
+        $u->email = $email;
+        $u->password = $password;
+        $u->ruolofk = $ruolofk;
+        $u->note = $note;
 
-        if(!$p->DB_Add()) {
+        if(!$u->DB_Add()) {
             $notices[] = 'Errore nella query sulla base dati';
         } else {
             $notices['ok'] = "Inserito";
