@@ -14,6 +14,11 @@ class Ruolo {
         $this->ruoloid = $id;
         $this->descrizione = $des;
     }
+
+    public function getDescrizione() {
+        return $this->descrizione;
+    }
+
 }
 
 /* --------------------------------------
