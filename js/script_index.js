@@ -25,13 +25,6 @@ $(document).ready(function () {
         datainizio = moment();
         datainizio_str = datainizio.format("DD/MM/YYYY HH:mm:ss");
 
-        // Avverti il cambio pagina
-        window.onbeforeunload = function(e) {
-            var dialogText = 'In registrazione';
-            e.returnValue = dialogText;
-            return dialogText;
-        };
-
         // cambio colore al pulsante e disabilito la funzione
         if(!pause) {
             // SE E' IN PAUSA
@@ -39,6 +32,13 @@ $(document).ready(function () {
             $("#btnPlay").removeClass("btn-success");
             $("#btnPlay").addClass("btn-secondary");
             $("#btnPlay").html("<i class='fa fa-power-off' aria-hidden='true'></i> ANNULLA");
+
+            // Avverti il cambio pagina
+            window.onbeforeunload = function(e) {
+                var dialogText = 'In registrazione';
+                e.returnValue = dialogText;
+                return dialogText;
+            };
 
             intervallo = setInterval(calcola, 1000);
         } else {
@@ -52,6 +52,10 @@ $(document).ready(function () {
             datainizio=null;
             datafine=null;
             $("#durata").text("00:00:00");
+
+            // Avverti il cambio pagina
+            window.onbeforeunload = null;
+
             clearInterval(intervallo);
         }
         
