@@ -45,6 +45,10 @@ class Utente {
         return $result;
     }
 
+    public function getInfo() {
+        return $this->denominazione;
+    }
+
     public function DB_Find_by_ID() {
         throw new Exception('Non implementato');
     }
@@ -99,6 +103,92 @@ class Utente {
             throw new PDOException("Error  : " . $e->getMessage());
         }
         return $u;
+    }
+
+    public static function EXIST($id) {
+        $exist = false;
+
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM utente WHERE utenteid = :id');
+            $database->bind(':id', $id);
+            $database->execute();
+            if($database->rowCount()>0) {
+                $exist = true;
+            }
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $exist;
+    }
+
+    public static function PROGETTI_COLLEGATI($id) {
+        $exist = false;
+
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM progetto WHERE clientefk = :id');
+            $database->bind(':id', $id);
+            $database->execute();
+            if($database->rowCount()>0) {
+                $exist = true;
+            }
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $exist;
+    }
+
+    public function getDataByID($id) {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM utente WHERE utenteid = :id');
+            $database->bind(':id', $id);
+            $row = $database->single();
+
+            $this->utenteid = $row['utenteid'];
+            $this->denominazione = Utilita::DB2HTML($row['denominazione']);
+            $this->indirizzo = Utilita::DB2HTML($row['indirizzo']);
+            $this->cf = Utilita::DB2HTML($row['cf']);
+            $this->piva = Utilita::DB2HTML($row['piva']);
+            $this->telefono = Utilita::DB2HTML($row['telefono']);
+            $this->email = Utilita::DB2HTML($row['email']);
+            $this->password = Utilita::DB2HTML($row['password']);
+            $this->ruolofk = $row['ruolofk'];
+            $this->ruolo = Ruolo::FIND_BY_ID($row['ruolofk']);
+            $this->note = Utilita::DB2HTML($row['note']);
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        return empty($this->descrizione)?false:true;
+    }
+
+    public static function DELETE_BY_ID($id) {
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('DELETE FROM utente WHERE utenteid = :id');
+            $database->bind(':id', $id);
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
     }
 }
 

@@ -33,30 +33,35 @@ if (!isset($_GET['ok'])) {
 }
 
 // CONTROLLO ID ESISTENTE
-if (empty($notices) && !Progetto::EXIST($id)) {
+if (empty($notices) && !Utente::EXIST($id)) {
     $notices[] = 'Nessun progetto con questo ID';
+}
+
+// CONTROLLA SE HA PROGETTI ASSOCIATI
+if (empty($notices) && Utente::PROGETTI_COLLEGATI($id)) {
+    $notices[] = 'Ci sono progetti associato con questo ID, cancellare prima loro';
 }
 
 // MOSTRO LA SCELTA
 if(empty($notices) && $ok != 1) {
-    $progetto = new Progetto();
-    $progetto->getDataByID($id);
-    $HTML->scelta("ATTENZIONE! CANCELLARE IL PROGETTO E I RELATIVI TEMPI?", $progetto->getInfo(), "CANCELLA", "$basename_corrente?id=$id&ok=1", "progetto.php");
+    $utente = new Utente();
+    $utente->getDataByID($id);
+    $HTML->scelta("ATTENZIONE! CANCELLARE QUESTO UTENTE?", $utente->getInfo(), "CANCELLA", "$basename_corrente?id=$id&ok=1", "utente.php");
 }
 
 // SE INVECE HO ACCETTATO
 if(empty($notices) && $ok == 1) {
-    $progetto = new Progetto();
-    $progetto->getDataByID($id);
+    $utente = new Utente();
+    $utente->getDataByID($id);
 
     // CANCELLA DAL DB
-    if(!Progetto::DELETE_BY_ID_AND_TEMPO($id)) {
+    if(!Utente::DELETE_BY_ID($id)) {
         $notices[] = 'Errore nella cancellazione sulla base dati';
     }
-    $notices['ok'] = "Progetto cancellato";
+    $notices['ok'] = "Utente cancellato";
 }
 
-Html_default::SHOW_NOTICES($notices, "progetto.php");
+Html_default::SHOW_NOTICES($notices, "utente.php");
 
 /* -----------------------------
 *      FINE CORPO FILE
