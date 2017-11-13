@@ -17,7 +17,27 @@ class Progetto {
     public $completato;
 
     public function DB_Add() {
-        throw new Exception('Non implementato');
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('INSERT INTO progetto (descrizione, clientefk, tipologiafk, compenso, acconto, pagato, completato ) VALUES(:descrizione, :clientefk, :tipologiafk, :compenso, :acconto, :pagato, :completato)');
+            $database->bind(':descrizione', Utilita::HTML2DB($this->descrizione));
+            $database->bind(':clientefk', $this->clientefk);
+            $database->bind(':tipologiafk', $this->tipologiafk);
+            $database->bind(':compenso', $this->compenso);
+            $database->bind(':acconto', $this->acconto);
+            $database->bind(':pagato', $this->pagato);
+            $database->bind(':completato', $this->completato);
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
     }
     
     public static function DB_Find_by_ID($id) {

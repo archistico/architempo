@@ -2,7 +2,7 @@
 
 class Html_progetto_nuovo {
 
-    public function Form_nuovo_progetto($utenti, $tipologie, $formLink, $annullaLink, $csrf, $csrf_user) {
+    public function Form_nuovo_progetto($utenti, $tipologie, $formLink, $annullaLink, $csrf, $csrfname) {
 
         // CLIENTE E DESCRIZIONE
         $html = "
@@ -83,7 +83,7 @@ class Html_progetto_nuovo {
 	            <a class='btn btn-secondary btn-block btn-lg text-white' href='$annullaLink'> ANNULLA</a>
             </div>
             <div class='col-md-6 paddingBottom20'>
-                <input type='hidden' name='$csrf_user' value='$csrf'>
+                <input type='hidden' name='$csrfname' value='$csrf'>
 	            <button type='submit' class='btn btn-danger btn-block btn-lg'><i class='fa fa-plus-square' aria-hidden='true'></i> REGISTRA</button>
             </div>
         </div>  
