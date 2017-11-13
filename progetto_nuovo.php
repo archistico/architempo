@@ -115,7 +115,7 @@ $utenti = new Utenti();
 $utenti->getDB_All();
 
 $tipologie = new Tipologie();
-
+$tipologie->getDB_All();
 $HTML->FORM_NUOVO_PROGETTO($utenti->getUtenti(), $tipologie->getTipologie(), $basename_corrente, "progetto.php",  htmlspecialchars($_SESSION[$csrfname]), $csrfname);
 
 /* -----------------------------
