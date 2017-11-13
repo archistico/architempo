@@ -58,6 +58,7 @@ class Tipologie
     }
 
     public function find_by_id($id) {
+        $this->getDB_All();
         $item = null;
         foreach($this->tipologie as $el) {
             if ($id == $el->tipologiaid) {
