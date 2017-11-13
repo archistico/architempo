@@ -14,7 +14,7 @@ Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
  * -----------------------------
  */
 $utentefk = Utente::UTENTE_LOGGATO_ID();
-
+$csrfname = $filename_corrente.":".$utentefk.":csrf";
 /* -----------------------------
  *       CORPO FILE
  * -----------------------------
@@ -22,11 +22,11 @@ $utentefk = Utente::UTENTE_LOGGATO_ID();
 
 // SE SONO VUOTI TUTTI NON VALIDARE -> FORM NON SUBMIT
 if (!empty($_POST['descrizione']) && !empty($_POST['progettofk']) && !empty($_POST['datainizio']) && !empty($_POST['datafine'])
-    && (isset($_POST['csrf']) && isset($_SESSION['csrf']) && $_POST["csrf"] == $_SESSION["csrf"])
+    && (isset($_POST[$csrfname]) && isset($_SESSION[$csrfname]) && $_POST[$csrfname] == $_SESSION[$csrfname])
     ) {
 
     // cancello il CSRF
-    $_SESSION["csrf"] = '';
+    $_SESSION[$csrfname] = '';
 
     // VALIDAZIONE
     if (empty($_POST['descrizione'])) {
@@ -84,7 +84,7 @@ if (!empty($_POST['descrizione']) && !empty($_POST['progettofk']) && !empty($_PO
 }
 
 // Creo il formid per questa sessione
-$_SESSION["csrf"] = $utentefk . "-" . md5(rand(0,10000000));
+$_SESSION[$csrfname] = $utentefk . "-" . md5(rand(0,10000000));
 
 Html_default::SHOW_NOTICES($notices);
 
@@ -92,7 +92,7 @@ Html_default::SHOW_NOTICES($notices);
 $progetti = new Progetti();
 $progetti->getDB_All();
 
-$HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente, htmlspecialchars($_SESSION["csrf"]));
+$HTML->Form_nuovo_tempo($progetti->getProgetti(), $basename_corrente, htmlspecialchars($_SESSION[$csrfname]), $csrfname);
 
 /* -----------------------------
  *      FINE CORPO FILE

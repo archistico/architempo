@@ -17,6 +17,7 @@ class Html_progetto {
               <th class='$colunneNascoste'>Pagato/Completato</th>
               <th class='$colonneVisibili'>Tempo</th>
               <th class='$colonneVisibili'>#</th>
+              <th class='$colonneVisibili'>#</th>
             </tr>
           </thead>
           <tbody>
@@ -29,6 +30,7 @@ class Html_progetto {
             echo " <td class='$colunneNascoste'>&euro; ".$elemento->acconto." / &euro; ".$elemento->compenso."</td>";
             echo " <td class='$colunneNascoste'>".($elemento->pagato==0?'NO':'SÍ')." - ".($elemento->completato==0?'NO':'SÍ')."</td>";
             echo " <td class='$colonneVisibili'>".$elemento->getTempo()."</td>";
+            echo " <td class='$colonneVisibili'><a href='progetto_elimina.php?id=$elemento->progettoid&ok=0'><i class='fa fa fa-pencil fa-lg arancione' aria-hidden='true'></i></a></td>";
             echo " <td class='$colonneVisibili'><a href='progetto_elimina.php?id=$elemento->progettoid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
         }

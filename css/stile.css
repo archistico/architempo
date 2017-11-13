@@ -19,7 +19,9 @@ body {
   color: green;
 }
 
-
+.arancione {
+  color: orange;
+}
 
 .jumbotron {
   border-radius: 0px;
