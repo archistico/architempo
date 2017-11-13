@@ -18,9 +18,8 @@ $(document).ready(function () {
     }
 
     $("#durata").fitText(0.4);
-    
-    $("#btnPlay").on("click", function () {
-        
+
+    var ClickPlay = function() {
         datainizio = moment();
         datainizio_str = datainizio.format("DD/MM/YYYY HH:mm:ss");
 
@@ -31,9 +30,16 @@ $(document).ready(function () {
             return dialogText;
         };
 
-        intervallo = setInterval(calcola, 1000);
+        // cambio colore al pulsante e disabilito la funzione
+        $("#btnPlay").removeClass("btn-success");
+        $("#btnPlay").addClass("btn-secondary");
+        $("#btnPlay").prop('onclick',null).off('click');
 
-        //console.log('Data inizio: ' + datainizio_str);
+        intervallo = setInterval(calcola, 1000);
+    }
+    
+    $("#btnPlay").on("click", function () {
+        ClickPlay();
     });
 
     $("#form").on("submit", function () {
@@ -42,6 +48,11 @@ $(document).ready(function () {
             return false;
         }
         
+        // cambio colore al pulsante e disabilito la funzione
+        $("#btnPlay").removeClass("btn-secondary");
+        $("#btnPlay").addClass("btn-success");
+        $("#btnPlay").prop('onclick',ClickPlay());
+
         datafine = moment();
         datafine_str = datafine.format("DD/MM/YYYY HH:mm:ss");
         
