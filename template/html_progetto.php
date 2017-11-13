@@ -3,6 +3,7 @@
 class Html_progetto {
 
     public function Table_progetto($progetti) {
+        $columShowOnlyLarge = 'd-none d-md-block';
         $html = "
         <div class='row'>
         <div class='col-md-12'>
@@ -10,9 +11,9 @@ class Html_progetto {
           <thead>
             <tr>
               <th>Descrizione</th>
-              <th>Tipologia</th>
-              <th>Acconto/Compenso</th>
-              <th>Pagato/Completato</th>
+              <th class='$columShowOnlyLarge'>Tipologia</th>
+              <th class='$columShowOnlyLarge'>Acconto/Compenso</th>
+              <th class='$columShowOnlyLarge'>Pagato/Completato</th>
               <th>Tempo</th>
               <th>#</th>
             </tr>
@@ -23,9 +24,9 @@ class Html_progetto {
         foreach ($progetti as $elemento) {
             echo "<tr>";
             echo " <td>".$elemento->descrizione." - ".$elemento->getCliente()->denominazione."</td>";
-            echo " <td>".$elemento->getTipologia()->descrizione."</td>";
-            echo " <td>&euro; ".$elemento->acconto." / &euro; ".$elemento->compenso."</td>";
-            echo " <td>".($elemento->pagato==0?'NO':'SÍ')." - ".($elemento->completato==0?'NO':'SÍ')."</td>";
+            echo " <td class='$columShowOnlyLarge'>".$elemento->getTipologia()->descrizione."</td>";
+            echo " <td class='$columShowOnlyLarge'>&euro; ".$elemento->acconto." / &euro; ".$elemento->compenso."</td>";
+            echo " <td class='$columShowOnlyLarge'>".($elemento->pagato==0?'NO':'SÍ')." - ".($elemento->completato==0?'NO':'SÍ')."</td>";
             echo " <td>".$elemento->getTempo()."</td>";
             echo " <td><a href='progetto_elimina.php?id=$elemento->progettoid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
