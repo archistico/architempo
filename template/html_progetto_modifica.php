@@ -63,23 +63,23 @@ class Html_progetto_modifica {
         <div class='col-md-3'>    
             <div class='form-group'>
                 <label for='acconto'>Acconto &euro;</label>
-                <input type='number' class='form-control' required name='acconto' min='0' value='0' step='0.01'>
+                <input type='number' class='form-control' required name='acconto' min='0' value='$progetto->acconto' step='0.01'>
             </div>
         </div>
         <div class='col-md-3'>    
             <div class='form-group'>
                 <label for='compenso'>Compenso &euro;</label>
-                <input type='number' class='form-control' required name='compenso' min='0' value='0' step='0.01'>
+                <input type='number' class='form-control' required name='compenso' min='0'  value='$progetto->compenso' step='0.01'>
             </div>
         </div>
         <div class='col-md-2'>
             <div class='form-group'>
                 <label>Altro</label>
                 <div class='form-check'>
-                    <label class='form-check-label'><input type='checkbox' name='pagato' class='form-check-input'>Pagato</label>
+                    <label class='form-check-label'><input type='checkbox' name='pagato' class='form-check-input' ".($progetto->pagato?'checked':'').">Pagato</label>
                 </div>
                 <div class='form-check'>
-                    <label class='form-check-label'><input type='checkbox' name='completato' class='form-check-input'>Completato</label>
+                    <label class='form-check-label'><input type='checkbox' name='completato' class='form-check-input' ".($progetto->completato?'checked':'').">Completato</label>
                 </div>
             </div>
         </div>
@@ -94,6 +94,8 @@ class Html_progetto_modifica {
 	            <a class='btn btn-secondary btn-block btn-lg text-white' href='$annullaLink'> ANNULLA</a>
             </div>
             <div class='col-md-6 paddingBottom20'>
+                <input type='hidden' name='id' value='$progetto->progettoid'>
+                <input type='hidden' name='ok' value='1'>
                 <input type='hidden' name='$csrfname' value='$csrf'>
 	            <button type='submit' class='btn btn-danger btn-block btn-lg'><i class='fa fa-plus-square' aria-hidden='true'></i> REGISTRA</button>
             </div>

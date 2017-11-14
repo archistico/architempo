@@ -22,7 +22,7 @@ $csrfname = $filename_corrente.":".$utentefk."-csrf";
 
 // SE FORM INVIATO
 // SE SONO VUOTI TUTTI NON VALIDARE -> FORM NON SUBMIT
-if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POST['tipologiafk']) && isset($_POST['compenso']) && isset($_POST['acconto']) && $_POST['ok']==1
+if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POST['tipologiafk']) && isset($_POST['compenso']) && isset($_POST['acconto'], $_POST['id'], $_POST['ok']) && $_POST['ok']==1
     && (isset($_POST[$csrfname]) && isset($_SESSION[$csrfname]) && $_POST[$csrfname] == $_SESSION[$csrfname])
 ) {
 
@@ -89,10 +89,10 @@ if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POS
         $p->pagato = $pagato;
         $p->completato = $completato;
 
-        if(!$p->DB_Add()) {
+        if(!$p->DB_Update($id)) {
             $notices[] = 'Errore nella query sulla base dati';
         } else {
-            $notices['ok'] = "Inserito";
+            $notices['ok'] = "Modificato";
         }
     }
 
@@ -108,7 +108,7 @@ $_SESSION[$csrfname] = $utentefk . "-" . md5(rand(0,10000000));
 Html_default::SHOW_NOTICES($notices);
 
 // SE DEVO ANCORA MODIFICARE I DATI
-if($_GET['ok']==0) {
+if(isset($_GET['ok'], $_GET['id']) && $_GET['ok']==0) {
     // Per nuovo progetto
     Html_default::HEADER("Modifica progetto");
 
