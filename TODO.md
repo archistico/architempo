@@ -18,3 +18,7 @@
 ## Login
 + pagina login e processo funzionante
 + autenticazione e autorizzazione
+
+## Generale
++ paginazione tabelle
++ possibilità di ordinare colonne
