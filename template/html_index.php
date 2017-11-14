@@ -23,9 +23,8 @@ class Html_index {
         echo $html;
 
         foreach ($progetti as $opz) {
-            $tipologia = $opz->getTipologia()->descrizione;
             $cliente = $opz->getCliente()->denominazione;
-            echo "<option value='$opz->progettoid'>$opz->descrizione - $cliente ($tipologia)</option>";
+            echo "<option value='$opz->progettoid'>$opz->descrizione - $cliente</option>";
         }
         $html = "
                 </select>
