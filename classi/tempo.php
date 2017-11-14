@@ -75,10 +75,6 @@ class Tempo {
         return $result;
     }
 
-    public function DB_Find_by_ID() {
-        throw new Exception('Non implementato');
-    }
-
     public static function NUOVO($tempoid, $progetto, $descrizione, $utente, $datainizio, $datafine) {
         $instance = new self();
         $instance->tempoid = $tempoid;

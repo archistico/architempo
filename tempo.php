@@ -20,6 +20,9 @@ $utentefk = Utente::UTENTE_LOGGATO_ID();
  * -----------------------------
  */
 
+Html_default::HEADER("Crea nuovo tempo manuale");
+Html_default::BUTTON("NUOVO", "tempo_nuovo.php", "info");
+
 Html_default::HEADER("Lista Registrazioni");
 $tempi = new Tempi();
 $tempi->getDB_All();

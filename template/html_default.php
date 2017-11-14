@@ -15,6 +15,9 @@ class Html_default {
             <link rel='icon' href='favicon.ico'>
             <link rel='stylesheet' href='vendor/bootstrap/bootstrap.min.css'>
             <link rel='stylesheet' href='vendor/awesome/css/font-awesome.min.css'>
+            
+            <link rel='stylesheet' href='vendor/bootstrap-datepicker/bootstrap-datepicker3.css'>
+            
             <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet'>
             <link href='css/stile.css' rel='stylesheet'>
         </head>
@@ -102,7 +105,7 @@ class Html_default {
         echo '</div>';
     }
 
-    public static function SCRIPT($attivi) {
+    public static function SCRIPT($attivi, $datepicker = false) {
         if($attivi){
             $html = "
             <script src='vendor/jquery/jquery-3.2.1.min.js'></script>
@@ -110,6 +113,12 @@ class Html_default {
             <script src='vendor/bootstrap/bootstrap.min.js'></script>
             <script src='vendor/moment/moment.min.js'></script>
             <script src='vendor/fittext/jquery.fittext.js'></script>
+            ";
+            echo $html;
+        }
+        if($datepicker){
+            $html = "
+            <script src='vendor/bootstrap-datepicker/bootstrap-datepicker.min.js'></script>
             ";
             echo $html;
         }
