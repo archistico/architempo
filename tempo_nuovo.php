@@ -63,6 +63,10 @@ if (isset($_POST['progettofk'], $_POST['descrizione'], $_POST['datainizio'], $_P
         }
     }
 
+    if( strtotime($datainizio) > strtotime($datafine)) {
+        $notices[] = 'Data fine precedente a quella iniziale';
+    }
+
     if(empty($notices)) {
 
         // AGGIUNGO IL TEMPO NEL DB
@@ -83,18 +87,18 @@ if (isset($_POST['progettofk'], $_POST['descrizione'], $_POST['datainizio'], $_P
 
     unset($_POST);
     $_POST = array();
+} else {
+    // Creo il formid per questa sessione
+    $_SESSION[$csrfname] = $utentefk . "-" . md5(rand(0,10000000));
+
+    // HOME CARICA DATI PER FORM - NUOVO TEMPO
+    $progetti = new Progetti();
+    $progetti->getDB_All();
+
+    $HTML->Form_tempo_nuovo($progetti->getProgetti(), $basename_corrente, 'tempo.php', htmlspecialchars($_SESSION[$csrfname]), $csrfname);
 }
 
-// Creo il formid per questa sessione
-$_SESSION[$csrfname] = $utentefk . "-" . md5(rand(0,10000000));
-
-Html_default::SHOW_NOTICES($notices);
-
-// HOME CARICA DATI PER FORM - NUOVO TEMPO
-$progetti = new Progetti();
-$progetti->getDB_All();
-
-$HTML->Form_tempo_nuovo($progetti->getProgetti(), $basename_corrente, 'tempo.php', htmlspecialchars($_SESSION[$csrfname]), $csrfname);
+Html_default::SHOW_NOTICES($notices, "tempo.php");
 
 /* -----------------------------
  *      FINE CORPO FILE

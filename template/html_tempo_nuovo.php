@@ -49,7 +49,7 @@ class Html_tempo_nuovo {
         <div class='col-md-3'>    
             <div class='form-group'>
                 <label for='orainizio'>Ora inizio</label>
-                <input type='number' class='form-control' required name='orainizio' min='0' max='23' value='0' step='1'>            
+                <input type='number' class='form-control' required name='orainizio' min='0' max='23' value='12' step='1'>            
             </div>
         </div>
         <div class='col-md-3'>    
@@ -61,7 +61,7 @@ class Html_tempo_nuovo {
         <div class='col-md-3'>    
             <div class='form-group'>
                 <label for='orafine'>Ora fine</label>
-                <input type='number' class='form-control' required name='orafine' min='0' max='23' value='0' step='1'>            
+                <input type='number' class='form-control' required name='orafine' min='0' max='23' value='12' step='1'>            
             </div>
         </div>
         <div class='col-md-3'>    
