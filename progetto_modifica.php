@@ -49,6 +49,12 @@ if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POS
     }
 
     // valore che potrebbero essere zero
+    if (!isset($_POST['id'])) {
+        $notices[] = 'Id non passato';
+    } else {
+        $id = Utilita::PULISCISTRINGA($_POST['id']);
+    }
+
     if (!isset($_POST['compenso'])) {
         $notices[] = 'Compenso non passato';
     } else {
@@ -79,7 +85,6 @@ if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POS
     if(empty($notices)) {
 
         // AGGIUNGO IL TEMPO NEL DB
-
         $p = new Progetto();
         $p->descrizione = $descrizione;
         $p->clientefk = $clientefk;
@@ -105,7 +110,7 @@ if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POS
 // Creo il formid per questa sessione
 $_SESSION[$csrfname] = $utentefk . "-" . md5(rand(0,10000000));
 
-Html_default::SHOW_NOTICES($notices);
+Html_default::SHOW_NOTICES($notices, "progetto.php");
 
 // SE DEVO ANCORA MODIFICARE I DATI
 if(isset($_GET['ok'], $_GET['id']) && $_GET['ok']==0) {

@@ -39,6 +39,31 @@ class Progetto {
 
         return $result;
     }
+
+    public function DB_Update($id) {
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('UPDATE progetto SET descrizione=:descrizione, clientefk=:clientefk, tipologiafk=:tipologiafk, compenso=:compenso, acconto=:acconto, pagato=:pagato, completato=:completato WHERE progettoid = :id');
+            $database->bind(':descrizione', Utilita::HTML2DB($this->descrizione));
+            $database->bind(':clientefk', $this->clientefk);
+            $database->bind(':tipologiafk', $this->tipologiafk);
+            $database->bind(':compenso', $this->compenso);
+            $database->bind(':acconto', $this->acconto);
+            $database->bind(':pagato', $this->pagato);
+            $database->bind(':completato', $this->completato);
+            $database->bind(':id', $id);
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
+    }
     
     public static function DB_Find_by_ID($id) {
         try {
@@ -68,14 +93,6 @@ class Progetto {
         if($instance!=null) {
             return $instance;
         }
-    }
-
-    public function DB_Delete_by_ID() {
-        throw new Exception('Non implementato');
-    }
-
-    public function DB_Update_by_ID() {
-        throw new Exception('Non implementato');
     }
 
     public static function NUOVO($id, $descrizione) {
