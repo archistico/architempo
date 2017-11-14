@@ -13,8 +13,9 @@ class Html_utente {
               <th class='d-none d-md-table-cell'>Indirizzo</th>
               <th class='d-none d-md-table-cell'>CF/PIVA</th>
               <th class='d-none d-md-table-cell'>Telefono</th>
-              <th>Email</th>
+              <th class='d-none d-md-table-cell'>Email</th>
               <th>#</th>
+              <th>X</th>
             </tr>
           </thead>
           <tbody>
@@ -26,7 +27,8 @@ class Html_utente {
             echo " <td class='d-none d-md-table-cell'>".$elemento->indirizzo."</td>";
             echo " <td class='d-none d-md-table-cell'>".$elemento->cf."/".$elemento->piva."</td>";
             echo " <td class='d-none d-md-table-cell'>".$elemento->telefono."</td>";
-            echo " <td>".$elemento->email."</td>";
+            echo " <td class='d-none d-md-table-cell'>".$elemento->email."</td>";
+            echo " <td><a href='utente_modifica.php?id=$elemento->utenteid&ok=0'><i class='fa fa fa-pencil fa-lg arancione' aria-hidden='true'></i></a></td>";
             echo " <td><a href='utente_elimina.php?id=$elemento->utenteid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
         }

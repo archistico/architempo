@@ -49,16 +49,32 @@ class Utente {
         return $this->denominazione;
     }
 
-    public function DB_Find_by_ID() {
-        throw new Exception('Non implementato');
-    }
+    public function DB_Update($id) {
+        $result = false;
 
-    public function DB_Delete_by_ID() {
-        throw new Exception('Non implementato');
-    }
+        try {
+            $database = new db();
+            $database->query('UPDATE utente SET denominazione=:denominazione, indirizzo=:indirizzo, cf=:cf, piva=:piva, telefono=:telefono, email=:email, password=:password, note=:note, ruolofk=:ruolofk WHERE utenteid = :id');
 
-    public function DB_Update_by_ID() {
-        throw new Exception('Non implementato');
+            $database->bind(':denominazione', Utilita::HTML2DB($this->denominazione));
+            $database->bind(':indirizzo', Utilita::HTML2DB($this->indirizzo));
+            $database->bind(':cf', Utilita::HTML2DB($this->cf));
+            $database->bind(':piva', Utilita::HTML2DB($this->piva));
+            $database->bind(':telefono', Utilita::HTML2DB($this->telefono));
+            $database->bind(':email', Utilita::HTML2DB($this->email));
+            $database->bind(':password', Utilita::HTML2DB($this->password));
+            $database->bind(':note', Utilita::HTML2DB($this->note));
+            $database->bind(':ruolofk', $this->ruolofk);
+            $database->bind(':id', $id);
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
     }
 
     public function getRuolo() {
