@@ -105,7 +105,7 @@ class Html_default {
         echo '</div>';
     }
 
-    public static function SCRIPT($attivi, $datepicker = false) {
+    public static function SCRIPT($attivi, $datepicker = false, $chartjs = false) {
         if($attivi){
             $html = "
             <script src='vendor/jquery/jquery-3.2.1.min.js'></script>
@@ -119,6 +119,12 @@ class Html_default {
         if($datepicker){
             $html = "
             <script src='vendor/bootstrap-datepicker/bootstrap-datepicker.min.js'></script>
+            ";
+            echo $html;
+        }
+        if($chartjs){
+            $html = "
+            <script src='vendor/chartjs/chart.bundle.min.js'></script>
             ";
             echo $html;
         }

@@ -35,5 +35,6 @@ $HTML->show($totale_ore_lavorate);
 
 // Elementi di chiusura
 Html_default::CLOSECONTAINER();
-Html_default::SCRIPT(True);
+Html_default::SCRIPT(true, false, true);
+$HTML->CaricaJS($filename_corrente);
 Html_default::END();

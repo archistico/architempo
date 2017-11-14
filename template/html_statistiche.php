@@ -14,6 +14,20 @@ class Html_statistiche {
                 </div>
             </div>
         </div>
+        <div class='row'>
+            <div class='col-md-6 paddingBottom20'>
+                <canvas id='tipologie' width='400' height='400'></canvas>
+            </div>
+        </div>
+        
+        
+        ";
+        echo $html;
+    }
+
+    public function CaricaJS($file) {
+        $html = "
+            <script src='js/script_$file.js'></script>
         ";
         echo $html;
     }
