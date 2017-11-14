@@ -17,7 +17,7 @@ class Html_tipologia {
           <thead>
             <tr>
               <th>Descrizione</th>
-              <th>#</th>
+              <!-- <th>#</th> -->
             </tr>
           </thead>
           <tbody>
@@ -26,7 +26,7 @@ class Html_tipologia {
         foreach ($tipologie as $elemento) {
             echo "<tr>";
             echo " <td>".$elemento->descrizione."</td>";
-            echo " <td><a href='tipologia_elimina.php?id=$elemento->tipologiaid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
+            echo " <!--  <td><a href='tipologia_elimina.php?id=$elemento->tipologiaid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td> -->";
             echo "</tr>";
         }
         $html = "
