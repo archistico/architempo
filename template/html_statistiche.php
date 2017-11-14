@@ -16,6 +16,7 @@ class Html_statistiche {
         </div>
         <div class='row'>
             <div class='col-md-6 paddingBottom20'>
+                <h4>Tipologie</h4>
                 <canvas id='tipologie' width='400' height='400'></canvas>
             </div>
         </div>
