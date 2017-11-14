@@ -1,3 +1,15 @@
+/*
+$.ajax({
+    type: 'POST',
+    url: 'api_tipologie.php',
+    success: function (data) {
+        console.log(JSON.stringify(data));
+
+    }
+});
+*/
+
+
 var ctx = document.getElementById('tipologie').getContext('2d');
 var tipologie = new Chart(ctx, {
     // The type of chart we want to create
