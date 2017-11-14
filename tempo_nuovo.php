@@ -45,9 +45,9 @@ if (isset($_POST['progettofk'], $_POST['descrizione'], $_POST['datainizio'], $_P
     if (empty($_POST['datainizio']) || !isset($_POST['orainizio'], $_POST['minutiinizio'])) {
         $notices[] = 'Data inizio non passata';
     } else {
-
-        if(Utilita::VALIDATE_DATE($_POST['datainizio']." ".str_pad($_POST['orainizio'],2,'0').":".str_pad($_POST['minutiinizio'],2,'0').":00")) {
-            $datainizio = $_POST['datainizio']." ".str_pad($_POST['orainizio'],2,'0').":".str_pad($_POST['minutiinizio'],2,'0').":00";
+        $inizio_str = $_POST['datainizio']." ".str_pad($_POST['orainizio'],2,'0').":".str_pad($_POST['minutiinizio'],2,'0').":00";
+        if(Utilita::VALIDATE_DATE($inizio_str)) {
+            $datainizio = $inizio_str;
         } else {
             $notices[] = 'Data inizio non valida';
         }
@@ -56,15 +56,18 @@ if (isset($_POST['progettofk'], $_POST['descrizione'], $_POST['datainizio'], $_P
     if (empty($_POST['datafine']) || !isset($_POST['orafine'], $_POST['minutifine'])) {
         $notices[] = 'Data fine non passata';
     } else {
-        if(Utilita::VALIDATE_DATE($_POST['datafine']." ".str_pad($_POST['orafine'],2,'0').":".str_pad($_POST['minutifine'],2,'0').":00")) {
-            $datafine = $_POST['datafine']." ".str_pad($_POST['orafine'],2,'0').":".str_pad($_POST['minutifine'],2,'0').":00";
+        $fine_str = $_POST['datafine']." ".str_pad($_POST['orafine'],2,'0').":".str_pad($_POST['minutifine'],2,'0').":00";
+        if(Utilita::VALIDATE_DATE($fine_str)) {
+            $datafine = $fine_str;
         } else {
             $notices[] = 'Data fine non valida';
         }
     }
 
-    if( strtotime($datainizio) > strtotime($datafine)) {
-        $notices[] = 'Data fine precedente a quella iniziale';
+    if(empty($notices)) {
+      if($datainizio > $datafine) {
+          $notices[] = 'Data fine precedente a quella iniziale';
+      }
     }
 
     if(empty($notices)) {
@@ -81,7 +84,7 @@ if (isset($_POST['progettofk'], $_POST['descrizione'], $_POST['datainizio'], $_P
         if(!$t->DB_Add()) {
             $notices[] = 'Errore nella query sulla base dati';
         } else {
-            $notices['ok'] = "Inserito";
+            $notices['ok'] = "Tempo manuale inserito";
         }
     }
 
