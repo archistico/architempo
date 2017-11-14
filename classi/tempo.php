@@ -33,6 +33,14 @@ class Tempo {
         return $this->datafine->format('d/m/Y H:i:s');
     }
 
+    public function getDatainizioObj() {
+        return $this->datainizio;
+    }
+
+    public function getDatafineObj() {
+        return $this->datafine;
+    }
+
     public function getDatainizio2DB() {
         return $this->datainizio->format('Y-m-d H:i:s');
     }
@@ -220,5 +228,18 @@ class Tempi
             }
         }
         return $item;
+    }
+
+    public function TOTALE_ORE_LAVORATE() {
+        $totale = 0;
+        foreach ($this->tempi as $t) {
+            $secondi = $t->getDatainizioObj()->diff($t->getDatafineObj())->format("%S");
+            $minuti = $t->getDatainizioObj()->diff($t->getDatafineObj())->format("%I");
+            $ore = $t->getDatainizioObj()->diff($t->getDatafineObj())->format("%H");
+            $giorni = $t->getDatainizioObj()->diff($t->getDatafineObj())->format("%D");
+
+            $totale += $ore + $giorni * 24 + $minuti /60 + $secondi/3600;
+        }
+        return number_format($totale, 1, ',', ' ');
     }
 }

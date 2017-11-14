@@ -21,7 +21,12 @@ $utentefk = Utente::UTENTE_LOGGATO_ID();
  */
 
 Html_default::HEADER("Statistiche");
-$HTML->show();
+
+$tempi = new Tempi();
+$tempi->getDB_All();
+$totale_ore_lavorate = $tempi->TOTALE_ORE_LAVORATE();
+
+$HTML->show($totale_ore_lavorate);
 
 /* -----------------------------
  *      FINE CORPO FILE
