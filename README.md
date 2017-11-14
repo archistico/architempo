@@ -6,7 +6,8 @@ Time tracker per liberi professionisti
 + mysql / mariadb
 
 ## Install
-git clone https://github.com/archistico/architempo.git
+git clone https://github.com/archistico/architempo.git  
+set db host, user, password on file config.php 
 
 ## sql
 + mysql -u root -p'toor'    
@@ -27,5 +28,5 @@ git clone https://github.com/archistico/architempo.git
 
 ### Database class
 
- https://gist.github.com/danferth/9512172#file-zdb-php-L9  
+https://gist.github.com/danferth/9512172#file-zdb-php-L9  
  
