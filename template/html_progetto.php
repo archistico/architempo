@@ -28,7 +28,7 @@ class Html_progetto {
             echo " <td class='$colonneVisibili'>".$elemento->descrizione." - ".$elemento->getCliente()->denominazione."</td>";
             echo " <td class='$colunneNascoste'>".$elemento->getTipologia()->descrizione."</td>";
             echo " <td class='$colunneNascoste'>&euro; ".$elemento->acconto." / &euro; ".$elemento->compenso."</td>";
-            echo " <td class='$colunneNascoste'>".($elemento->pagato==0?'NO':'SÍ')." - ".($elemento->completato==0?'NO':'SÍ')."</td>";
+            echo " <td class='$colunneNascoste'>".($elemento->pagato==0?"<i class='fa fa-thumbs-down rosso' aria-hidden='true'></i>":"<i class='fa fa-thumbs-up verde' aria-hidden='true'></i>")." / ".($elemento->completato==0?"<i class='fa fa-thumbs-down rosso' aria-hidden='true'></i>":"<i class='fa fa-thumbs-up verde' aria-hidden='true'></i>")."</td>";
             echo " <td class='$colonneVisibili'>".$elemento->getTempo()."</td>";
             echo " <td class='$colonneVisibili'><a href='progetto_modifica.php?id=$elemento->progettoid&ok=0'><i class='fa fa fa-pencil fa-lg arancione' aria-hidden='true'></i></a></td>";
             echo " <td class='$colonneVisibili'><a href='progetto_elimina.php?id=$elemento->progettoid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
