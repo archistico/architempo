@@ -97,7 +97,7 @@ class Utilita {
 
     public static function REDIRECT($link = 'login.php')
     {
-        header($link);
+        header ("Location: $link");
         exit();
     }
 }

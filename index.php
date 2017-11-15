@@ -8,32 +8,28 @@ require_once('loader.php');
  *           LOGGIN
  * -----------------------------
  */
+
 if(Utente::AUTENTICATO()) {
     // SE E' AUTENTICATO
 
-    if(Utente::AUTENTICATO() && Utente::AUTORIZZATO()) {
+    if(Utente::AUTORIZZATO()) {
         // POSSO ACCEDERE ALLA RISORSA
-        Login::ADD(Utente::LOGGATO(), true);
+        $utentefk = Utente::UTENTE_LOGGATO_ID();
+        $csrfname = $filename_corrente.":".$utentefk.":csrf";
+
     } else {
-        switch(Utente::TIPOLOGIA(Utente::LOGGATO())) {
-            case 'Lavoratore':
-                Utilita::REDIRECT();
-                break;
-            case 'Cliente':
-                Utilita::REDIRECT();
-                break;
-            default:
-                Utilita::REDIRECT();
-                break;
-        }
+        // SE NO E' AUTORIZZATO
+        Utilita::REDIRECT("error.php");
     }
 } else {
     // SE NON E' AUTENTICATO
-    Utilita::REDIRECT();
+    Utilita::REDIRECT("login.php");
 }
 
-$utentefk = Utente::UTENTE_LOGGATO_ID();
-$csrfname = $filename_corrente.":".$utentefk.":csrf";
+/* -----------------------------
+ *           HTML
+ * -----------------------------
+ */
 
 Html_default::HEAD("Architempo - ".strtoupper($filename_corrente));
 Html_default::OPENCONTAINER();

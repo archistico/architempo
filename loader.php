@@ -11,6 +11,7 @@ require_once('classi/database.php');
 require_once('classi/tipologia.php');
 require_once('classi/progetto.php');
 require_once('classi/tempo.php');
+require_once('classi/autaut.php');
 require_once('classi/login.php');
 
 // Caricamento template HTML

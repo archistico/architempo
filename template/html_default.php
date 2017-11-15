@@ -1,7 +1,7 @@
 <?php
 
 class Html_default {
-    public static function HEAD($titolo) {
+    public static function HEAD($titolo, $login = false) {
         $html = "
         <!DOCTYPE html>
         <html lang='it'>
@@ -17,7 +17,14 @@ class Html_default {
             <link rel='stylesheet' href='vendor/awesome/css/font-awesome.min.css'>
             
             <link rel='stylesheet' href='vendor/bootstrap-datepicker/bootstrap-datepicker3.css'>
-            
+            ";
+        echo $html;
+
+        if($login) {
+            echo "<link href='css/login.css' rel='stylesheet'>";
+        }
+
+        $html = "    
             <link href='https://fonts.googleapis.com/css?family=Ubuntu+Mono' rel='stylesheet'>
             <link href='css/stile.css' rel='stylesheet'>
         </head>

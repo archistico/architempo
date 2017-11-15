@@ -212,7 +212,7 @@ class Utente {
     }
 
     public static function AUTORIZZATO() {
-        return false;
+        return true;
     }
 
     public static function LOGGATO() {
