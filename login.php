@@ -12,6 +12,8 @@ Html_default::OPENCONTAINER();
  * -----------------------------
  */
 
+// $_SESSION[$_COOKIE[GLOBAL_COOKIENAME]])
+
 $HTML->Login();
 
 /* -----------------------------

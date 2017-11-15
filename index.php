@@ -9,22 +9,11 @@ require_once('loader.php');
  * -----------------------------
  */
 
-if(Utente::AUTENTICATO()) {
-    // SE E' AUTENTICATO
+Autaut::CHECK_CREDENTIAL(['Amministrazione','Lavoratore']);
 
-    if(Utente::AUTORIZZATO()) {
-        // POSSO ACCEDERE ALLA RISORSA
-        $utentefk = Utente::UTENTE_LOGGATO_ID();
-        $csrfname = $filename_corrente.":".$utentefk.":csrf";
-
-    } else {
-        // SE NO E' AUTORIZZATO
-        Utilita::REDIRECT("error.php");
-    }
-} else {
-    // SE NON E' AUTENTICATO
-    Utilita::REDIRECT("login.php");
-}
+// POSSO ACCEDERE ALLA RISORSA
+$utentefk = Utente::UTENTE_LOGGATO_ID();
+$csrfname = $filename_corrente.":".$utentefk.":csrf";
 
 /* -----------------------------
  *           HTML

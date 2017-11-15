@@ -9,4 +9,5 @@ if(file_exists('config_dist.php')) {
     define(GLOBAL_DB_USER, "root");
     define(GLOBAL_DB_PSWD, "toor");
     define(GLOBAL_DB_SALT, "qwerty");
+    define(GLOBAL_COOKIENAME, "Architempo");
 }

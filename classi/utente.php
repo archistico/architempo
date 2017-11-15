@@ -207,22 +207,21 @@ class Utente {
         return $result;
     }
 
-    public static function AUTENTICATO() {
-        return true;
-    }
-
-    public static function AUTORIZZATO() {
-        return true;
-    }
-
-    public static function LOGGATO() {
-        // Ritorna il utentefk se è stato loggato
-        return 1;
-    }
-
     public static function TIPOLOGIA($id) {
-        // Ritorna la tipologia dell'utente loggato
-        return 'Cliente';
+        // Ritorna la tipologia dell'utenteid
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM utente WHERE utenteid = :id');
+            $database->bind(':id', $id);
+            $row = $database->single();
+
+            $ruolo = Ruolo::FIND_BY_ID($row['ruolofk']);
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        return $ruolo->getDescrizione();
     }
     
 }
