@@ -4,15 +4,37 @@ $filename_corrente = File::FILENAME(__FILE__);
 $basename_corrente = File::BASENAME(__FILE__);
 require_once('loader.php');
 
-Html_default::HEAD("Architempo - ".strtoupper($filename_corrente), true);
-Html_default::OPENCONTAINER();
+
+/* -----------------------------
+ *     LOGICA APPLICAZIONE
+ * -----------------------------
+ */
+
+if(isset($_GET['logout']) && $_GET['logout']== 1 ) {
+    unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME]]);
+    unset($_COOKIE[GLOBAL_COOKIENAME]);
+}
+
+if(isset($_GET['email'], $_GET['password'])) {
+
+    // VALIDARE I DATI
+
+    // SE NON CI SONO ERRORI
+    // CONTROLLA SU DB SE: EMAIL E PASSWORD CORRISPONDONO
+
+    $_SESSION[$_COOKIE[GLOBAL_COOKIENAME]] = 1;
+    Utilita::REDIRECT('index.php');
+    exit();
+
+}
 
 /* -----------------------------
  *       CORPO FILE
  * -----------------------------
- */
+*/
 
-// $_SESSION[$_COOKIE[GLOBAL_COOKIENAME]])
+Html_default::HEAD("Architempo - ".strtoupper($filename_corrente), true);
+Html_default::OPENCONTAINER();
 
 $HTML->Login();
 

@@ -64,6 +64,7 @@ class Html_default {
             'Tipologie' => 'tipologia.php',
             'Utenti' => 'utente.php',
             'Statistiche' => 'statistiche.php',
+            'Logout' => 'login.php?logout=1',
         ];
 
         $linkHome = current($menu);
