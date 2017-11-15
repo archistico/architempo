@@ -46,7 +46,7 @@ $(document).ready(function () {
             pause = false;
             $("#btnPlay").removeClass("btn-secondary");
             $("#btnPlay").addClass("btn-success");
-            $("#btnPlay").html("<i class='fa fa-play' aria-hidden='true'></i> PLAY");
+            $("#btnPlay").html("<i class='fa fa-play' aria-hidden='true'></i> START");
 
             // ripristina
             datainizio=null;
@@ -70,7 +70,7 @@ $(document).ready(function () {
         // cambio colore al pulsante e disabilito la funzione
         $("#btnPlay").removeClass("btn-secondary");
         $("#btnPlay").addClass("btn-success");
-        $("#btnPlay").html("<i class='fa fa-play' aria-hidden='true'></i> PLAY");
+        $("#btnPlay").html("<i class='fa fa-play' aria-hidden='true'></i> START");
 
         datafine = moment();
         datafine_str = datafine.format("DD/MM/YYYY HH:mm:ss");
