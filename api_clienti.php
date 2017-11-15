@@ -9,6 +9,7 @@ require_once('classi/database.php');
 
 $data = array();
 $oggetti = array();
+$tempi = array();
 
 function differenza_ore($inizio, $fine) {
     $totale = 0;
@@ -25,29 +26,29 @@ function differenza_ore($inizio, $fine) {
 
 try {
     $database = new db();
-    $database->query("SELECT tempo.datainizio, tempo.datafine, tipologia.descrizione 
+    $database->query("SELECT tempo.datainizio, tempo.datafine, utente.denominazione 
                             FROM tempo 
                             INNER JOIN progetto ON tempo.progettofk = progetto.progettoid 
-                            INNER JOIN tipologia ON progetto.tipologiafk = tipologia.tipologiaid
+                            INNER JOIN utente ON progetto.clientefk = utente.utenteid 
                             ");
 
     $rows = $database->resultset();
 
     foreach ($rows as $row) {
-        $tipologia = $row['descrizione'];
+        $denominazione = $row['denominazione'];
         $inizio = DateTime::createFromFormat('Y-m-d H:i:s', $row['datainizio']);
         $fine = DateTime::createFromFormat('Y-m-d H:i:s', $row['datafine']);
 
         $riga = [];
-        $riga['tipologia'] = $tipologia;
+        $riga['denominazione'] = $denominazione;
         $riga['ore'] = differenza_ore($inizio, $fine);
 
         $tempi[] = $riga;
     }
 
     foreach ($tempi as $riga) {
-        if(in_array($riga['tipologia'], array_column($oggetti, 'tipologia'))) {
-            $key = array_search($riga['tipologia'], array_column($oggetti, 'tipologia'));
+        if(in_array($riga['denominazione'], array_column($oggetti, 'denominazione'))) {
+            $key = array_search($riga['denominazione'], array_column($oggetti, 'denominazione'));
             $oggetti[$key]['ore'] += $riga['ore'];
         } else {
             $oggetti[] = $riga;
@@ -56,7 +57,7 @@ try {
 
     foreach ($oggetti as $ris) {
         $riga = [];
-        $riga[] = $ris['tipologia'];
+        $riga[] = $ris['denominazione'];
         $riga[] = number_format($ris['ore'],1);
         $data[] = $riga;
     }

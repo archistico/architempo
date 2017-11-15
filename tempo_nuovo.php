@@ -45,22 +45,22 @@ if (isset($_POST['progettofk'], $_POST['descrizione'], $_POST['datainizio'], $_P
     if (empty($_POST['datainizio']) || !isset($_POST['orainizio'], $_POST['minutiinizio'])) {
         $notices[] = 'Data inizio non passata';
     } else {
-        $inizio_str = $_POST['datainizio']." ".str_pad($_POST['orainizio'],2,'0').":".str_pad($_POST['minutiinizio'],2,'0').":00";
+        $inizio_str = $_POST['datainizio']." ".str_pad($_POST['orainizio'],2,'0', STR_PAD_LEFT).":".str_pad($_POST['minutiinizio'],2,'0', STR_PAD_LEFT).":00";
         if(Utilita::VALIDATE_DATE($inizio_str)) {
             $datainizio = $inizio_str;
         } else {
-            $notices[] = 'Data inizio non valida';
+            $notices[] = 'Data inizio non valida: '.$inizio_str;
         }
     }
 
     if (empty($_POST['datafine']) || !isset($_POST['orafine'], $_POST['minutifine'])) {
         $notices[] = 'Data fine non passata';
     } else {
-        $fine_str = $_POST['datafine']." ".str_pad($_POST['orafine'],2,'0').":".str_pad($_POST['minutifine'],2,'0').":00";
+        $fine_str = $_POST['datafine']." ".str_pad($_POST['orafine'],2,'0', STR_PAD_LEFT).":".str_pad($_POST['minutifine'],2,'0', STR_PAD_LEFT).":00";
         if(Utilita::VALIDATE_DATE($fine_str)) {
             $datafine = $fine_str;
         } else {
-            $notices[] = 'Data fine non valida';
+            $notices[] = 'Data fine non valida: '.$fine_str;
         }
     }
 

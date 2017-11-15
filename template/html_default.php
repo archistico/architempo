@@ -124,6 +124,7 @@ class Html_default {
         }
         if($chartjs){
             $html = "
+            <script src='vendor/palette/palette.js'></script>
             <script src='vendor/chartjs/chart.bundle.min.js'></script>
             ";
             echo $html;

@@ -1,36 +1,74 @@
-/*
+
 $.ajax({
     type: 'POST',
     url: 'api_tipologie.php',
     success: function (data) {
         console.log(JSON.stringify(data));
 
+        // converto i miei dati in due array: label e dati
+        var etichette = [];
+        var dati = [];
+
+        for(var c=0; c<data.length; c++ ) {
+            etichette.push(data[c][0]);
+            dati.push(data[c][1]);
+        }
+
+        var ctx = document.getElementById('tipologie').getContext('2d');
+        var tipologie = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: etichette,
+                datasets: [{
+                    label: "Tipologie",
+                    data: dati,
+                    backgroundColor: palette('tol-rainbow', dati.length).map(function(hex) {
+                        return '#' + hex;
+                    })
+
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
     }
 });
-*/
 
+$.ajax({
+    type: 'POST',
+    url: 'api_clienti.php',
+    success: function (data) {
+        console.log(JSON.stringify(data));
 
-var ctx = document.getElementById('tipologie').getContext('2d');
-var tipologie = new Chart(ctx, {
-    // The type of chart we want to create
-    type: 'doughnut',
+        // converto i miei dati in due array: label e dati
+        var etichette = [];
+        var dati = [];
 
-    // The data for our dataset
-    data: {
-        labels: ["AAA", "BBB", "CCC", "DDD", "EEE"],
-        datasets: [{
-            label: "Tipologie",
-            backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-            ],
-            data: [0, 10, 5, 2, 20],
-        }]
-    },
+        for(var c=0; c<data.length; c++ ) {
+            etichette.push(data[c][0]);
+            dati.push(data[c][1]);
+        }
 
-    // Configuration options go here
-    options: {}
+        var ctx = document.getElementById('clienti').getContext('2d');
+        var clienti = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: etichette,
+                datasets: [{
+                    label: "Clienti",
+                    data: dati,
+                    backgroundColor: palette('tol-rainbow', dati.length).map(function(hex) {
+                        return '#' + hex;
+                    })
+
+                }]
+            },
+
+            // Configuration options go here
+            options: {}
+        });
+    }
 });
+
+
