@@ -12,7 +12,7 @@ require_once('loader.php');
 Autaut::CHECK_CREDENTIAL(['Amministrazione','Lavoratore']);
 
 // POSSO ACCEDERE ALLA RISORSA
-$utentefk = Utente::UTENTE_LOGGATO_ID();
+$utentefk = Autaut::LOGGATO();
 $csrfname = $filename_corrente.":".$utentefk.":csrf";
 
 /* -----------------------------

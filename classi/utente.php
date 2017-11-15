@@ -89,10 +89,6 @@ class Utente {
         return $instance;
     }
 
-    public static function UTENTE_LOGGATO_ID() {
-        // DATI FAKE
-        return 1;
-    }
 
     public static function FIND_BY_ID($id) {
         $u = new Utente();

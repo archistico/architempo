@@ -4,17 +4,27 @@ $filename_corrente = File::FILENAME(__FILE__);
 $basename_corrente = File::BASENAME(__FILE__);
 require_once('loader.php');
 
+/* -----------------------------
+ *           LOGGIN
+ * -----------------------------
+ */
+
+Autaut::CHECK_CREDENTIAL(['Amministrazione','Lavoratore']);
+
+// POSSO ACCEDERE ALLA RISORSA
+$utentefk = Autaut::LOGGATO();
+$csrfname = $filename_corrente.":".$utentefk.":csrf";
+
+/* -----------------------------
+ *           HTML
+ * -----------------------------
+ */
+
 Html_default::HEAD("Architempo - ".strtoupper($filename_corrente));
 Html_default::OPENCONTAINER();
 Html_default::MENU($basename_corrente);
 Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
 
-/* -----------------------------
- *           LOGGIN
- * -----------------------------
- */
-$utentefk = Utente::UTENTE_LOGGATO_ID();
-$csrfname = $filename_corrente.":".$utentefk."-csrf";
 /* -----------------------------
  *       CORPO FILE
  * -----------------------------
