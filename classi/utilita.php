@@ -94,4 +94,10 @@ class Utilita {
         $d = DateTime::createFromFormat($format, $date);
         return $d && $d->format($format) == $date;
     }
+
+    public static function REDIRECT($link = 'login.php')
+    {
+        header($link);
+        exit();
+    }
 }

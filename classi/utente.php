@@ -206,6 +206,25 @@ class Utente {
 
         return $result;
     }
+
+    public static function AUTENTICATO() {
+        return true;
+    }
+
+    public static function AUTORIZZATO() {
+        return false;
+    }
+
+    public static function LOGGATO() {
+        // Ritorna il utentefk se è stato loggato
+        return 1;
+    }
+
+    public static function TIPOLOGIA($id) {
+        // Ritorna la tipologia dell'utente loggato
+        return 'Cliente';
+    }
+    
 }
 
 /* --------------------------------------
