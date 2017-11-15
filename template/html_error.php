@@ -7,7 +7,7 @@ class Html_error {
         <div class='row'>
             <div class='col-md-12'>
                 <h4>!!! PAGINA NON DISPONIBILE PER L'UTENTE !!!</h4>
-                <a href='$loginlink'>Pagina di login</a>
+                <a href='$loginlink'>Pagina iniziale</a>
             </div>
         </div>
         ";

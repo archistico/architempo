@@ -13,7 +13,7 @@ Html_default::JUMBOTRON("Studio Archistico", "");
  * -----------------------------
  */
 
-$HTML->show_error('login.php');
+$HTML->show_error('index.php');
 
 /* -----------------------------
  *      FINE CORPO FILE
