@@ -138,6 +138,30 @@ class Utente {
         return $exist;
     }
 
+    public static function Check_email_password($email, $password) {
+        $check = false;
+
+        try {
+            $database = new db();
+            $database->query('SELECT password FROM utente WHERE email = :email');
+            $database->bind(':email', $email);
+            $database->execute();
+            $row = $database->single();
+
+            if($row['password']==$password) {
+                $check = true;
+            }
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $check;
+    }
+
     public static function PROGETTI_COLLEGATI($id) {
         $exist = false;
 

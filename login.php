@@ -15,17 +15,34 @@ if(isset($_GET['logout']) && $_GET['logout']== 1 ) {
     unset($_COOKIE[GLOBAL_COOKIENAME]);
 }
 
-if(isset($_GET['email'], $_GET['password'])) {
+$csrfname = $filename_corrente.":csrf";
+
+if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset($_SESSION[$csrfname]) && $_GET[$csrfname] == $_SESSION[$csrfname])) {
+
+    // cancello il CSRF
+    $_SESSION[$csrfname] = '';
 
     // VALIDARE I DATI
+    if (empty($_GET['password'])) {
+        $notices[] = 'Password non passata';
+    } else {
+        $password = Utilita::PULISCISTRINGA($_GET['password']);
+    }
 
-    // SE NON CI SONO ERRORI
+    if (empty($_GET['email'])) {
+        $notices[] = 'Email non passata';
+    } else {
+        $email = Utilita::PULISCISTRINGA($_GET['email']);
+    }
+
     // CONTROLLA SU DB SE: EMAIL E PASSWORD CORRISPONDONO
-
-    $_SESSION[$_COOKIE[GLOBAL_COOKIENAME]] = 1;
-    Utilita::REDIRECT('index.php');
-    exit();
-
+    if(empty($notices)) {
+        if(Utente::Check_email_password($email, $password)) {
+            $_SESSION[$_COOKIE[GLOBAL_COOKIENAME]] = 1;
+            Utilita::REDIRECT('index.php');
+            exit();
+        }
+    }
 }
 
 /* -----------------------------
@@ -36,7 +53,9 @@ if(isset($_GET['email'], $_GET['password'])) {
 Html_default::HEAD("Architempo - ".strtoupper($filename_corrente), true);
 Html_default::OPENCONTAINER();
 
-$HTML->Login();
+// Creo il formid per questa sessione
+$_SESSION[$csrfname] = md5(rand(0,10000000));
+$HTML->Login(htmlspecialchars($_SESSION[$csrfname]), $csrfname);
 
 /* -----------------------------
  *      FINE CORPO FILE
