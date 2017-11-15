@@ -113,7 +113,7 @@ class Html_default {
         echo '</div>';
     }
 
-    public static function SCRIPT($attivi, $datepicker = false, $chartjs = false) {
+    public static function SCRIPT($attivi, $datepicker = false, $chartjs = false, $sha512 = false) {
         if($attivi){
             $html = "
             <script src='vendor/jquery/jquery-3.2.1.min.js'></script>
@@ -134,6 +134,13 @@ class Html_default {
             $html = "
             <script src='vendor/palette/palette.js'></script>
             <script src='vendor/chartjs/chart.bundle.min.js'></script>
+            ";
+            echo $html;
+        }
+        if($sha512){
+            $html = "
+            <script src='vendor/sha512/sha512.js'></script>
+            <script src='vendor/sha512/form.js'></script>
             ";
             echo $html;
         }
