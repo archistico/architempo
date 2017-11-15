@@ -6,14 +6,14 @@ class Html_login {
         // onkeydown='if (event.keyCode == 13) { formhash(this.form, this.form.password); this.form.submit(); return false; }'
         // onclick='formhash(this.form, this.form.password);'
         $html = "
-        <form class='form-signin' name='login_form' onsubmit='formhash(this.form, this.form.password);'>
+        <form class='form-signin' name='login_form'>
             <h2 class='form-signin-heading'>Login</h2>
             <label for='email' class='sr-only'>Email</label>
             <input type='email' id='email' name='email' class='form-control' placeholder='Email address' required autofocus>
             <label for='password' class='sr-only'>Password</label>
-            <input type='password' id='password' name='password' class='form-control' placeholder='Password' required>
+            <input type='password' id='password' name='p' class='form-control' placeholder='Password' onkeydown='if (event.keyCode == 13) { formhash(this.form, this.form.password); this.form.submit(); return false; }' required>
             <input type='hidden' name='$csrfname' value='$csrf'>
-            <button class='btn btn-lg btn-primary btn-block' type='submit'>ENTRA</button>
+            <button class='btn btn-lg btn-primary btn-block' type='submit' onclick='formhash(this.form, this.form.password);'>ENTRA</button>
         </form>
         ";
         echo $html;

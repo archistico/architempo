@@ -3,7 +3,7 @@ function formhash(form, password) {
     var p = document.createElement("input");
     // Aggiungi un nuovo elemento al tuo form.
     form.appendChild(p);
-    p.name = "p";
+    p.name = "password";
     p.type = "hidden"
     p.value = hex_sha512(password.value);
     // Assicurati che la password non venga inviata in chiaro.

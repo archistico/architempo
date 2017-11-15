@@ -150,23 +150,7 @@ class Utente {
 
             if($password==hash('sha512',($row['password']))) {
                 $check = true;
-            } else {
-                // DA TOGLIERE QUANDO FUNZIONE SHA512.js FUNZIONA
-
-                $passwordDB = $row['password'];
-                $passwordDBSHA512 = hash('sha512',($row['password']));
-
-                $myfile = fopen("loggin.log", "w") or die("Unable to open file!");
-
-                $txt = "Password sent: $password\n";
-                fwrite($myfile, $txt);
-                $txt = "Password db  : $passwordDB\n";
-                fwrite($myfile, $txt);
-                $txt = "Hash         : $passwordDBSHA512\n";
-                fwrite($myfile, $txt);
-
-                fclose($myfile);
-            }
+            } 
 
         } catch (PDOException $e) {
             throw new PDOException("Error  : " . $e->getMessage());
