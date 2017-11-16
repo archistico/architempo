@@ -23,7 +23,9 @@ set db host, user, password on file config.php
 + mysql -u root -p'toor' architempo < sql/tabella_tipologia.sql
 + mysql -u root -p'toor' architempo < sql/tabella_utente.sql
 + mysql -u root -p'toor' architempo < sql/tabella_login.sql
-
+  
+[![schemadb.jpg](https://s7.postimg.org/grhy5fp4r/schemadb.jpg)](https://postimg.org/image/z72f2u393/)
+  
 ## fake data
 + mysql -u root -p'toor' architempo < sql/tabella_progetto_insert_fake.sql
 + mysql -u root -p'toor' architempo < sql/tabella_ruolo_insert_fake.sql
