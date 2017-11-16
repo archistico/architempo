@@ -127,6 +127,7 @@ class Html_default {
         if($datepicker){
             $html = "
             <script src='vendor/bootstrap-datepicker/bootstrap-datepicker.min.js'></script>
+            <script src='vendor/bootstrap-datepicker/bootstrap-datepicker.it.min.js'></script>
             ";
             echo $html;
         }
