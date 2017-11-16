@@ -78,7 +78,11 @@ if (!empty($_POST['denominazione']) && !empty($_POST['ruolofk'])
     if (empty($_POST['email'])) {
         $notices[] = 'Email non passato';
     } else {
-        $email = Utilita::PULISCISTRINGA($_POST['email']);
+        if(filter_var(Utilita::PULISCISTRINGA($_POST['email']), FILTER_VALIDATE_EMAIL)) {
+            $email = Utilita::PULISCISTRINGA($_POST['email']);
+        } else {
+            $notices[] = 'Email non valida';
+        }        
     }
 
     if (empty($_POST['password'])) {
