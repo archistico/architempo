@@ -31,7 +31,7 @@ $(document).ready(function () {
             pause = true;
             $("#btnPlay").removeClass("btn-success");
             $("#btnPlay").addClass("btn-secondary");
-            $("#btnPlay").html("<i class='fa fa-power-off' aria-hidden='true'></i> ANNULLA");
+            $("#btnPlay").html("<i class='fa fa-reply' aria-hidden='true'></i> ANNULLA");
 
             // Avverti il cambio pagina
             window.onbeforeunload = function(e) {
@@ -63,7 +63,7 @@ $(document).ready(function () {
 
     $("#form").on("submit", function () {
         if(datainizio==null) {
-            alert('Premere play prima');
+            alert('Premere start prima');
             return false;
         }
         

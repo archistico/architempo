@@ -46,7 +46,7 @@ class Html_index {
 	            <a class='btn btn-success btn-block btn-lg text-white' id='btnPlay'><i class='fa fa-play' aria-hidden='true'></i> START</a>
             </div>
             <div class='col-md-6 paddingBottom20'>
-	            <button type='submit' class='btn btn-danger btn-block btn-lg' id='btnRegistra'><i class='fa fa-stop' aria-hidden='true'></i> STOP</button>
+	            <button type='submit' class='btn btn-danger btn-block btn-lg' id='btnRegistra'><i class='fa fa-stop' aria-hidden='true'></i> STOP/SALVA</button>
             </div>
         </div>  
         </form>
