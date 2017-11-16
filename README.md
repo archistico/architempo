@@ -1,6 +1,10 @@
-# architempo
+# ARCHITEMPO
 Time tracker per liberi professionisti
-
+  
+[![Screenshot-2017-11-16_Architempo_-_INDEX.png](https://s7.postimg.org/evhdp4gqj/Screenshot-2017-11-16_Architempo_-_INDEX.png)](https://postimg.org/image/t1x4kcrlj/)
+  
+[![Screenshot-2017-11-16_Architempo_-_TEMPO.png](https://s7.postimg.org/v6hhlgvt7/Screenshot-2017-11-16_Architempo_-_TEMPO.png)](https://postimg.org/image/8hsalwefb/)
+  
 ## Requisiti
 + PHP 7
 + mysql / mariadb
@@ -29,4 +33,5 @@ set db host, user, password on file config.php
 ### Database class
 
 https://gist.github.com/danferth/9512172#file-zdb-php-L9  
- 
+  
+[![Screenshot-2017-11-16_Architempo_-_STATISTICHE.png](https://s7.postimg.org/ydc154qjv/Screenshot-2017-11-16_Architempo_-_STATISTICHE.png)](https://postimg.org/image/o39m5w0o7/)
