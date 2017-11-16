@@ -6,7 +6,7 @@ class Html_index {
         $html = "
         <div class='row'>
         <div class='col-md-12'>
-            <h1 id='durata' class='text-center'>00:00:00</h1>
+            <h1 id='durata' class='text-center cronometro'>00:00:00</h1>
         </div>
         </div>
         ";

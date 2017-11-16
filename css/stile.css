@@ -35,3 +35,7 @@ body {
 .paddingBottom20 {
   padding-bottom: 20px;
 }
+
+.cronometro {
+  line-height: 80%;
+}
