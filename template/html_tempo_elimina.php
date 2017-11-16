@@ -12,7 +12,7 @@ class Html_tempo_elimina
                 </div>
             </div>
             <div class='row paddingTop20'>
-            <div class='col-md-6'>
+            <div class='col-md-6 paddingBottom20'>
                 <a class='btn btn-block btn-secondary btn-lg' href='$linkAnnulla'>Annulla</a>
             </div>
             <div class='col-md-6'>
