@@ -32,9 +32,14 @@ set db host, user, password on file config.php
 + mysql -u root -p'toor' architempo < sql/tabella_tipologia_insert_fake.sql
 + mysql -u root -p'toor' architempo < sql/tabella_utente_insert_fake.sql
 
+## dump dati
++ mysqldump --user='root' --password='toor' architempo> dump.sql
+
 ## Accesso con dati fake
 + Email: indirizzo1@email.com
 + Password: toor
+
+## Altro
 
 ### Database class
 
