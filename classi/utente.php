@@ -117,6 +117,33 @@ class Utente {
         return $u;
     }
 
+    public static function FIND_BY_EMAIL($email) {
+        $u = new Utente();
+
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM utente WHERE email = :email');
+            $database->bind(':email', $email);
+            $row = $database->single();
+
+            $u->utenteid = $row['utenteid'];
+            $u->denominazione = Utilita::DB2HTML($row['denominazione']);
+            $u->indirizzo = Utilita::DB2HTML($row['indirizzo']);
+            $u->cf = Utilita::DB2HTML($row['cf']);
+            $u->piva = Utilita::DB2HTML($row['piva']);
+            $u->telefono = Utilita::DB2HTML($row['telefono']);
+            $u->email = Utilita::DB2HTML($row['email']);
+            $u->password = Utilita::DB2HTML($row['password']);
+            $u->ruolofk = $row['ruolofk'];
+            $u->ruolo = Ruolo::FIND_BY_ID($row['ruolofk']);
+            $u->note = Utilita::DB2HTML($row['note']);
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+        return $u;
+    }
+
     public static function EXIST($id) {
         $exist = false;
 

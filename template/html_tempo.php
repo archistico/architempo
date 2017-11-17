@@ -5,7 +5,7 @@ class Html_tempo {
     public function Scelta_tempo() {
         $html = "
         <div class='row paddingBottom20'>
-            <div class='col-md-6'>
+            <div class='col-md-6 paddingBottom20'>
                 <a class='btn btn-info btn-block btn-lg' href='index.php'>NUOVO TEMPO CON CRONOMETRO</a>
             </div>
             <div class='col-md-6'>

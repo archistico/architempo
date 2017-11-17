@@ -38,7 +38,12 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
     // CONTROLLA SU DB SE: EMAIL E PASSWORD CORRISPONDONO
     if(empty($notices)) {
         if(Utente::Check_email_password($email, $password)) {
-            $_SESSION[$_COOKIE[GLOBAL_COOKIENAME]] = 1;
+
+            $utente = Utente::FIND_BY_EMAIL($email);
+
+            $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":utenteid"] = $utente->utenteid;
+            $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":ruolo"] = $utente->getRuolo()->descrizione;
+            
             Utilita::REDIRECT('index.php');
             exit();
         } else {

@@ -9,11 +9,16 @@ require_once('loader.php');
  * -----------------------------
  */
 
-Autaut::CHECK_CREDENTIAL(['Amministrazione','Lavoratore']);
+Autaut::CHECK_CREDENTIAL(['Amministrazione','Lavoratore','Cliente']);
 
 // POSSO ACCEDERE ALLA RISORSA
 $utentefk = Autaut::LOGGATO();
 $csrfname = $filename_corrente.":".$utentefk.":csrf";
+
+// SE CLIENTE REDIRIGI
+if(Autaut::LOGGATO_RUOLO()=='Cliente') {
+    Utilita::REDIRECT('cliente.php');
+}
 
 /* -----------------------------
  *           HTML
