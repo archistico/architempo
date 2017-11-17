@@ -9,7 +9,7 @@ require_once('loader.php');
  * -----------------------------
  */
 
-Autaut::CHECK_CREDENTIAL(['Amministrazione','Lavoratore']);
+Autaut::CHECK_CREDENTIAL(['Amministrazione']);
 
 // POSSO ACCEDERE ALLA RISORSA
 $utentefk = Autaut::LOGGATO();
