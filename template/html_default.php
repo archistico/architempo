@@ -57,7 +57,22 @@ class Html_default {
 
     public static function MENU($file) {
         // MENU
-        $menu = [
+        
+        // Altro
+        $menuAltro = [
+            'Home' => 'index.php',
+            'Logout' => 'login.php?logout=1',
+        ];
+
+        // Lavoratore
+        $menuLavoratore = [
+            'Home' => 'index.php',
+            'Tempo' => 'tempo.php',
+            'Logout' => 'login.php?logout=1',
+        ];
+
+        // Amministrazione
+        $menuAmministrazione = [
             'Home' => 'index.php',
             'Tempo' => 'tempo.php',
             'Progetti' => 'progetto.php',
@@ -66,6 +81,20 @@ class Html_default {
             'Statistiche' => 'statistiche.php',
             'Logout' => 'login.php?logout=1',
         ];
+
+        // Menu in base al tipo di utente
+        switch(Autaut::LOGGATO_RUOLO()) {
+            case 'Amministrazione' :
+                $menu = $menuAmministrazione;
+                break;
+            case 'Lavoratore' :
+                $menu = $menuLavoratore;
+                break;
+            default :
+                $menu = $menuAltro;
+                break;
+        }
+        
 
         $linkHome = current($menu);
         $nomeHome = key($menu);
