@@ -30,8 +30,10 @@ Html_default::JUMBOTRON("Studio Archistico", "Time tracker");
  * -----------------------------
  */
 
-// HOME CARICA DATI DEL CLIENTE
-Utilita::WRITELINE("Cliente");
+Html_default::HEADER("Lista Progetti");
+$progetti = new Progetti();
+$progetti->getDB_All_by_Cliente($utentefk);
+$HTML->Table_progetti($progetti->getProgetti());
 
 /* -----------------------------
  *      FINE CORPO FILE

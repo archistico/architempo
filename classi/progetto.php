@@ -284,6 +284,40 @@ class Progetti
         }
     }
 
+    // getDB_All_by_Cliente
+    public function getDB_All_by_Cliente($clientefk)
+    {
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM progetto WHERE clientefk = :clientefk');
+            $database->bind(':clientefk', $clientefk);
+            $rows = $database->resultset();
+
+            foreach ($rows as $row) {
+                $t = new Progetto();
+                $t->progettoid = $row['progettoid'];
+                $t->clientefk = $row['clientefk'];
+                $t->cliente = Utente::FIND_BY_ID($row['clientefk']);
+                $t->descrizione = Utilita::DB2HTML($row['descrizione']);
+                $t->tipologiafk = $row['tipologiafk'];
+
+                $tipologie = new Tipologie();
+                $t->tipologia = $tipologie->find_by_id($row['tipologiafk']);
+
+                $t->compenso = $row['compenso'];
+                $t->acconto = $row['acconto'];
+                $t->pagato = $row['pagato'];
+                $t->completato = $row['completato'];
+
+                $this->Add($t);
+            }
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+    }
+
+
     public function find_by_id($id) {
         $item = null;
         foreach($this->progetti as $el) {
