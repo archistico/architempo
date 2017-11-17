@@ -100,4 +100,8 @@ class Utilita {
         header ("Location: $link");
         exit();
     }
+
+    public static function EURO($valore) {
+        return "&euro; ".number_format($valore, 2, ',', ' ');
+    }
 }

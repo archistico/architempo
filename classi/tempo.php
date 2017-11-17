@@ -242,4 +242,6 @@ class Tempi
         }
         return number_format($totale, 1, ',', ' ');
     }
+
+    
 }

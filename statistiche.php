@@ -36,7 +36,12 @@ $tempi = new Tempi();
 $tempi->getDB_All();
 $totale_ore_lavorate = $tempi->TOTALE_ORE_LAVORATE();
 
-$HTML->show($totale_ore_lavorate);
+$progetti = new Progetti();
+$progetti->getDB_All();
+$totale_acconti = $progetti->TOTALE_ACCONTI();
+$totale_compensi = $progetti->TOTALE_COMPENSI();
+
+$HTML->show($totale_ore_lavorate, $totale_acconti, $totale_compensi);
 
 /* -----------------------------
  *      FINE CORPO FILE

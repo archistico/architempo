@@ -328,4 +328,22 @@ class Progetti
         }
         return $item;
     }
+
+    public function TOTALE_ACCONTI() {
+        $totale = 0;
+        foreach ($this->progetti as $t) {
+            $valore = $t->acconto;
+            $totale += $valore;
+        }
+        return $totale;
+    }
+
+    public function TOTALE_COMPENSI() {
+        $totale = 0;
+        foreach ($this->progetti as $t) {
+            $valore = $t->compenso;
+            $totale += $valore;
+        }
+        return $totale;
+    }
 }
