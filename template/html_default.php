@@ -76,6 +76,7 @@ class Html_default {
             'Home' => 'index.php',
             'Tempo' => 'tempo.php',
             'Progetti' => 'progetto.php',
+            'Fatture' => 'fattura.php',
             'Tipologie' => 'tipologia.php',
             'Utenti' => 'utente.php',
             'Statistiche' => 'statistiche.php',
