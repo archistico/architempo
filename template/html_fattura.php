@@ -90,15 +90,6 @@ class Html_fattura {
         echo $html;
     }
 
-    public $fatturaid;
-    public $numero;
-    public $data;
-    public $anno;
-    public $progettofk;
-    public $oggetto;
-    public $importo;
-    public $totale;
-
     public function Table_fatture($fatture) {
         $colunneNascoste = 'd-none d-md-table-cell';
         $html = "
@@ -121,12 +112,13 @@ class Html_fattura {
         echo $html;
         foreach ($fatture as $tem) {
             echo "<tr>";
+            echo " <td>".$tem->anno." - ".$tem->numero."</td>";
+            echo " <td>".$tem->getDataStr()."</td>";
             echo " <td>".$tem->getProgetto()->descrizione."</td>";
-            echo " <td>".$tem->descrizione."</td>";
-            echo " <td class='$colunneNascoste'>".$tem->getDatainizio()."</td>";
-            echo " <td class='$colunneNascoste'>".$tem->getDatafine()."</td>";
-            echo " <td>".$tem->getDurata()."</td>";
-            echo " <td><a href='tempo_elimina.php?id=$tem->tempoid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
+            echo " <td class='$colunneNascoste'>".$tem->importo."</td>";
+            echo " <td class='$colunneNascoste'>".$tem->totale."</td>";
+            echo " <td>PDF</td>";
+            echo " <td><a href='fattura_elimina.php?id=$tem->fatturaid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
         }
         $html = "
