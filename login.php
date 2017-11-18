@@ -11,8 +11,13 @@ require_once('loader.php');
  */
 
 if(isset($_GET['logout']) && $_GET['logout']== 1 ) {
-    unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME]]);
-    unset($_COOKIE[GLOBAL_COOKIENAME]);
+    if(isset($_COOKIE[GLOBAL_COOKIENAME])) {
+        if (isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"], $_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"])) {
+            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"]);
+            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"]);
+        }
+        unset($_COOKIE[GLOBAL_COOKIENAME]);
+    }
 }
 
 $csrfname = $filename_corrente.":csrf";
@@ -43,7 +48,7 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
 
             $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":utenteid"] = $utente->utenteid;
             $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":ruolo"] = $utente->getRuolo()->descrizione;
-            
+
             Utilita::REDIRECT('index.php');
             exit();
         } else {
