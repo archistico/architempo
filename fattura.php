@@ -1,10 +1,9 @@
 <?php
-
+require 'config.php';
 require 'vendor/fpdf/fpdf.php';
-define('EURO',chr(128));
 
 class FatturaPdf {
-    public static function Stampa($numero, $anno, $data, $studio, $studio_proprieta,
+    public static function Stampa($numero, $anno, $data, $logo, $studio, $studio_proprieta,
                                   $studioindirizzo, $studiorecapiti, $studiofiscali,
                                   $denominazione, $indirizzo, $recapiti, $datifiscali,
                                   $oggetto, $importo, 
@@ -49,7 +48,7 @@ class FatturaPdf {
         $pdf->SetFont($font,'',10);
         $pdf->SetXY(38,52.9);
         $pdf->Cell(48.4,10,utf8_decode(strtoupper($studio_proprieta)),0,0,'C');
-        $pdf->Image("img/Logo.png", 45 ,12, 35, 30, 'PNG');
+        $pdf->Image($logo, 45 ,12, 35, 30, 'PNG');
 
         // TESTI
         $pdf->SetFont($font,'B',48);
@@ -177,11 +176,10 @@ class FatturaPdf {
     }
 }
 
-FatturaPdf::Stampa("000","2017","01/01/2017","Studio Archistico", "di Rollandin Emilie",
-                    "Via Guillet 6 - 11027 Saint-Vincent (AO)", 
-                    "Tel. 345 70 54 951 - info@archistico.com - www.archistico.com", 
-                    "P.IVA: 011 60 68 00 78 - C.F. RLL MLE 77S65 E379H",
-                    "Ing. Alessandro Tammone", "Via delle rose XXIII, 10 - 11027 Saint-Vincent (AO)",
-                    "Telefono: 345 70 54 951 - info@saldeng.it", "P.IVA: 01160680078 - C.F. RLLMLE77S65E379H",
+FatturaPdf::Stampa("000","2017","01/01/2017",
+                    STUDIO_LOGO, STUDIO_DENOMINAZIONE, STUDIO_PROPRIETA,
+                    STUDIO_INDIRIZZO, STUDIO_RECAPITI, STUDIO_DATI_FISCALI,
+                    "Ing. Piru Piru", "Via delle rose XXIII, 10 - 11100 Sun (AO)",
+                    "Telefono: 000 00 00 00 - info@piru.it", "P.IVA: 111 11 11 11 11 - C.F. XXX XXX 00X00 X000X",
                     "Consulenza 1090 - Redazione documentazione", 1350,
-                    "Bonifico", "Conto BancoPosta", "IT 00 00000000", "Emilie Rollandin", "01/01/2017");
+                    STUDIO_PAGAMENTO_MODALITA, STUDIO_PAGAMENTO_CONTO, STUDIO_PAGAMENTO_IBAN, STUDIO_PAGAMENTO_INTESTAZIONE, "01/01/2017");
