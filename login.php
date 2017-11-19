@@ -17,6 +17,8 @@ if(isset($_GET['logout']) && $_GET['logout']== 1 ) {
             unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"]);
         }
         unset($_COOKIE[GLOBAL_COOKIENAME]);
+        setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
+        setcookie(GLOBAL_COOKIENAME, null, -1, '/');
     }
 }
 
@@ -46,8 +48,15 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
 
             $utente = Utente::FIND_BY_EMAIL($email);
 
-            $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":utenteid"] = $utente->utenteid;
-            $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":ruolo"] = $utente->getRuolo()->descrizione;
+            if(!isset($_COOKIE[GLOBAL_COOKIENAME])) {
+                $value = md5(rand(0,10000000));
+                setcookie(GLOBAL_COOKIENAME, $value);
+
+                // Messo interno perché la prima volta il valore dal cookie non viene letto
+                // Cosi riesco a settarlo comunque
+                $_SESSION[$value.":utenteid"] = $utente->utenteid;
+                $_SESSION[$value.":ruolo"] = $utente->getRuolo()->descrizione;
+            }
 
             Utilita::REDIRECT('index.php');
             exit();

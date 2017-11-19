@@ -17,23 +17,15 @@ class Autaut {
         // Ogni volta che autentico guardo se ho un cookie in cui c'è il name della session da controllare
         // Se non c'è lo creo
 
-        if(!isset($_COOKIE[GLOBAL_COOKIENAME])) {
-            $value = md5(rand(0,10000000));
-            $cookie_domain = ".".$_SERVER['HTTP_HOST'];
-            setcookie(GLOBAL_COOKIENAME, $value,time() + (86400),"/", $cookie_domain);
-            // Attivo il login in cui i dati di sessione saranno da cercare nel SESSION[$_COOKIE[GLOBAL_COOKIENAME]]
-            // I dati nel SESSION[$_COOKIE[GLOBAL_COOKIENAME]] me li deve mettere il form di login
-            return false;
+        // Se ho già il cookie
+        // Cerco nel session se ho i dati di login
+        // Salvo nel session utentefk
+        if(isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":utenteid"])) {
+            return true;
         } else {
-            // Se ho già il cookie
-            // Cerco nel session se ho i dati di login
-            // Salvo nel session utentefk
-            if(isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":utenteid"])) {
-                return true;
-            } else {
-                return false;
-            }
+            return false;
         }
+
     }
 
     public static function AUTORIZZATO($admitted_role) {
