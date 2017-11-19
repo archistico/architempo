@@ -27,12 +27,12 @@ class Fattura
 
     // SETTA DATA
     public function setData($data) {
-        $this->data = DateTime::createFromFormat('d/m/Y H:i:s', $data);
+        $this->data = DateTime::createFromFormat('d/m/Y', $data);
     }
 
     // RESTITUISCI DATA STRINGA
     public function getDataStr() {
-        return $this->data->format('d/m/Y H:i:s');
+        return $this->data->format('d/m/Y');
     }
 
     // RESTITUISCI DATA STRINGA
@@ -52,6 +52,33 @@ class Fattura
 
     public function setDataDB($data) {
         $this->data = DateTime::createFromFormat('Y-m-d H:i:s', $data);
+    }
+
+    public function DB_Add() {
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('INSERT INTO fattura (numero, data, anno, progettofk, oggetto, importo, totale, tipologiafatturafk) VALUES(:numero, :data, :anno, :progettofk, :oggetto, :importo, :totale, :tipologiafatturafk)');
+
+            $database->bind(':numero', $this->numero);
+            $database->bind(':data', $this->getDataDB());
+            $database->bind(':anno', $this->anno);
+            $database->bind(':progettofk', $this->progettofk);
+            $database->bind(':oggetto', Utilita::HTML2DB($this->oggetto));
+            $database->bind(':importo', $this->importo);
+            $database->bind(':totale', $this->totale);
+            $database->bind(':tipologiafatturafk', 1);
+
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
     }
 
 }

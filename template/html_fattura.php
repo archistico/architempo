@@ -8,7 +8,26 @@ class Html_fattura {
         $html = "
         <form action='$formLink' method='post' id='form'>
         <div class='row'>
-        <div class='col-md-6'>
+        
+        <div class='col-md-6'>    
+            <div class='form-group'>
+                <label for='data'>Data</label>
+                <input type='text' class='form-control' name='data' id='data' placeholder='Data fattura' required>
+            </div>
+        </div>
+        
+        <div class='col-md-6'>    
+            <div class='form-group'>
+                <label for='numero'>Numero Fattura</label>
+                <input type='number' class='form-control' required name='numero' min='1' max='999' value='1' step='1'>
+            </div>
+        </div>
+        
+        </div> <!-- chiudi row -->
+        
+        <div class='row'>
+        
+        <div class='col-md-12'>
             <div class='form-group'>
                 <label for='clientefk'>Seleziona il progetto</label>
                 <select class='form-control' style='width: 100%;' name='progettofk' required>
@@ -24,53 +43,38 @@ class Html_fattura {
                 </select>
             </div>
         </div>
-        <div class='col-md-6'>    
-            <div class='form-group'>
-                <label for='Descrizione'>Descrizione attività</label>
-                <input type='text' class='form-control' id='Descrizione' placeholder='Descrizione' name='descrizione' required>
-            </div>
-        </div>
-        </div>
+        
+        </div> <!-- chiudi row -->
+        
         <div class='row'>
-        <div class='col-md-6'>    
+        
+        <div class='col-md-12'>    
             <div class='form-group'>
-                <label for='datainizio'>Data inizio</label>
-                <input type='text' class='form-control' name='datainizio' id='datainizio' placeholder='Data inizio attività' required>
+                <label for='oggetto'>Oggetto</label>
+                <input type='text' class='form-control' id='oggetto' placeholder='Oggetto' name='oggetto' required>
             </div>
         </div>
-        <div class='col-md-6'>    
-            <div class='form-group'>
-                <label for='datafine'>Data fine</label>
-                <input type='text' class='form-control' name='datafine' id='datafine' placeholder='Data fine attività' required>
-            </div>
-        </div>
-        </div>
+        
+        </div> <!-- chiudi row -->
+        
         <div class='row'>
-        <div class='col-md-3'>    
+        
+        <div class='col-md-6'>    
             <div class='form-group'>
-                <label for='orainizio'>Ora inizio</label>
-                <input type='number' class='form-control' required name='orainizio' min='0' max='23' value='12' step='1'>            
+                <label for='importo'>Importo</label>
+                <input type='number' class='form-control' required name='importo' min='0' max='999999' value='0' step='0.01'>
             </div>
         </div>
-        <div class='col-md-3'>    
+        
+        <div class='col-md-6'>    
             <div class='form-group'>
-                <label for='minutiinizio'>Minuti inizio</label>
-                <input type='number' class='form-control' required name='minutiinizio' min='0' max='59' value='0' step='1'>
+                <label for='totale'>Totale</label>
+                <input type='number' class='form-control' required name='totale' min='0' max='999999' value='0' step='0.01'>
             </div>
         </div>
-        <div class='col-md-3'>    
-            <div class='form-group'>
-                <label for='orafine'>Ora fine</label>
-                <input type='number' class='form-control' required name='orafine' min='0' max='23' value='12' step='1'>            
-            </div>
-        </div>
-        <div class='col-md-3'>    
-            <div class='form-group'>
-                <label for='minutifine'>Minuti fine</label>
-                <input type='number' class='form-control' required name='minutifine' min='0' max='59' value='0' step='1'>
-            </div>
-        </div>
-        </div>
+        
+        </div> <!-- chiudi row -->
+
         ";
         echo $html;
 
@@ -114,7 +118,7 @@ class Html_fattura {
             echo "<tr>";
             echo " <td>".$tem->anno." - ".$tem->numero."</td>";
             echo " <td>".$tem->getDataStr()."</td>";
-            echo " <td>".$tem->getProgetto()->descrizione."</td>";
+            echo " <td>".$tem->getProgetto()->getInfo()."</td>";
             echo " <td class='$colunneNascoste'>".$tem->importo."</td>";
             echo " <td class='$colunneNascoste'>".$tem->totale."</td>";
             echo " <td>PDF</td>";

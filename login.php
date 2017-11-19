@@ -20,6 +20,16 @@ if(isset($_GET['logout']) && $_GET['logout']== 1 ) {
         setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
         setcookie(GLOBAL_COOKIENAME, null, -1, '/');
     }
+} else {
+    if(isset($_COOKIE[GLOBAL_COOKIENAME])) {
+        if (isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"], $_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"])) {
+            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"]);
+            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"]);
+        }
+        unset($_COOKIE[GLOBAL_COOKIENAME]);
+        setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
+        setcookie(GLOBAL_COOKIENAME, null, -1, '/');
+    }
 }
 
 $csrfname = $filename_corrente.":csrf";

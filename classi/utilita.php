@@ -95,6 +95,12 @@ class Utilita {
         return $d && $d->format($format) == $date;
     }
 
+    public static function VALIDATE_DATE_SHORT($date, $format = 'd/m/Y')
+    {
+        $d = DateTime::createFromFormat($format, $date);
+        return $d && $d->format($format) == $date;
+    }
+
     public static function REDIRECT($link = 'login.php')
     {
         header ("Location: $link");
