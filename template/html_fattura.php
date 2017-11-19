@@ -19,7 +19,7 @@ class Html_fattura {
         <div class='col-md-6'>    
             <div class='form-group'>
                 <label for='numero'>Numero Fattura</label>
-                <input type='number' class='form-control' required name='numero' min='1' max='999' value='1' step='1' readonly>
+                <input type='number' class='form-control' required name='numero' min='1' max='999' value='1' step='1'>
             </div>
         </div>
         
@@ -116,12 +116,12 @@ class Html_fattura {
         echo $html;
         foreach ($fatture as $tem) {
             echo "<tr>";
-            echo " <td>".$tem->anno." - ".$tem->numero."</td>";
+            echo " <td>".$tem->anno." - ".str_pad($tem->numero, 3, '0', STR_PAD_LEFT)."</td>";
             echo " <td>".$tem->getDataStr()."</td>";
             echo " <td>".$tem->getProgetto()->getInfo()."</td>";
             echo " <td class='$colunneNascoste'>".$tem->importo."</td>";
             echo " <td class='$colunneNascoste'>".$tem->totale."</td>";
-            echo " <td><a href='fattura_pdf.php?id=$tem->fatturaid'><i class='fa fa-file-pdf-o fa-lg' aria-hidden='true'></i></a></td>";
+            echo " <td><a href='fattura_pdf.php?id=$tem->fatturaid' target='_blank'><i class='fa fa-file-pdf-o fa-lg' aria-hidden='true'></i></a></td>";
             echo " <td><a href='fattura_elimina.php?id=$tem->fatturaid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
         }

@@ -142,7 +142,7 @@ class Fatture
     {
         try {
             $database = new db();
-            $database->query('SELECT * FROM fattura');
+            $database->query('SELECT * FROM fattura ORDER BY anno DESC, numero DESC');
             $rows = $database->resultset();
 
             foreach ($rows as $row) {

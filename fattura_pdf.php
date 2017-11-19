@@ -207,11 +207,11 @@ if (isset($_GET['id'])) {
     if($t->FIND_BY_ID($id)) {
         $scadenza = $t->getDataObj()->add(new DateInterval('P15D'));
 
-        FatturaPdf::Stampa($t->numero,$t->anno,$t->getDataStr(),
+        FatturaPdf::Stampa(str_pad($t->numero, 3, '0', STR_PAD_LEFT),$t->anno,$t->getDataStr(),
             STUDIO_LOGO, STUDIO_DENOMINAZIONE, STUDIO_PROPRIETA,
             STUDIO_INDIRIZZO, STUDIO_RECAPITI, STUDIO_DATI_FISCALI,
             $t->getProgetto()->getCliente()->denominazione, $t->getProgetto()->getCliente()->indirizzo,
-            $t->getProgetto()->getCliente()->telefono. " - ".$t->getProgetto()->getCliente()->email, "P.IVA: ".$t->getProgetto()->getCliente()->piva." - C.F. ".$t->getProgetto()->getCliente()->cf,
+            "Telefono: ".$t->getProgetto()->getCliente()->telefono. " - ".$t->getProgetto()->getCliente()->email, "P.IVA: ".$t->getProgetto()->getCliente()->piva." - C.F. ".$t->getProgetto()->getCliente()->cf,
             $t->oggetto, $t->importo,
             STUDIO_PAGAMENTO_MODALITA, STUDIO_PAGAMENTO_CONTO, STUDIO_PAGAMENTO_IBAN, STUDIO_PAGAMENTO_INTESTAZIONE, $scadenza->format('d/m/Y'));
 
