@@ -1,5 +1,21 @@
 <?php
-require 'config.php';
+require_once('classi/file.php');
+// Caricamento configurazione e utilita
+require_once('config.php');
+require_once('classi/utilita.php');
+Utilita::PARAMETRI_INIZIALI();
+$notices = [];
+
+require_once('classi/ruolo.php');
+require_once('classi/utente.php');
+require_once('classi/database.php');
+require_once('classi/tipologia.php');
+require_once('classi/progetto.php');
+require_once('classi/tempo.php');
+require_once('classi/fattura.php');
+require_once('classi/autaut.php');
+require_once('classi/login.php');
+
 require 'vendor/fpdf/fpdf.php';
 
 class FatturaPdf {
@@ -176,10 +192,33 @@ class FatturaPdf {
     }
 }
 
-FatturaPdf::Stampa("000","2017","01/01/2017",
-                    STUDIO_LOGO, STUDIO_DENOMINAZIONE, STUDIO_PROPRIETA,
-                    STUDIO_INDIRIZZO, STUDIO_RECAPITI, STUDIO_DATI_FISCALI,
-                    "Ing. Piru Piru", "Via delle rose XXIII, 10 - 11100 Sun (AO)",
-                    "Telefono: 000 00 00 00 - info@piru.it", "P.IVA: 111 11 11 11 11 - C.F. XXX XXX 00X00 X000X",
-                    "Consulenza 1090 - Redazione documentazione", 1350,
-                    STUDIO_PAGAMENTO_MODALITA, STUDIO_PAGAMENTO_CONTO, STUDIO_PAGAMENTO_IBAN, STUDIO_PAGAMENTO_INTESTAZIONE, "01/01/2017");
+// VALIDO I DATI
+if (isset($_GET['id'])) {
+
+    // VALIDAZIONE
+    if (empty($_GET['id'])) {
+        Utilita::WRITELINE("Nessuna fattura passata");
+    } else {
+        $id = Utilita::PULISCISTRINGA($_GET['id']);
+    }
+
+    // Carica i dati
+    $t = new Fattura();
+    if($t->FIND_BY_ID($id)) {
+        $scadenza = $t->getDataObj()->add(new DateInterval('P15D'));
+
+        FatturaPdf::Stampa($t->numero,$t->anno,$t->getDataStr(),
+            STUDIO_LOGO, STUDIO_DENOMINAZIONE, STUDIO_PROPRIETA,
+            STUDIO_INDIRIZZO, STUDIO_RECAPITI, STUDIO_DATI_FISCALI,
+            $t->getProgetto()->getCliente()->denominazione, $t->getProgetto()->getCliente()->indirizzo,
+            $t->getProgetto()->getCliente()->telefono. " - ".$t->getProgetto()->getCliente()->email, "P.IVA: ".$t->getProgetto()->getCliente()->piva." - C.F. ".$t->getProgetto()->getCliente()->cf,
+            $t->oggetto, $t->importo,
+            STUDIO_PAGAMENTO_MODALITA, STUDIO_PAGAMENTO_CONTO, STUDIO_PAGAMENTO_IBAN, STUDIO_PAGAMENTO_INTESTAZIONE, $scadenza->format('d/m/Y'));
+
+    } else {
+        Utilita::WRITELINE("Nessuna fattura trovata con questo id");
+    }
+
+} else {
+    Utilita::WRITELINE("ID fattura non passato");
+}

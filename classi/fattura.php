@@ -81,6 +81,37 @@ class Fattura
         return $result;
     }
 
+    public function FIND_BY_ID($id) {
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM fattura WHERE fatturaid=:id');
+            $database->bind(':id', $id);
+            $row = $database->single();
+
+            $this->fatturaid = $row['fatturaid'];
+            $this->numero = $row['numero'];
+            $this->setDataDB($row['data']);
+            $this->anno = $row['anno'];
+            $this->progettofk = $row['progettofk'];
+            $this->progetto = Progetto::DB_FIND_BY_ID($row['progettofk']);
+            $this->oggetto = Utilita::DB2HTML($row['oggetto']);
+            $this->importo = $row['importo'];
+            $this->totale = $row['totale'];
+            $this->tipologiafatturafk = $row['tipologiafatturafk'];
+
+            $result = true;
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
+    }
+
 }
 
 /* --------------------------------------

@@ -19,7 +19,7 @@ class Html_fattura {
         <div class='col-md-6'>    
             <div class='form-group'>
                 <label for='numero'>Numero Fattura</label>
-                <input type='number' class='form-control' required name='numero' min='1' max='999' value='1' step='1'>
+                <input type='number' class='form-control' required name='numero' min='1' max='999' value='1' step='1' readonly>
             </div>
         </div>
         
@@ -62,14 +62,14 @@ class Html_fattura {
         <div class='col-md-6'>    
             <div class='form-group'>
                 <label for='importo'>Importo</label>
-                <input type='number' class='form-control' required name='importo' min='0' max='999999' value='0' step='0.01'>
+                <input type='number' class='form-control' id='importo' required name='importo' min='0' max='999999' value='0' step='0.01'>
             </div>
         </div>
         
         <div class='col-md-6'>    
             <div class='form-group'>
                 <label for='totale'>Totale</label>
-                <input type='number' class='form-control' required name='totale' min='0' max='999999' value='0' step='0.01'>
+                <input type='number' class='form-control' id='totale' required name='totale' min='0' max='999999' value='0' step='0.01' readonly>
             </div>
         </div>
         
@@ -121,7 +121,7 @@ class Html_fattura {
             echo " <td>".$tem->getProgetto()->getInfo()."</td>";
             echo " <td class='$colunneNascoste'>".$tem->importo."</td>";
             echo " <td class='$colunneNascoste'>".$tem->totale."</td>";
-            echo " <td>PDF</td>";
+            echo " <td><a href='fattura_pdf.php?id=$tem->fatturaid'><i class='fa fa-file-pdf-o fa-lg' aria-hidden='true'></i></a></td>";
             echo " <td><a href='fattura_elimina.php?id=$tem->fatturaid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
         }
