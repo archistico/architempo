@@ -109,7 +109,7 @@ class FatturaPdf {
         $pdf->SetXY(33,122.5);
         $pdf->Cell(162,10, "Oggetto:");
 
-        $pdf->SetFont($font,'B',18);
+        $pdf->SetFont($font,'B',16);
         $pdf->SetXY(33,129.3);
         $pdf->Cell(162,10, utf8_decode($oggetto));
 
