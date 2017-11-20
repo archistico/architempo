@@ -111,13 +111,14 @@ class Html_fattura {
         <table class='table table-bordered'>
           <thead>
             <tr>
+              <th>PDF</th>
+              <th>#</th>
               <th>Numero</th>
               <th class='$colunneNascoste'>Data</th>
               <th>Progetto</th>
               <th class='$colunneNascoste'>Importo</th>
               <th class='$colunneNascoste'>Totale</th>
               <th class='$colunneNascoste'>Pagato</th>
-              <th>PDF</th>
               <th>#</th>
             </tr>
           </thead>
@@ -126,13 +127,14 @@ class Html_fattura {
         echo $html;
         foreach ($fatture as $tem) {
             echo "<tr>";
+            echo " <td><a href='fattura_pdf.php?id=$tem->fatturaid' target='_blank'><i class='fa fa-file-pdf-o fa-lg' aria-hidden='true'></i></a></td>";
+            echo " <td><a href='fattura_modifica.php?id=$tem->fatturaid&ok=0'><i class='fa fa fa-pencil fa-lg arancione' aria-hidden='true'></i></a></td>";
             echo " <td>".$tem->anno." - ".str_pad($tem->numero, 3, '0', STR_PAD_LEFT)."</td>";
             echo " <td class='$colunneNascoste'>".$tem->getDataStr()."</td>";
             echo " <td>".$tem->getProgetto()->getInfo()."</td>";
             echo " <td class='$colunneNascoste'>".$tem->importo."</td>";
             echo " <td class='$colunneNascoste'>".$tem->totale."</td>";
             echo " <td class='$colunneNascoste'>".($tem->pagato==0?"<i class='fa fa-thumbs-down arancione' aria-hidden='true'></i>":"<i class='fa fa-thumbs-up verde' aria-hidden='true'></i>")."</td>";
-            echo " <td><a href='fattura_pdf.php?id=$tem->fatturaid' target='_blank'><i class='fa fa-file-pdf-o fa-lg' aria-hidden='true'></i></a></td>";
             echo " <td><a href='fattura_elimina.php?id=$tem->fatturaid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";
         }
