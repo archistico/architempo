@@ -15,7 +15,7 @@ class Fattura
     public $progetto;
 
     public function getInfo() {
-        return "";
+        return $this->anno. " - ".str_pad($this->numero, 2, '0', STR_PAD_LEFT);
     }
 
     public function getProgetto() {
@@ -105,6 +105,76 @@ class Fattura
             $this->pagato = $row['pagato'];
 
             $result = true;
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
+    }
+
+    public static function EXIST($id) {
+        $exist = false;
+
+        try {
+            $database = new db();
+            $database->query('SELECT * FROM fattura WHERE fatturaid = :id');
+            $database->bind(':id', $id);
+            $database->execute();
+            if($database->rowCount()>0) {
+                $exist = true;
+            }
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $exist;
+    }
+
+    public static function DELETE_BY_ID($id) {
+        $result = false;
+
+        try {
+            $database = new db();
+
+            $database->query('DELETE FROM fattura WHERE fatturaid = :id');
+            $database->bind(':id', $id);
+            $result = $database->execute();
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
+    }
+
+    public function DB_Update($id) {
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('UPDATE fattura SET numero=:numero, data=:data, anno=:anno, progettofk=:progettofk, oggetto=:oggetto, importo=:importo, totale=:totale, tipologiafatturafk=:tipologiafatturafk, pagato=:pagato WHERE fatturaid = :id');
+
+            $database->bind(':numero', $this->numero);
+            $database->bind(':data', $this->getDataDB());
+            $database->bind(':anno', $this->anno);
+            $database->bind(':progettofk', $this->progettofk);
+            $database->bind(':oggetto', Utilita::HTML2DB($this->oggetto));
+            $database->bind(':importo', $this->importo);
+            $database->bind(':totale', $this->totale);
+            $database->bind(':tipologiafatturafk', 1);
+            $database->bind(':pagato', $this->pagato);
+
+            $database->bind(':id', $id);
+            $result = $database->execute();
         } catch (PDOException $e) {
             throw new PDOException("Error  : " . $e->getMessage());
         }

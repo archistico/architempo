@@ -273,7 +273,6 @@ class Progetti
 
                 $this->Add($t);
             }
-
         } catch (PDOException $e) {
             throw new PDOException("Error  : " . $e->getMessage());
         }
