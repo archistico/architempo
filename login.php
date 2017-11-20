@@ -60,7 +60,7 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
 
             if(!isset($_COOKIE[GLOBAL_COOKIENAME])) {
                 $value = md5(rand(0,10000000));
-                setcookie(GLOBAL_COOKIENAME, $value);
+                setcookie(GLOBAL_COOKIENAME, $value, time()+86400);
 
                 // Messo interno perché la prima volta il valore dal cookie non viene letto
                 // Cosi riesco a settarlo comunque
