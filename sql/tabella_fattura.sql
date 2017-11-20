@@ -7,7 +7,8 @@ CREATE TABLE `fattura` (
   `oggetto` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `importo` DECIMAL(10,2) NOT NULL DEFAULT 0,
   `totale` DECIMAL(10,2) NOT NULL DEFAULT 0,
-  `tipologiafatturafk` int(11) NOT NULL
+  `tipologiafatturafk` int(11) NOT NULL,
+  `pagato` boolean not null default 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 ALTER TABLE `fattura`

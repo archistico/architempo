@@ -78,6 +78,13 @@ if (isset($_POST['data'], $_POST['numero'], $_POST['progettofk'], $_POST['oggett
         $totale = Utilita::PULISCISTRINGA($_POST['totale']);
     }
 
+    // Checkbox
+    if (!isset($_POST['pagato'])) {
+        $pagato = 0;
+    } else {
+        $pagato = 1;
+    }
+
     if(empty($notices)) {
 
         // AGGIUNGO IL TEMPO NEL DB
@@ -91,6 +98,7 @@ if (isset($_POST['data'], $_POST['numero'], $_POST['progettofk'], $_POST['oggett
         $t->oggetto = $oggetto;
         $t->importo = $importo;
         $t->totale = $totale;
+        $t->pagato = $pagato;
 
         if(!$t->DB_Add()) {
             $notices[] = 'Errore nella query sulla base dati';

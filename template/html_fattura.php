@@ -66,11 +66,20 @@ class Html_fattura {
             </div>
         </div>
         
-        <div class='col-md-6'>    
+        <div class='col-md-4'>    
             <div class='form-group'>
                 <label for='totale'>Totale</label>
                 <input type='number' class='form-control' id='totale' required name='totale' min='0' max='999999' value='0' step='0.01' readonly>
             </div>
+        </div>
+
+        <div class='col-md-2'>
+        <div class='form-group'>
+            <label>Altro</label>
+            <div class='form-check'>
+                <label class='form-check-label'><input type='checkbox' name='pagato' class='form-check-input'>Pagato</label>
+            </div>
+        </div>
         </div>
         
         </div> <!-- chiudi row -->
@@ -107,6 +116,7 @@ class Html_fattura {
               <th>Progetto</th>
               <th class='$colunneNascoste'>Importo</th>
               <th class='$colunneNascoste'>Totale</th>
+              <th class='$colunneNascoste'>Pagato</th>
               <th>PDF</th>
               <th>#</th>
             </tr>
@@ -121,6 +131,7 @@ class Html_fattura {
             echo " <td>".$tem->getProgetto()->getInfo()."</td>";
             echo " <td class='$colunneNascoste'>".$tem->importo."</td>";
             echo " <td class='$colunneNascoste'>".$tem->totale."</td>";
+            echo " <td class='$colunneNascoste'>".($tem->pagato==0?"<i class='fa fa-thumbs-down arancione' aria-hidden='true'></i>":"<i class='fa fa-thumbs-up verde' aria-hidden='true'></i>")."</td>";
             echo " <td><a href='fattura_pdf.php?id=$tem->fatturaid' target='_blank'><i class='fa fa-file-pdf-o fa-lg' aria-hidden='true'></i></a></td>";
             echo " <td><a href='fattura_elimina.php?id=$tem->fatturaid&ok=0'><i class='fa fa-times fa-lg rosso' aria-hidden='true'></i></a></td>";
             echo "</tr>";

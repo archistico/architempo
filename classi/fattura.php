@@ -10,6 +10,7 @@ class Fattura
     public $importo;
     public $totale;
     public $tipologiafatturafk;
+    public $pagato;
 
     public $progetto;
 
@@ -59,7 +60,7 @@ class Fattura
 
         try {
             $database = new db();
-            $database->query('INSERT INTO fattura (numero, data, anno, progettofk, oggetto, importo, totale, tipologiafatturafk) VALUES(:numero, :data, :anno, :progettofk, :oggetto, :importo, :totale, :tipologiafatturafk)');
+            $database->query('INSERT INTO fattura (numero, data, anno, progettofk, oggetto, importo, totale, tipologiafatturafk, pagato) VALUES(:numero, :data, :anno, :progettofk, :oggetto, :importo, :totale, :tipologiafatturafk, :pagato)');
 
             $database->bind(':numero', $this->numero);
             $database->bind(':data', $this->getDataDB());
@@ -69,6 +70,7 @@ class Fattura
             $database->bind(':importo', $this->importo);
             $database->bind(':totale', $this->totale);
             $database->bind(':tipologiafatturafk', 1);
+            $database->bind(':pagato', $this->pagato);
 
             $result = $database->execute();
         } catch (PDOException $e) {
@@ -100,6 +102,7 @@ class Fattura
             $this->importo = $row['importo'];
             $this->totale = $row['totale'];
             $this->tipologiafatturafk = $row['tipologiafatturafk'];
+            $this->pagato = $row['pagato'];
 
             $result = true;
         } catch (PDOException $e) {
@@ -157,6 +160,7 @@ class Fatture
                 $t->importo = $row['importo'];
                 $t->totale = $row['totale'];
                 $t->tipologiafatturafk = $row['tipologiafatturafk'];
+                $t->pagato = $row['pagato'];
 
                 $this->Add($t);
             }

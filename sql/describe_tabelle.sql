@@ -1,0 +1,2 @@
+DESCRIBE tempo;
+DESCRIBE fattura;

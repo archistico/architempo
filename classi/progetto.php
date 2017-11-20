@@ -21,13 +21,12 @@ class Progetto {
 
         try {
             $database = new db();
-            $database->query('INSERT INTO progetto (descrizione, clientefk, tipologiafk, compenso, acconto, pagato, completato ) VALUES(:descrizione, :clientefk, :tipologiafk, :compenso, :acconto, :pagato, :completato)');
+            $database->query('INSERT INTO progetto (descrizione, clientefk, tipologiafk, compenso, acconto, completato ) VALUES(:descrizione, :clientefk, :tipologiafk, :compenso, :acconto, :completato)');
             $database->bind(':descrizione', Utilita::HTML2DB($this->descrizione));
             $database->bind(':clientefk', $this->clientefk);
             $database->bind(':tipologiafk', $this->tipologiafk);
             $database->bind(':compenso', $this->compenso);
             $database->bind(':acconto', $this->acconto);
-            $database->bind(':pagato', $this->pagato);
             $database->bind(':completato', $this->completato);
             $result = $database->execute();
         } catch (PDOException $e) {
@@ -45,13 +44,12 @@ class Progetto {
 
         try {
             $database = new db();
-            $database->query('UPDATE progetto SET descrizione=:descrizione, clientefk=:clientefk, tipologiafk=:tipologiafk, compenso=:compenso, acconto=:acconto, pagato=:pagato, completato=:completato WHERE progettoid = :id');
+            $database->query('UPDATE progetto SET descrizione=:descrizione, clientefk=:clientefk, tipologiafk=:tipologiafk, compenso=:compenso, acconto=:acconto, completato=:completato WHERE progettoid = :id');
             $database->bind(':descrizione', Utilita::HTML2DB($this->descrizione));
             $database->bind(':clientefk', $this->clientefk);
             $database->bind(':tipologiafk', $this->tipologiafk);
             $database->bind(':compenso', $this->compenso);
             $database->bind(':acconto', $this->acconto);
-            $database->bind(':pagato', $this->pagato);
             $database->bind(':completato', $this->completato);
             $database->bind(':id', $id);
             $result = $database->execute();
@@ -83,7 +81,6 @@ class Progetto {
             $instance->tipologia = $tipologie->find_by_id($row['tipologiafk']);
             $instance->compenso = $row['compenso'];
             $instance->acconto = $row['acconto'];
-            $instance->pagato = $row['pagato'];
             $instance->completato = $row['completato'];
           
         } catch (PDOException $e) {
@@ -126,7 +123,6 @@ class Progetto {
             $this->tipologia = $tipologie->find_by_id($row['tipologiafk']);
             $this->compenso = $row['compenso'];
             $this->acconto = $row['acconto'];
-            $this->pagato = $row['pagato'];
             $this->completato = $row['completato'];
 
         } catch (PDOException $e) {
@@ -273,7 +269,6 @@ class Progetti
 
                 $t->compenso = $row['compenso'];
                 $t->acconto = $row['acconto'];
-                $t->pagato = $row['pagato'];
                 $t->completato = $row['completato'];
 
                 $this->Add($t);
@@ -306,7 +301,6 @@ class Progetti
 
                 $t->compenso = $row['compenso'];
                 $t->acconto = $row['acconto'];
-                $t->pagato = $row['pagato'];
                 $t->completato = $row['completato'];
 
                 $this->Add($t);

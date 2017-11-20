@@ -76,9 +76,6 @@ class Html_progetto_modifica {
             <div class='form-group'>
                 <label>Altro</label>
                 <div class='form-check'>
-                    <label class='form-check-label'><input type='checkbox' name='pagato' class='form-check-input' ".($progetto->pagato?'checked':'').">Pagato</label>
-                </div>
-                <div class='form-check'>
                     <label class='form-check-label'><input type='checkbox' name='completato' class='form-check-input' ".($progetto->completato?'checked':'').">Completato</label>
                 </div>
             </div>

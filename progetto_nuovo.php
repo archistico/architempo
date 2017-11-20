@@ -73,13 +73,6 @@ if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POS
     }
 
     // Checkbox
-    if (!isset($_POST['pagato'])) {
-        $pagato = 0;
-    } else {
-        $pagato = 1;
-    }
-
-    // Checkbox
     if (!isset($_POST['completato'])) {
         $completato = 0;
     } else {
@@ -96,7 +89,6 @@ if (!empty($_POST['descrizione']) && !empty($_POST['clientefk']) && !empty($_POS
         $p->tipologiafk = $tipologiafk;
         $p->compenso = $compenso;
         $p->acconto = $acconto;
-        $p->pagato = $pagato;
         $p->completato = $completato;
 
         if(!$p->DB_Add()) {
