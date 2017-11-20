@@ -112,7 +112,7 @@ class Html_fattura {
           <thead>
             <tr>
               <th>Numero</th>
-              <th>Data</th>
+              <th class='$colunneNascoste'>Data</th>
               <th>Progetto</th>
               <th class='$colunneNascoste'>Importo</th>
               <th class='$colunneNascoste'>Totale</th>
@@ -127,7 +127,7 @@ class Html_fattura {
         foreach ($fatture as $tem) {
             echo "<tr>";
             echo " <td>".$tem->anno." - ".str_pad($tem->numero, 3, '0', STR_PAD_LEFT)."</td>";
-            echo " <td>".$tem->getDataStr()."</td>";
+            echo " <td class='$colunneNascoste'>".$tem->getDataStr()."</td>";
             echo " <td>".$tem->getProgetto()->getInfo()."</td>";
             echo " <td class='$colunneNascoste'>".$tem->importo."</td>";
             echo " <td class='$colunneNascoste'>".$tem->totale."</td>";
