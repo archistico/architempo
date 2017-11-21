@@ -16,9 +16,9 @@ if(file_exists('config_dist.php')) {
 
     define(STUDIO_DENOMINAZIONE, "Studio Archistico");
     define(STUDIO_PROPRIETA, "di Rollandin Emilie");
-    define(STUDIO_INDIRIZZO, "Via delle Xyzw, 25  - 11100 Moon-Heart (AO)");
+    define(STUDIO_INDIRIZZO, "Via Guillet, 6 - 11027 Saint-Vincent (AO)");
 
-    define(STUDIO_TELEFONO, "000 00 00 000");
+    define(STUDIO_TELEFONO, "345 70 54 951");
     define(STUDIO_EMAIL, "info@archistico.com");
     define(STUDIO_RECAPITI, "Tel: ".STUDIO_TELEFONO." Email: ".STUDIO_EMAIL);
 
