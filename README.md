@@ -42,6 +42,7 @@ set db host, user, password on file config.php
 ## File config.php
 Aggiungere il file nella cartella principale
 
+```php
 <?php  
 if(file_exists('config_dist.php')) {  
     // SE DISTANTE  
@@ -78,6 +79,7 @@ if(file_exists('config_dist.php')) {
     // STRINGHE UTILI  
     define('EURO',chr(128));  
 }  
+```
 
 ## Altro
 
