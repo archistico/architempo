@@ -20,16 +20,6 @@ if(isset($_GET['logout']) && $_GET['logout']== 1 ) {
         setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
         setcookie(GLOBAL_COOKIENAME, null, -1, '/');
     }
-} else {
-    if(isset($_COOKIE[GLOBAL_COOKIENAME])) {
-        if (isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"], $_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"])) {
-            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"]);
-            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"]);
-        }
-        unset($_COOKIE[GLOBAL_COOKIENAME]);
-        setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
-        setcookie(GLOBAL_COOKIENAME, null, -1, '/');
-    }
 }
 
 $csrfname = $filename_corrente.":csrf";
@@ -57,6 +47,17 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
         if(Utente::Check_email_password($email, $password)) {
 
             $utente = Utente::FIND_BY_EMAIL($email);
+
+            if(isset($_COOKIE[GLOBAL_COOKIENAME])) {
+                if (isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"], $_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"])) {
+                    unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"]);
+                    unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"]);
+                }
+                unset($_COOKIE[GLOBAL_COOKIENAME]);
+                setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
+                setcookie(GLOBAL_COOKIENAME, null, -1, '/');
+                sleep(1);
+            }
 
             if(!isset($_COOKIE[GLOBAL_COOKIENAME])) {
                 $value = md5(rand(0,10000000));
