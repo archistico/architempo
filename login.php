@@ -65,6 +65,8 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
 
                 // Messo interno perché la prima volta il valore dal cookie non viene letto
                 // Cosi riesco a settarlo comunque
+
+                // USARE TABELLA DATABASE INVECE DELLA SESSIONE
                 $_SESSION[$value.":utenteid"] = $utente->utenteid;
                 $_SESSION[$value.":ruolo"] = $utente->getRuolo()->descrizione;
             }
