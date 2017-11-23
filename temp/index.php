@@ -1,4 +1,3 @@
 <?php
-
-$timestamp = date('Y-m-d G:i:s');
-echo $timestamp."<br>";
+ini_set('session.gc_maxlifetime', 86400);
+echo phpinfo();

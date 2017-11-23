@@ -19,8 +19,54 @@ class Accesso {
     // Tengo anche la classe
     public $utente;     // utente
 
-    public static function ADD($utentefk, $accesso) {
+    public function getData2DB() {
+        return $this->data->format('Y-m-d H:i:s');
+    }
+
+    public function setNow() {
+        $dtz = new DateTimeZone("Europe/Rome"); //Your timezone
+        $now = new DateTime(date("Y-m-d H:i:s"), $dtz);
+
+        $this->data = $now;
+    }
+
+    public function Insert() {
         // Aggiungi alla base dati
+        $result = false;
+
+        try {
+            $database = new db();
+            $database->query('INSERT INTO accesso (cookiename, utentefk, utenteruolo, data, ip, errore) VALUES(:cookiename, :utentefk, :utenteruolo, :data, :ip, :errore)');
+            $database->bind(':cookiename', $this->cookiename);
+            $database->bind(':utentefk', $this->utentefk);
+            $database->bind(':utenteruolo', Utilita::HTML2DB($this->utenteruolo));
+            $database->bind(':data', $this->getData2DB());  
+            $database->bind(':ip', Utilita::HTML2DB($this->ip));
+            $database->bind(':errore', Utilita::HTML2DB($this->descrizione));
+
+            $result = $database->execute();
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+
+        return $result;
+    }
+
+    public function Update($data) {
+        // Modifica in base al cookiename
+
+    }
+
+    /* -------- FUNZIONI STATICHE ----------*/
+    public static function EXIST($cookiename) {
+        
+    }
+
+    public static function CHECK($cookiename) {
+        
     }
 }
 

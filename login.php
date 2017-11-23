@@ -69,6 +69,17 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
                 // USARE TABELLA DATABASE INVECE DELLA SESSIONE
                 $_SESSION[$value.":utenteid"] = $utente->utenteid;
                 $_SESSION[$value.":ruolo"] = $utente->getRuolo()->descrizione;
+
+                // NUOVO GESTIONE PER DB
+                $accesso = new Accesso();
+                $accesso->cookiename = $value;
+                $accesso->utentefk = $utente->utenteid;
+                $accesso->utenteruolo= $utente->getRuolo()->descrizione;
+                $accesso->setNow();
+                $accesso->ip = Utilita::GET_CLIENT_IP();         
+                $accesso->errore = '-';    
+                
+                $accesso->Insert();
             }
 
             Utilita::REDIRECT('index.php');
