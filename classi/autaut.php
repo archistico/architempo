@@ -14,23 +14,22 @@ class Autaut {
     }
 
     public static function AUTENTICATO() {
-        // Ogni volta che autentico guardo se ho un cookie in cui c'è il name della session da controllare
-        // Se non c'è lo creo
+        // Cerco la stringa che è nel cookie
+        // Controllo che l'ip sia lo stesso
+        // Guardo se è più vecchia di un giorno
+        // restituisco true se c'è false se non c'è
 
-        // Se ho già il cookie
-        // Cerco nel session se ho i dati di login
-        // Salvo nel session utentefk
-        if(isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":utenteid"])) {
+        if(ACCESSO::EXIST($_COOKIE[GLOBAL_COOKIENAME], Utilita::GET_CLIENT_IP())) {
             return true;
         } else {
             return false;
         }
-
     }
 
     public static function AUTORIZZATO($admitted_role) {
         // $admitted_role is array
-        if(in_array($_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":ruolo"], $admitted_role)) {
+        $utenteruolo = Accesso::RUOLO($_COOKIE[GLOBAL_COOKIENAME], Utilita::GET_CLIENT_IP());
+        if(in_array($utenteruolo, $admitted_role)) {
             return true;
         } else {
             return false;
@@ -38,12 +37,11 @@ class Autaut {
     }
 
     public static function LOGGATO() {
-        // Ritorna il utentefk se è stato loggato
-        return $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":utenteid"];
+        // Ritorna il utentefk in base al cookiename
+        return ACCESSO::UTENTEFK($_COOKIE[GLOBAL_COOKIENAME], Utilita::GET_CLIENT_IP());
     }
-
     public static function LOGGATO_RUOLO() {
-        // Ritorna il utentefk se è stato loggato
-        return $_SESSION[$_COOKIE[GLOBAL_COOKIENAME].":ruolo"];
+        // Ritorna il ruolo in base al cookiename
+        return Accesso::RUOLO($_COOKIE[GLOBAL_COOKIENAME], Utilita::GET_CLIENT_IP());
     }
 }

@@ -61,13 +61,73 @@ class Accesso {
     }
 
     /* -------- FUNZIONI STATICHE ----------*/
-    public static function EXIST($cookiename) {
+    public static function EXIST($cookiename, $ip) {
+        $exist = false;
         
+        try {
+            // trova la data di ieri 
+            $oggi = new DateTime();
+            $ieri = $oggi->sub( new DateInterval('P1D') )->format('Y-m-d H:i:s');
+
+            $database = new db();
+            $database->query('SELECT * FROM accesso WHERE cookiename = :cookiename AND ip=:ip AND data >:ieri');
+            $database->bind(':cookiename', $cookiename);
+            $database->bind(':ip', $ip);
+            $database->bind(':ieri', $ieri);
+            $database->execute();
+            if($database->rowCount()>0) {
+                $exist = true;
+            }
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }
+
+        // chiude il database
+        $database = NULL;
+        
+        return $exist;
     }
 
-    public static function CHECK($cookiename) {
-        
+    public static function RUOLO($cookiename, $ip) {
+        try {
+            // trova la data di ieri 
+            $oggi = new DateTime();
+            $ieri = $oggi->sub( new DateInterval('P1D') )->format('Y-m-d H:i:s');
+
+            $database = new db();
+            $database->query('SELECT * FROM accesso WHERE cookiename = :cookiename AND ip=:ip AND data >:ieri');
+            $database->bind(':cookiename', $cookiename);
+            $database->bind(':ip', $ip);
+            $database->bind(':ieri', $ieri);
+            $row = $database->single();
+
+            return Utilita::DB2HTML($row['utenteruolo']);
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }        
     }
+
+    public static function UTENTEFK($cookiename, $ip) {
+        try {
+            // trova la data di ieri 
+            $oggi = new DateTime();
+            $ieri = $oggi->sub( new DateInterval('P1D') )->format('Y-m-d H:i:s');
+
+            $database = new db();
+            $database->query('SELECT * FROM accesso WHERE cookiename = :cookiename AND ip=:ip AND data >:ieri');
+            $database->bind(':cookiename', $cookiename);
+            $database->bind(':ip', $ip);
+            $database->bind(':ieri', $ieri);
+            $row = $database->single();
+
+            return Utilita::DB2HTML($row['utentefk']);
+
+        } catch (PDOException $e) {
+            throw new PDOException("Error  : " . $e->getMessage());
+        }        
+    }
+
 }
 
 /* --------------------------------------

@@ -8,6 +8,8 @@ class Utilita {
 
         ini_set('display_errors',1);
         ini_set('session.gc_maxlifetime', 86400);
+        ini_set("session.gc_probability", 0);
+        ini_set("session.gc_divisor", 0); 
         error_reporting(E_ALL);
 
         session_start();

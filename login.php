@@ -12,10 +12,6 @@ require_once('loader.php');
 
 if(isset($_GET['logout']) && $_GET['logout']== 1 ) {
     if(isset($_COOKIE[GLOBAL_COOKIENAME])) {
-        if (isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"], $_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"])) {
-            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"]);
-            unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"]);
-        }
         unset($_COOKIE[GLOBAL_COOKIENAME]);
         setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
         setcookie(GLOBAL_COOKIENAME, null, -1, '/');
@@ -49,10 +45,6 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
             $utente = Utente::FIND_BY_EMAIL($email);
 
             if(isset($_COOKIE[GLOBAL_COOKIENAME])) {
-                if (isset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"], $_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"])) {
-                    unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":utenteid"]);
-                    unset($_SESSION[$_COOKIE[GLOBAL_COOKIENAME] . ":ruolo"]);
-                }
                 unset($_COOKIE[GLOBAL_COOKIENAME]);
                 setcookie(GLOBAL_COOKIENAME, null, -1, '/architempo');
                 setcookie(GLOBAL_COOKIENAME, null, -1, '/');
@@ -67,8 +59,8 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
                 // Cosi riesco a settarlo comunque
 
                 // USARE TABELLA DATABASE INVECE DELLA SESSIONE
-                $_SESSION[$value.":utenteid"] = $utente->utenteid;
-                $_SESSION[$value.":ruolo"] = $utente->getRuolo()->descrizione;
+                //$_SESSION[$value.":utenteid"] = $utente->utenteid;
+                //$_SESSION[$value.":ruolo"] = $utente->getRuolo()->descrizione;
 
                 // NUOVO GESTIONE PER DB
                 $accesso = new Accesso();
