@@ -1,5 +1,5 @@
 // function principale
-$(document).ready(function () {
+$(document).ready(function() {
 
     var datainizio;
     var datainizio_str;
@@ -10,10 +10,20 @@ $(document).ready(function () {
     var durata_ore;
     var durata_str;
     var intervallo;
+    var refreshTime = 600000; // in millisecondi
+
+    window.setInterval(function() {
+        $.ajax({
+            cache: false,
+            type: "GET",
+            url: "refreshSession.php",
+            success: function(data) {}
+        });
+    }, refreshTime);
 
     Number.prototype.pad = function(size) {
         var s = String(this);
-        while (s.length < (size || 2)) {s = "0" + s;}
+        while (s.length < (size || 2)) { s = "0" + s; }
         return s;
     }
 
@@ -21,12 +31,12 @@ $(document).ready(function () {
 
     var pause = false;
 
-    $("#btnPlay").on("click", function () {
+    $("#btnPlay").on("click", function() {
         datainizio = moment();
         datainizio_str = datainizio.format("DD/MM/YYYY HH:mm:ss");
 
         // cambio colore al pulsante e disabilito la funzione
-        if(!pause) {
+        if (!pause) {
             // SE E' IN PAUSA
             pause = true;
             $("#btnPlay").removeClass("btn-success");
@@ -49,8 +59,8 @@ $(document).ready(function () {
             $("#btnPlay").html("<i class='fa fa-play' aria-hidden='true'></i> START");
 
             // ripristina
-            datainizio=null;
-            datafine=null;
+            datainizio = null;
+            datafine = null;
             $("#durata").text("00:00:00");
 
             // Avverti il cambio pagina
@@ -58,15 +68,15 @@ $(document).ready(function () {
 
             clearInterval(intervallo);
         }
-        
+
     });
 
-    $("#form").on("submit", function () {
-        if(datainizio==null) {
+    $("#form").on("submit", function() {
+        if (datainizio == null) {
             alert('Premere start prima');
             return false;
         }
-        
+
         // cambio colore al pulsante e disabilito la funzione
         $("#btnPlay").removeClass("btn-secondary");
         $("#btnPlay").addClass("btn-success");
@@ -74,28 +84,28 @@ $(document).ready(function () {
 
         datafine = moment();
         datafine_str = datafine.format("DD/MM/YYYY HH:mm:ss");
-        
+
         // calcola durata
         var differenza = moment.duration(datafine.diff(datainizio));
 
         durata_ore = parseInt(differenza.asHours());
-        durata_minuti = parseInt(differenza.asMinutes())-durata_ore*60;
-        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*3600-durata_minuti*60;
-        durata_str = durata_ore.pad()+":" +durata_minuti.pad()+ ":"+durata_secondi.pad();
+        durata_minuti = parseInt(differenza.asMinutes()) - durata_ore * 60;
+        durata_secondi = parseInt(differenza.asSeconds()) - durata_ore * 3600 - durata_minuti * 60;
+        durata_str = durata_ore.pad() + ":" + durata_minuti.pad() + ":" + durata_secondi.pad();
 
         $("#datainizio").val(datainizio_str);
         $("#datafine").val(datafine_str);
-        
+
         // Avverti il cambio pagina
         window.onbeforeunload = null;
-        
-        console.log('Data inizio: '+datainizio_str);
-        console.log('Data fine  : '+datafine_str);
-        console.log('Durata     : '+durata_str);
+
+        console.log('Data inizio: ' + datainizio_str);
+        console.log('Data fine  : ' + datafine_str);
+        console.log('Durata     : ' + durata_str);
 
         // ripristina
-        datainizio=null;
-        datafine=null;
+        datainizio = null;
+        datafine = null;
         $("#durata").text("00:00:00");
         clearInterval(intervallo);
 
@@ -110,14 +120,13 @@ $(document).ready(function () {
         var differenza = moment.duration(now.diff(datainizio));
 
         durata_ore = parseInt(differenza.asHours());
-        durata_minuti = parseInt(differenza.asMinutes())-durata_ore*60;
-        durata_secondi = parseInt(differenza.asSeconds())-durata_ore*3600-durata_minuti*60;
+        durata_minuti = parseInt(differenza.asMinutes()) - durata_ore * 60;
+        durata_secondi = parseInt(differenza.asSeconds()) - durata_ore * 3600 - durata_minuti * 60;
 
-        durata_str = durata_ore.pad()+":" +durata_minuti.pad()+ ":"+durata_secondi.pad();
+        durata_str = durata_ore.pad() + ":" + durata_minuti.pad() + ":" + durata_secondi.pad();
         now = null;
         $("#durata").text(durata_str);
     }
 
-    
-});
 
+});
