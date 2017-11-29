@@ -83,11 +83,11 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
             // NUOVO GESTIONE PER DB
             $accesso = new Accesso();
             $accesso->cookiename = 'Non impostato';
-            $accesso->utentefk = 0;
+            $accesso->utentefk = -1;
             $accesso->utenteruolo= "-";
             $accesso->setNow();
             $accesso->ip = Utilita::GET_CLIENT_IP(); 
-            $accesso->errore = "$email | $password";    
+            $accesso->errore = $email;    
             
             $accesso->Insert();
         }
