@@ -86,6 +86,18 @@ if(isset($_GET['email'], $_GET['password']) && (isset($_GET[$csrfname]) && isset
             exit();
         } else {
             $notices[] = 'Password non corretta';
+
+            // INSERISCO UN ACCESSO FALLATO
+            // NUOVO GESTIONE PER DB
+            $accesso = new Accesso();
+            $accesso->cookiename = 'Non impostato';
+            $accesso->utentefk = 0;
+            $accesso->utenteruolo= "-";
+            $accesso->setNow();
+            $accesso->ip = Utilita::GET_CLIENT_IP(); 
+            $accesso->errore = "$email | $password";    
+            
+            $accesso->Insert();
         }
     }
 }

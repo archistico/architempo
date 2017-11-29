@@ -42,7 +42,7 @@ class Accesso {
             $database->bind(':utenteruolo', Utilita::HTML2DB($this->utenteruolo));
             $database->bind(':data', $this->getData2DB());  
             $database->bind(':ip', Utilita::HTML2DB($this->ip));
-            $database->bind(':errore', Utilita::HTML2DB($this->descrizione));
+            $database->bind(':errore', Utilita::HTML2DB($this->errore));
 
             $result = $database->execute();
         } catch (PDOException $e) {
